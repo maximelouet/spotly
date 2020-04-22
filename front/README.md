@@ -1,0 +1,1 @@
+# Saumon Spot frontend
