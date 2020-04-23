@@ -15,5 +15,7 @@ module.exports = {
     sourceType: 'module',
   },
   rules: {
+    'arrow-parens': 0,
+    'arrow-body-style': 0,
   },
 };

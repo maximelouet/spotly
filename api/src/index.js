@@ -1,4 +1,6 @@
+/* eslint-disable no-unused-vars */
 import Fastify from 'fastify';
+import Spot from './spot';
 
 const fastify = new Fastify({
   logger: true,
@@ -8,8 +10,19 @@ fastify.get('/', async (request, reply) => {
   return { hello: 'world' };
 });
 
+fastify.get('/getAuthorizeUrl', async (request, reply) => Spot.getAuthorizeUrl());
+
+fastify.post('/exchangeCode', async (request, reply) => Spot.exchangeCode(request.body.code));
+
+fastify.post('/getPlaybackState', async (request, reply) => Spot.getPlaybackState(request.body.accessToken));
+
+fastify.post('/getPlaybackLyrics', async (request, reply) => Spot.getSongLyrics(request.body.accessToken));
+
 fastify.setNotFoundHandler(async (request, reply) => {
-  return { error: '404 Not Found' };
+  return {
+    error: 'NOT_FOUND',
+    message: 'API route not found',
+  };
 });
 
 const start = async () => {
