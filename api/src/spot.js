@@ -65,8 +65,8 @@ class Spot {
     } catch (e) {
       return {
         playbackState,
-        error: 'LYRICS_NOT_FOUND',
-        message: e.message,
+        lyrics: '',
+        lyricsStatus: e.message,
       };
     }
   }
