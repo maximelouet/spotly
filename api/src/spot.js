@@ -14,7 +14,9 @@ class Spot {
   }
 
   static getAuthorizeUrl() {
-    return this.getApiInstance().createAuthorizeURL(scopes, '', false);
+    return {
+      url: this.getApiInstance().createAuthorizeURL(scopes, '', false),
+    };
   }
 
   static async exchangeCode(code) {
