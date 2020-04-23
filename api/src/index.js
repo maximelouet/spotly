@@ -1,10 +1,15 @@
 /* eslint-disable no-unused-vars */
 import Fastify from 'fastify';
+import cors from 'cors';
 import Spot from './spot';
 
 const fastify = new Fastify({
   logger: true,
 });
+
+fastify.use(cors({
+  origin: process.env.FRONT_URL,
+}));
 
 fastify.get('/', async (request, reply) => {
   return { hello: 'world' };
