@@ -1,11 +1,12 @@
 import React from 'react';
+import { getErrorMessage } from '../tools/api';
 import s from './LyricsView.module.css';
 
-function LyricsView({ lyrics }) {
-  const notFound = lyrics === '';
-
-  if (notFound) {
-    return <p>No lyrics found for this track.</p>;
+function LyricsView({ lyrics, errorMessage }) {
+  if (lyrics === '') {
+    return (
+      <p>{ getErrorMessage(errorMessage) }</p>
+    );
   }
 
   if (!lyrics) {

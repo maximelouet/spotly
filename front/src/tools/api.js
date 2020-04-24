@@ -13,8 +13,20 @@ const request = (route, params = {}, includeAccessToken = true) => {
       'Content-Type': 'application/json',
     },
     body,
-  }).then(r => r.json());
+  })
+    .then(r => r.json());
 };
+
+export function getErrorMessage(errorCode) {
+  switch (errorCode) {
+    case 'NOTHING_PLAYING':
+      return 'No song is currently playing.';
+    case 'LYRICS_NOT_FOUND':
+      return 'No lyrics found for this track.';
+    default:
+      return 'An error occurred.';
+  }
+}
 
 export default {
   getAuthorizeUrl: async () => {

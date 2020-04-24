@@ -52,7 +52,6 @@ class Spot {
     if (!isPlaying) {
       return {
         error: 'NOTHING_PLAYING',
-        message: 'No music is currently playing',
       };
     }
     try {
@@ -66,7 +65,7 @@ class Spot {
       return {
         playbackState,
         lyrics: '',
-        lyricsStatus: e.message,
+        error: e.message,
       };
     }
   }

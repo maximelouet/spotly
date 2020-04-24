@@ -30,12 +30,8 @@ const htmlToArray = (html) => {
 
 class LyricsHelper {
   static async findLyrics(artistName, songName) {
-    try {
-      return this.fromGoogle(artistName, songName);
-    } catch (e) {
-      // TODO: implement other fetching methods
-      throw new Error('Lyrics not found');
-    }
+    // TODO: implement other fetching methods
+    return this.fromGoogle(artistName, songName);
   }
 
   static async fromGoogle(artistName, songName) {
@@ -53,7 +49,7 @@ class LyricsHelper {
       if (songName.includes('feat')) {
         return this.fromGoogle(artistName, songName.substring(0, songName.indexOf('feat')));
       }
-      throw new Error();
+      throw new Error('LYRICS_NOT_FOUND');
     }
     const lyricsHtml = cleanUpGoogleResult(lyricsNode.toString());
     const lyrics = htmlToArray(lyricsHtml);

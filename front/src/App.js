@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import './App.css';
 import LyricsView from './components/LyricsView';
 import PlaybackStateView from './components/PlaybackStateView';
 import LoginWithSpotify from './components/LoginWithSpotify';
@@ -15,11 +14,15 @@ function App() {
 
   useEffect(() => {
     async function populate() {
-      const ps = await api.getPlaybackLyrics();
-      setPlaybackState(ps.playbackState);
-      setLyrics(ps.lyrics);
-      if (ps.error) {
-        setError(ps.error);
+      try {
+        const ps = await api.getPlaybackLyrics();
+        setPlaybackState(ps.playbackState);
+        setLyrics(ps.lyrics);
+        if (ps.error) {
+          setError(ps.error);
+        }
+      } catch (e) {
+        setError(e.message);
       }
     }
     if (accessToken) {
@@ -51,16 +54,11 @@ function App() {
     )
   }
 
-  if (error) {
-    let message;
-    if (error === 'NOTHING_PLAYING') {
-      message = 'Nothing is currently playing.';
-    } else {
-      message = 'An error occurred.';
-    }
+  if (error && !playbackState && !lyrics) {
     return (
       <main>
-        <p>{ message }</p>
+        <p>An error occurred while connecting to the server:</p>
+        <code>{ error }</code>
       </main>
     )
   }
@@ -68,7 +66,7 @@ function App() {
   return (
     <main>
       <PlaybackStateView playbackState={playbackState} />
-      <LyricsView lyrics={lyrics} />
+      <LyricsView lyrics={lyrics} errorMessage={error} />
     </main>
   );
 }

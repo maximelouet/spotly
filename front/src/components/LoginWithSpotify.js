@@ -1,17 +1,33 @@
 import React, { useEffect, useState } from 'react';
-import api from '../tools/api';
+import api, { getErrorMessage } from '../tools/api';
 import s from './LoginWithSpotify.module.css';
 
 function LoginWithSpotify() {
   const [authorizeUrl, setAuthorizeUrl] = useState(undefined);
+  const [error, setError] = useState(undefined);
 
   useEffect(() => {
     async function retrieveAuthorizeUrl() {
-      const url = await api.getAuthorizeUrl();
-      setAuthorizeUrl(url);
+      try {
+        const url = await api.getAuthorizeUrl();
+        if (!url)
+          throw new Error();
+        setAuthorizeUrl(url);
+      } catch (e) {
+        setError(e.message);
+      }
     }
     retrieveAuthorizeUrl();
   }, []);
+
+  if (error) {
+    return (
+      <>
+        <p>{ getErrorMessage(error) }</p>
+        <p><a href="/">Try again</a></p>
+      </>
+    )
+  }
 
   // FIXME: preload spotify logo image
   if (!authorizeUrl) {
