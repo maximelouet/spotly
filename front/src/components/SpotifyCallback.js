@@ -34,7 +34,7 @@ function SpotifyCallback() {
   }
 
   return (
-    <p>Logging in with Spotify...</p>
+    <p>Connecting to Spotify...</p>
   );
 }
 
