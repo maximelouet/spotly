@@ -14,12 +14,12 @@ function LyricsView({ lyrics }) {
 
   return (
     <div className={s.root}>
-      { lyrics.map(paragraph => (
-        <p>{ paragraph.map(line => (
-          <>
+      { lyrics.map((paragraph, p_index) => (
+        <p key={p_index}>{ paragraph.map((line, l_index) => (
+          <span key={l_index}>
             { line }
             <br />
-          </>
+          </span>
         )) }</p>
       )) }
     </div>

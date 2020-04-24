@@ -13,9 +13,10 @@ function LoginWithSpotify() {
     retrieveAuthorizeUrl();
   }, []);
 
+  // FIXME: preload spotify logo image
   if (!authorizeUrl) {
     return (
-      <p>Loading...<img src="/spotify_white.png" alt="Spotify" /></p>
+      <p>Loading...</p>
     );
   }
 
