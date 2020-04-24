@@ -1,3 +1,5 @@
+import React from 'react';
+
 const API_URL = process.env.REACT_APP_API_URL ?? 'http://localhost:3001';
 
 const request = (route, params = {}, includeAccessToken = true) => {
@@ -25,6 +27,21 @@ export function getErrorMessage(errorCode) {
       return 'No lyrics found for this track.';
     default:
       return 'An error occurred.';
+  }
+}
+
+export function getHtmlErrorMessage(errorCode) {
+  switch (errorCode) {
+    case 'NOTHING_PLAYING':
+    case 'LYRICS_NOT_FOUND':
+      return getErrorMessage(errorCode);
+    default:
+      return (
+        <>
+          An error occurred while connecting to the server:<br />
+          <code>{ errorCode }</code>
+        </>
+      );
   }
 }
 

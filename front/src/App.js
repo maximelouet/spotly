@@ -3,7 +3,7 @@ import LyricsView from './components/LyricsView';
 import PlaybackStateView from './components/PlaybackStateView';
 import LoginWithSpotify from './components/LoginWithSpotify';
 import SpotifyCallback from './components/SpotifyCallback';
-import api from './tools/api';
+import api, { getHtmlErrorMessage } from './tools/api';
 
 function App() {
   const [playbackState, setPlaybackState] = useState(undefined);
@@ -53,8 +53,7 @@ function App() {
   if (error && !playbackState && !lyrics) {
     return (
       <main>
-        <p>An error occurred while connecting to the server:</p>
-        <code>{ error }</code>
+        <p>{ getHtmlErrorMessage(error) }</p>
       </main>
     )
   }
