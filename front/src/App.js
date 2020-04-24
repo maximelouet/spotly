@@ -3,7 +3,7 @@ import LyricsView from './components/LyricsView';
 import PlaybackStateView from './components/PlaybackStateView';
 import LoginWithSpotify from './components/LoginWithSpotify';
 import SpotifyCallback from './components/SpotifyCallback';
-import api, { getHtmlErrorMessage } from './tools/api';
+import api from './tools/api';
 
 function App() {
   const [playbackState, setPlaybackState] = useState(undefined);
@@ -18,9 +18,7 @@ function App() {
         const ps = await api.getPlaybackLyrics();
         setPlaybackState(ps.playbackState);
         setLyrics(ps.lyrics);
-        if (ps.error) {
-          setError(ps.error);
-        }
+        setError(ps.error);
       } catch (e) {
         setError(e.message);
       }
@@ -50,18 +48,10 @@ function App() {
     )
   }
 
-  if (error && !playbackState && !lyrics) {
-    return (
-      <main>
-        <p>{ getHtmlErrorMessage(error) }</p>
-      </main>
-    )
-  }
-
   return (
     <main>
-      <PlaybackStateView playbackState={playbackState} />
-      <LyricsView lyrics={lyrics} errorMessage={error} />
+      <PlaybackStateView playbackState={playbackState} error={error} />
+      <LyricsView lyrics={lyrics} error={error} />
     </main>
   );
 }

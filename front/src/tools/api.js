@@ -30,7 +30,7 @@ export function getErrorMessage(errorCode) {
   }
 }
 
-export function getHtmlErrorMessage(errorCode) {
+export function formatError(errorCode) {
   switch (errorCode) {
     case 'NOTHING_PLAYING':
     case 'LYRICS_NOT_FOUND':

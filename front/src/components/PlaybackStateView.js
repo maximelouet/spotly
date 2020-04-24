@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import s from './PlaybackStateView.module.css';
 
-function PlaybackStateView({ playbackState }) {
+function PlaybackStateView({ playbackState, error }) {
   const ps = playbackState;
   const song = {
     name: ps?.item.name,
@@ -15,7 +15,7 @@ function PlaybackStateView({ playbackState }) {
   }, [songId]);
 
   if (!ps) {
-    return <p>Loading...</p>;
+    return null;
   }
 
   return (

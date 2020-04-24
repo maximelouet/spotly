@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import api, { getErrorMessage } from '../tools/api';
+import api, { formatError } from '../tools/api';
 import s from './LoginWithSpotify.module.css';
 
 function LoginWithSpotify() {
@@ -23,7 +23,7 @@ function LoginWithSpotify() {
   if (error) {
     return (
       <>
-        <p>{ getErrorMessage(error) }</p>
+        <p>{ formatError(error) }</p>
         <p><a href="/">Try again</a></p>
       </>
     )

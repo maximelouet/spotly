@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import api from '../tools/api';
+import api, { formatError } from '../tools/api';
 import s from './SpotifyCallback.module.css';
 
 function SpotifyCallback() {
@@ -9,12 +9,12 @@ function SpotifyCallback() {
 
   useEffect(() => {
     async function exchangeCode() {
-      const authData = await api.exchangeCode(code);
-      if (!authData || !authData.access_token) {
-        setError(true)
-      } else {
+      try {
+        const authData = await api.exchangeCode(code);
         localStorage.setItem('accessToken', authData.access_token);
         window.location.replace('/');
+      } catch (e) {
+        setError(e.message);
       }
     }
     exchangeCode();
@@ -32,10 +32,10 @@ function SpotifyCallback() {
   if (error) {
     return (
       <>
-        <p>An error occured.</p>
-        <p><a href="/">Try again</a></p>
+        <p>{ formatError(error) }</p>
+        <p><a href="/" onClick={(e) => { e.preventDefault(); window.location.reload(); }}>Try again</a></p>
       </>
-    )
+    );
   }
 
   return (
