@@ -12,7 +12,20 @@ const cleanUpGoogleResult = (html) => {
   cleanedUp = cleanedUp.replace(/^<\/p>/g, '');
   cleanedUp = cleanedUp.replace(/<p><br>$/g, '');
   cleanedUp = cleanedUp.replace(/ <br>/g, '<br>');
+  if (cleanedUp.endsWith('</p>')) {
+    cleanedUp = cleanedUp.slice(0, -4);
+  }
   return cleanedUp;
+};
+
+const htmlToArray = (html) => {
+  const paragraphs = html.split('</p><p>');
+  let final = [];
+  paragraphs.forEach(elm => {
+    final.push(elm.split('<br>').filter(e => e !== '<p>' && e !== '</p>' && e.length));
+  });
+  final = final.filter(e => e.length);
+  return final;
 };
 
 class LyricsHelper {
@@ -39,9 +52,9 @@ class LyricsHelper {
     if (!lyricsNode) {
       throw new Error();
     }
-    const lyricsHtml = lyricsNode.toString();
-    const cleanedLyrics = cleanUpGoogleResult(lyricsHtml);
-    return { lyrics: cleanedLyrics };
+    const lyricsHtml = cleanUpGoogleResult(lyricsNode.toString());
+    const lyrics = htmlToArray(lyricsHtml);
+    return { lyrics };
   }
 }
 
