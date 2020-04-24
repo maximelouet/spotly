@@ -21,12 +21,7 @@ function LoginWithSpotify() {
   }, []);
 
   if (error) {
-    return (
-      <>
-        <p>{ formatError(error) }</p>
-        <p><a href="/">Try again</a></p>
-      </>
-    )
+    return formatError(error);
   }
 
   // FIXME: preload spotify logo image

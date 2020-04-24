@@ -45,10 +45,14 @@ code {
     monospace;
 }
 
-
 main {
     display: flex;
     flex-direction: column;
     max-width: 38em;
     margin: 2em auto;
+}
+
+.light-bold {
+    font-weight: 600;
+    color: #444;
 }

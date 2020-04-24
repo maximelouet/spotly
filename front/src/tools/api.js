@@ -19,27 +19,23 @@ const request = (route, params = {}, includeAccessToken = true) => {
     .then(r => r.json());
 };
 
-export function getErrorMessage(errorCode) {
-  switch (errorCode) {
-    case 'NOTHING_PLAYING':
-      return 'No song is currently playing.';
-    case 'LYRICS_NOT_FOUND':
-      return 'No lyrics found for this track.';
-    default:
-      return 'An error occurred.';
-  }
-}
-
 export function formatError(errorCode) {
   switch (errorCode) {
     case 'NOTHING_PLAYING':
+      return <p><span className="light-bold">No song is currently playing.</span></p>;
     case 'LYRICS_NOT_FOUND':
-      return getErrorMessage(errorCode);
+      return <p><span className="light-bold">No lyrics found for this track.</span></p>;
     default:
       return (
         <>
-          An error occurred while connecting to the server:<br />
-          <code>{ errorCode }</code>
+          <p>
+            <span className="light-bold">An error occurred while connecting to the server:</span>
+            <br />
+            <code>{ errorCode }</code>
+          </p>
+          <p>
+            <a href="/" onClick={(e) => { e.preventDefault(); window.location.reload(); }}>Try again</a>
+          </p>
         </>
       );
   }

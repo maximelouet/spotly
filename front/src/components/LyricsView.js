@@ -4,9 +4,7 @@ import s from './LyricsView.module.css';
 
 function LyricsView({ lyrics, error }) {
   if (lyrics === '' || (!lyrics && error)) {
-    return (
-      <p>{ formatError(error) }</p>
-    );
+    return formatError(error);
   }
 
   if (!lyrics) {

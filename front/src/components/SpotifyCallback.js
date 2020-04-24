@@ -30,12 +30,7 @@ function SpotifyCallback() {
   }
 
   if (error) {
-    return (
-      <>
-        <p>{ formatError(error) }</p>
-        <p><a href="/" onClick={(e) => { e.preventDefault(); window.location.reload(); }}>Try again</a></p>
-      </>
-    );
+    return formatError(error);
   }
 
   return (
