@@ -1,0 +1,20 @@
+.root {
+    display: flex;
+    width: auto;
+}
+
+.root img {
+    width: 64px;
+    height: 64px;
+    align-self: center;
+}
+
+.songInfo {
+    display: flex;
+    flex-direction: column;
+    padding-left: 1em;
+}
+
+.songInfo span:first-child {
+    font-weight: 600;
+}

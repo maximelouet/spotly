@@ -1,0 +1,33 @@
+.root {
+    margin-top: 30vh;
+    text-align: center;
+    background: var(--spotify-green);
+    padding: .7em 1.5em;
+    paddding-left: 1.4em;
+    display: flex;
+    max-width: 20em;
+    align-self: center;
+    text-decoration: none!important;
+    color: white;
+    text-transform: uppercase;
+    border-radius: 5px;
+    font-weight: 600;
+    transition: opacity .07s;
+    box-shadow: 0 .1em .2em rgba(0,0,0,0.1),0 .1em .2em rgba(0,0,0,0.18);
+}
+
+.root:hover {
+    opacity: .9;
+}
+.root:focus, .root:active {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.root img {
+    max-width: 1.8em;
+}
+
+.root span {
+    padding-left: .8em;
+    align-self: center;
+}
