@@ -5,6 +5,7 @@
   "main": "src/index.js",
   "scripts": {
     "start": "nodemon -r esm -r dotenv/config src/index.js",
+    "prod": "node -r esm src/index.js",
     "lint": "eslint ./src"
   },
   "keywords": [],
