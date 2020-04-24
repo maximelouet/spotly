@@ -34,10 +34,6 @@ function App() {
     }
   }, [accessToken]);
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-
   if (window.location.pathname === '/callback') {
     return (
       <main>

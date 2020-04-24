@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import s from './PlaybackStateView.module.css';
 
 function PlaybackStateView({ playbackState }) {
@@ -8,6 +8,11 @@ function PlaybackStateView({ playbackState }) {
     artist: ps?.item.artists[0].name,
     image: ps?.item.album.images.find(e => e.height === 64).url,
   };
+  const songId = ps?.item.id;
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [songId]);
 
   if (!ps) {
     return <p>Loading...</p>;
