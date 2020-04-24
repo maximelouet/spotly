@@ -29,7 +29,7 @@ class Spot {
       accessToken,
     });
     const playbackState = await api.getMyCurrentPlaybackState({}).then((res) => res.body);
-    // remove unused resources to save network resources and protect the user's privacy
+    // remove unused fields to save network resources and protect the user's privacy
     if (playbackState.actions) {
       delete playbackState.actions;
     }
