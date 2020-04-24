@@ -50,6 +50,9 @@ class LyricsHelper {
     const root = parse(result);
     const lyricsNode = root.querySelector('[data-lyricid]');
     if (!lyricsNode) {
+      if (songName.includes('feat')) {
+        return this.fromGoogle(artistName, songName.substring(0, songName.indexOf('feat')));
+      }
       throw new Error();
     }
     const lyricsHtml = cleanUpGoogleResult(lyricsNode.toString());
