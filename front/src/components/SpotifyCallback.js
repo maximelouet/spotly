@@ -3,7 +3,7 @@ import api, { formatError } from '../tools/api';
 import s from './SpotifyCallback.module.css';
 
 function SpotifyCallback() {
-  const [error, setError] = useState(false);
+  const [error, setError] = useState(undefined);
 
   const code = new URLSearchParams(window.location.search).get('code');
 
@@ -11,10 +11,13 @@ function SpotifyCallback() {
     async function exchangeCode() {
       try {
         const authData = await api.exchangeCode(code);
+        if (!authData.access_token) {
+          throw new Error();
+        }
         localStorage.setItem('accessToken', authData.access_token);
         window.location.replace('/');
       } catch (e) {
-        setError(e.message);
+        setError(e);
       }
     }
     exchangeCode();

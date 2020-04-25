@@ -20,7 +20,7 @@ function App() {
         setLyrics(ps.lyrics);
         setError(ps.error);
       } catch (e) {
-        setError(e.message);
+        setError(e);
       }
     }
     if (accessToken) {

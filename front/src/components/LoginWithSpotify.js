@@ -14,7 +14,7 @@ function LoginWithSpotify() {
           throw new Error();
         setAuthorizeUrl(url);
       } catch (e) {
-        setError(e.message);
+        setError(e);
       }
     }
     retrieveAuthorizeUrl();
