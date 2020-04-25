@@ -34,7 +34,7 @@ function LoginWithSpotify() {
   return (
     <a href={authorizeUrl} className={s.root}>
       <img src="/spotify_white.png" alt="Spotify" />
-      <span>Login with Spotify</span>
+      <span>Log in with Spotify</span>
     </a>
   );
 }
