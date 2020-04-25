@@ -1,20 +1,30 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import s from './PlaybackStateView.module.css';
 
 function PlaybackStateView({ playbackState, error }) {
-  const ps = playbackState;
-  const song = {
-    name: ps?.item.name,
-    artist: ps?.item.artists[0].name,
-    image: ps?.item.album.images.find(e => e.height === 64).url,
-  };
-  const songId = ps?.item.id;
+  const [song, setSong] = useState(undefined);
+  const songId = playbackState?.item.id;
+
+  useEffect(() => {
+    if (playbackState) {
+      const otherArtists = [];
+      playbackState.item.artists.slice(1).forEach((e) => otherArtists.push(e.name));
+      setSong({
+        name: playbackState.item.name,
+        image: playbackState.item.album.images.find(e => e.height === 64).url,
+        mainArtist: playbackState.item.artists[0].name,
+        otherArtists,
+      });
+    } else {
+      setSong(undefined);
+    }
+  }, [playbackState]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [songId]);
 
-  if (!ps) {
+  if (!song) {
     return null;
   }
 
@@ -23,7 +33,11 @@ function PlaybackStateView({ playbackState, error }) {
       <img src={song.image} alt="Cover art" />
       <p className={s.songInfo}>
         <span>{ song.name }</span>
-        <span>{ song.artist }</span>
+        <span>
+          <span className={s.mainArtist}>{ song.mainArtist }</span>
+          { song.otherArtists.length > 0 && ', '}
+          { song.otherArtists.join(', ') }
+        </span>
       </p>
     </div>
   );

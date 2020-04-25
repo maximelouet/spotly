@@ -16,6 +16,6 @@
     padding-left: 1em;
 }
 
-.songInfo span:first-child {
+.songInfo > span:first-child {
     font-weight: 600;
 }
