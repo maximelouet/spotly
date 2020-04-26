@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import LyricsView from './components/LyricsView';
 import PlaybackStateView from './components/PlaybackStateView';
 import LoginWithSpotify from './components/LoginWithSpotify';
@@ -10,11 +10,11 @@ function App() {
   const [playbackState, setPlaybackState] = useState(undefined);
   const [lyrics, setLyrics] = useState(undefined);
   const [error, setError] = useState(undefined);
-  const [refreshInterval, setRefreshInterval] = useState(5000);
+  const [refreshInterval, setRefreshInterval] = useState(7000);
 
   const accessToken = localStorage.getItem('accessToken');
 
-  const refresh = async (force = false) => {
+  const refresh = useCallback(async (force = false) => {
     if (!accessToken)
       return;
     try {
@@ -36,16 +36,29 @@ function App() {
     } catch (e) {
       setError(e);
     }
-  };
+  }, [accessToken, playbackState, lyrics, error]);
 
-  useInterval(async () => {
+  useInterval(() => {
     refresh();
   }, refreshInterval);
 
   useEffect(() => {
+    const onFocusChange = () => {
+      if (document.hidden) {
+        setRefreshInterval(30000);
+      } else {
+        refresh();
+        setRefreshInterval(7000);
+      }
+    };
+    document.addEventListener('visibilitychange', onFocusChange);
+    return () => document.removeEventListener('visibilitychange', onFocusChange);
+  }, [accessToken, refresh]);
+
+  useEffect(() => {
     if (accessToken)
       refresh();
-  }, [accessToken]);
+  }, [accessToken]); // eslint-disable-line react-hooks/exhaustive-deps
 
   if (window.location.pathname === '/callback') {
     return (
