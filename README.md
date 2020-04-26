@@ -5,7 +5,7 @@ Display lyrics from your currently playing song on Spotify.
 ## Features
 
 Display the current song you play on Spotify along with its lyrics, updated in
-~real-time (see Limitations).
+~real-time.
 
 ## How it works
 
@@ -23,11 +23,6 @@ embedded lyrics that Google displays.
   unneeded data for lyrics, such as "Remastered", "2020 Mix", etc. In most cases
   it still manages to find the lyrics though. See
   https://github.com/maximelouet/spotly/issues/4
-- Current refresh mechanism is a simple interval that polls the API every x
-  seconds for current song info and lyrics. This generates useless load on the
-  API and on the user's network, and does not take into account the current song
-  state (if it's about to finish we should prepare to poll the API for new song
-  info and lyrics). See https://github.com/maximelouet/spotly/issues/2
 
 ## Running locally
 
