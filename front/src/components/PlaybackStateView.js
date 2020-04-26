@@ -3,10 +3,10 @@ import s from './PlaybackStateView.module.css';
 
 function PlaybackStateView({ playbackState, error }) {
   const [song, setSong] = useState(undefined);
-  const songId = playbackState?.item.id;
+  const songId = playbackState?.item?.id;
 
   useEffect(() => {
-    if (playbackState) {
+    if (playbackState && playbackState.item) {
       const otherArtists = [];
       playbackState.item.artists.slice(1).forEach((e) => otherArtists.push(e.name));
       setSong({
