@@ -4,9 +4,10 @@ The frontend uses [React](https://reactjs.org/).
 
 ## Environment variables
 
-| Environment variable | Description    | Mandatory |
-|----------------------|----------------|-----------|
-| REACT_APP_API_URL    | URL of the API | YES       |
+| Environment variable | Description                       | Mandatory |
+|----------------------|-----------------------------------|-----------|
+| REACT_APP_API_URL    | URL of the API                    | YES       |
+| REACT_APP_VERSION    | Spotly version for footer display | no        |
 
 ## Running locally
 
