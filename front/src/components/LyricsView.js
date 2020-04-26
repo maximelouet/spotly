@@ -15,10 +15,10 @@ function LyricsView({ lyrics, error }) {
     <div className={s.root}>
       { lyrics.map((paragraph, p_index) => (
         <p key={p_index}>{ paragraph.map((line, l_index) => (
-          <span key={l_index}>
+          <React.Fragment key={l_index}>
             { line }
             <br />
-          </span>
+          </React.Fragment>
         )) }</p>
       )) }
     </div>
