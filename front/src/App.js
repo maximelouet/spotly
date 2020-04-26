@@ -23,9 +23,17 @@ function App() {
         setPlaybackState(ps.playbackState);
         setLyrics(ps.lyrics);
         setError(ps.error);
+        const finishesIn = ps.playbackState.item?.duration_ms - ps.playbackState.progress_ms;
+        if (finishesIn < 7000) {
+          setTimeout(refresh, finishesIn + 300);
+        }
       } else {
         const response = await api.getPlaybackState();
         const ps = response.playbackState;
+        const finishesIn = ps.item?.duration_ms - ps.progress_ms;
+        if (finishesIn < 7000) {
+          setTimeout(refresh, finishesIn + 300);
+        }
         if (ps.item?.id !== playbackState?.item?.id) {
           setPlaybackState(ps);
           setLyrics(undefined);
