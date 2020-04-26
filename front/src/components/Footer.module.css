@@ -1,0 +1,24 @@
+.root {
+    border-top: 1px solid #ddd;
+    padding: 1em;
+    display: flex;
+    flex: auto;
+}
+
+.root div {
+    flex: auto;
+}
+.root div:last-child {
+    text-align: right;
+}
+
+
+@media all and (max-width: 500px) {
+    .root {
+        flex-direction: column;
+    }
+    .root div:last-child {
+        text-align: left;
+        margin-top: -1em;
+    }
+}

@@ -1,32 +1,38 @@
 .root {
-    margin-top: 30vh;
+    margin-top: 7em;
+}
+
+.buttonContainer {
+    display: flex;
+    justify-content: center;
+}
+
+.button {
+    margin-top: 25vh;
     text-align: center;
     background: var(--spotify-green);
-    padding: .7em 1.5em;
-    paddding-left: 1.4em;
-    display: flex;
-    max-width: 20em;
-    align-self: center;
+    padding: .7em 1.5em .7em 1.4em;
     text-decoration: none!important;
     color: white;
+    display: flex;
     text-transform: uppercase;
     border-radius: 1.8em;
     font-weight: 600;
     transition: opacity .07s;
 }
 
-.root:hover {
+.button:hover {
     opacity: .9;
 }
-.root:focus, .root:active {
+.button:focus, .button:active {
     color: rgba(255, 255, 255, 0.8);
 }
 
-.root img {
+.button img {
     max-width: 1.4em;
 }
 
-.root span {
+.button span {
     padding-left: .7em;
     align-self: center;
 }

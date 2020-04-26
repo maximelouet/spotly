@@ -28,19 +28,25 @@ function SpotifyCallback() {
 
   if (!code) {
     return (
-      <>
+      <div className={s.root}>
         <p>Invalid callback.</p>
-        <p><a href='/'>Return to home</a></p>
-      </>
+        <p><a href='/' className="link">Return to home</a></p>
+      </div>
     );
   }
 
   if (error) {
-    return formatError(error);
+    return (
+      <div className={s.root}>
+        { formatError(error) }
+      </div>
+    );
   }
 
   return (
-    <p>Connecting to Spotify...</p>
+    <div className={s.root}>
+      <p>Connecting to Spotify...</p>
+    </div>
   );
 }
 

@@ -4,11 +4,19 @@ import s from './LyricsView.module.css';
 
 function LyricsView({ lyrics, error }) {
   if (lyrics === '' || (!lyrics && error)) {
-    return formatError(error);
+    return (
+      <div className={s.minHeight}>
+        { formatError(error) }
+      </div>
+    );
   }
 
   if (!lyrics) {
-    return <p>Loading...</p>;
+    return (
+      <div className={s.minHeight}>
+        <p>Loading...</p>
+      </div>
+    );
   }
 
   return (

@@ -24,21 +24,21 @@ function PlaybackStateView({ playbackState, error }) {
     window.scrollTo(0, 0);
   }, [songId]);
 
-  if (!song) {
-    return null;
-  }
-
   return (
     <div className={s.root}>
-      <img src={song.image} alt="Cover art" />
-      <p className={s.songInfo}>
-        <span>{ song.name }</span>
-        <span>
-          <span className={s.mainArtist}>{ song.mainArtist }</span>
-          { song.otherArtists.length > 0 && ', '}
-          { song.otherArtists.join(', ') }
-        </span>
-      </p>
+      { song && (
+        <>
+          <img src={song.image} alt="Cover art" />
+          <p className={s.songInfo}>
+            <span>{ song.name }</span>
+            <span>
+              <span className={s.mainArtist}>{ song.mainArtist }</span>
+              { song.otherArtists.length > 0 && ', '}
+              { song.otherArtists.join(', ') }
+            </span>
+          </p>
+        </>
+      )}
     </div>
   );
 }

@@ -21,21 +21,31 @@ function LoginWithSpotify() {
   }, []);
 
   if (error) {
-    return formatError(error);
+    return (
+      <div className={s.root}>
+        { formatError(error) }
+      </div>
+    );
   }
 
   // FIXME: preload spotify logo image
   if (!authorizeUrl) {
     return (
-      <p>Loading...</p>
+      <div className={s.root}>
+        <p>Loading...</p>
+      </div>
     );
   }
 
   return (
-    <a href={authorizeUrl} className={s.root}>
-      <img src="/spotify_white.png" alt="Spotify" />
-      <span>Log in with Spotify</span>
-    </a>
+    <div className={s.root}>
+      <p className={s.buttonContainer}>
+        <a href={authorizeUrl} className={s.button}>
+          <img src="/spotify_white.png" alt="Spotify" />
+          <span>Log in with Spotify</span>
+        </a>
+      </p>
+    </div>
   );
 }
 

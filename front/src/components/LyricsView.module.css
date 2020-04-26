@@ -1,3 +1,8 @@
 .root {
-    padding-bottom: 10em;
+    padding-bottom: 5em;
+    min-height: 70vh;
+}
+
+.minHeight {
+    min-height: 70vh;
 }

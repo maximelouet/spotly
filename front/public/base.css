@@ -49,11 +49,37 @@ code {
 main {
     display: flex;
     flex-direction: column;
-    max-width: 38em;
-    margin: 2em auto;
+    max-width: 39em;
+    margin: 2em auto 0;
+    padding: 0 1.5em;
+}
+
+.loading-height {
+    height: 7em;
 }
 
 .light-bold {
     font-weight: 600;
     color: #444;
+}
+
+
+a.link, button.link {
+    text-decoration: none!important;
+    outline: none!important;
+    color: #0D57B1;
+    background: none!important;
+    border: none;
+    border-bottom: 1px solid;
+    cursor: pointer;
+    font-size: 1rem;
+    padding: 0;
+    line-height: inherit;
+}
+a.link:hover, button.link:hover {
+    color: #0C1751;
+}
+a.link:active, a.link:focus, button.link:active, button.link:focus {
+    color: #0C1751;
+    opacity: .8;
 }

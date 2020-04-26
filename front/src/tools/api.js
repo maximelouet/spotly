@@ -32,7 +32,13 @@ export function formatError(error) {
             <code>{ error }</code>
           </p>
           <p>
-            <a href="/" onClick={(e) => { e.preventDefault(); window.location.reload(); }}>Try again</a>
+            <a
+              href="/"
+              onClick={(e) => { e.preventDefault(); window.location.reload(); }}
+              className="link"
+            >
+              Try again
+            </a>
           </p>
         </>
       );
