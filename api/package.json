@@ -1,5 +1,5 @@
 {
-  "name": "saumon-spot-api",
+  "name": "saumon-spotly-api",
   "version": "0.1.0",
   "description": "",
   "main": "src/index.js",

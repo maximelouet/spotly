@@ -1,4 +1,4 @@
-# Spot front
+# Spotly front
 
 The frontend uses [React](https://reactjs.org/).
 
@@ -24,7 +24,7 @@ The frontend auto-reloads on code changes.
 ### Docker way
 
 - Run `docker build . --build-arg REACT_APP_API_URL=http://localhost:3001 -t
-  spot-api`
-- Run `docker run -p 3001:3001 spot-api`
+  spotly-api`
+- Run `docker run -p 3001:3001 spotly-api`
 
 Please note that auto-reload is disabled with Docker.

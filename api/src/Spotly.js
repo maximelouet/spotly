@@ -1,9 +1,9 @@
 import SpotifyWebApi from 'spotify-web-api-node';
-import LyricsHelper from './lyrics';
+import LyricsHelper from './LyricsHelper';
 
 const scopes = ['user-read-playback-state', 'user-read-currently-playing'];
 
-class Spot {
+class Spotly {
   static getApiInstance(params) {
     return new SpotifyWebApi({
       clientId: process.env.SPOTIFY_CLIENT_ID,
@@ -78,4 +78,4 @@ class Spot {
   }
 }
 
-export default Spot;
+export default Spotly;

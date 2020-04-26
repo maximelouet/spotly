@@ -1,4 +1,4 @@
-# Spot
+# Spotly
 
 Display lyrics from your currently playing song on Spotify.
 
@@ -22,12 +22,12 @@ embedded lyrics that Google displays.
 - Some song titles are unrecognised by Google because they contain additional
   unneeded data for lyrics, such as "Remastered", "2020 Mix", etc. In most cases
   it still manages to find the lyrics though. See
-  https://github.com/maximelouet/spot/issues/4
+  https://github.com/maximelouet/spotly/issues/4
 - Current refresh mechanism is a simple interval that polls the API every x
   seconds for current song info and lyrics. This generates useless load on the
   API and on the user's network, and does not take into account the current song
   state (if it's about to finish we should prepare to poll the API for new song
-  info and lyrics). See https://github.com/maximelouet/spot/issues/2
+  info and lyrics). See https://github.com/maximelouet/spotly/issues/2
 
 ## Running locally
 
@@ -42,11 +42,11 @@ to run each part.
 
 The easiest way to contribute is to report issues with a detailed explanation of
 your problem in the [issues
-section](https://github.com/maximelouet/spot/issues), after checking that it's
+section](https://github.com/maximelouet/spotly/issues), after checking that it's
 not already been reported.
 
 ## License
 
 This project is licensed under the Apache License 2.0. See
-[`LICENSE`](https://github.com/maximelouet/spot/blob/master/LICENSE) for
+[`LICENSE`](https://github.com/maximelouet/spotly/blob/master/LICENSE) for
 details.

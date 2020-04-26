@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import Fastify from 'fastify';
 import cors from 'cors';
-import Spot from './spot';
+import Spotly from './Spotly';
 
 const fastify = new Fastify({
   logger: true,
@@ -15,15 +15,15 @@ fastify.get('/', async (request, reply) => {
   return { hello: 'world' };
 });
 
-fastify.get('/getAuthorizeUrl', async (request, reply) => Spot.getAuthorizeUrl());
+fastify.get('/getAuthorizeUrl', async (request, reply) => Spotly.getAuthorizeUrl());
 
-fastify.post('/exchangeCode', async (request, reply) => Spot.exchangeCode(request.body.code));
+fastify.post('/exchangeCode', async (request, reply) => Spotly.exchangeCode(request.body.code));
 
-fastify.post('/refreshToken', async (request, reply) => Spot.refreshToken(request.body.refreshToken));
+fastify.post('/refreshToken', async (request, reply) => Spotly.refreshToken(request.body.refreshToken));
 
-fastify.post('/getPlaybackState', async (request, reply) => Spot.getPlaybackState(request.body.accessToken));
+fastify.post('/getPlaybackState', async (request, reply) => Spotly.getPlaybackState(request.body.accessToken));
 
-fastify.post('/getPlaybackLyrics', async (request, reply) => Spot.getSongLyrics(request.body.accessToken));
+fastify.post('/getPlaybackLyrics', async (request, reply) => Spotly.getSongLyrics(request.body.accessToken));
 
 fastify.setNotFoundHandler(async (request, reply) => {
   return {

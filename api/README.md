@@ -1,4 +1,4 @@
-# Spot API
+# Spotly API
 
 The API uses [fastify](https://www.fastify.io/) as a Web server framework.
 
@@ -23,8 +23,8 @@ The server auto-reloads on code changes.
 
 ### Docker way
 
-- Run `docker build . -t spot-api`
+- Run `docker build . -t spotly-api`
 - Put the required environment variables in `.env`, in the format `NAME=VALUE`
-- Run `docker run --env-file=.env -p 3001:3001 spot-api`
+- Run `docker run --env-file=.env -p 3001:3001 spotly-api`
 
 Please note that auto-reload is disabled with Docker.
