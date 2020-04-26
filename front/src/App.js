@@ -3,33 +3,48 @@ import LyricsView from './components/LyricsView';
 import PlaybackStateView from './components/PlaybackStateView';
 import LoginWithSpotify from './components/LoginWithSpotify';
 import SpotifyCallback from './components/SpotifyCallback';
+import useInterval from './tools/useInterval';
 import api from './tools/api';
 
 function App() {
   const [playbackState, setPlaybackState] = useState(undefined);
   const [lyrics, setLyrics] = useState(undefined);
   const [error, setError] = useState(undefined);
+  const [refreshInterval, setRefreshInterval] = useState(5000);
 
   const accessToken = localStorage.getItem('accessToken');
 
-  useEffect(() => {
-    async function populate() {
-      try {
+  const refresh = async (force = false) => {
+    if (!accessToken)
+      return;
+    try {
+      if (!playbackState || (!lyrics && error !== 'LYRICS_NOT_FOUND') || force) {
         const ps = await api.getPlaybackLyrics();
         setPlaybackState(ps.playbackState);
         setLyrics(ps.lyrics);
         setError(ps.error);
-      } catch (e) {
-        setError(e);
+      } else {
+        const response = await api.getPlaybackState();
+        const ps = response.playbackState;
+        if (ps.item?.id !== playbackState?.item?.id) {
+          setPlaybackState(ps);
+          setLyrics(undefined);
+          setError(undefined);
+          return refresh(true);
+        }
       }
+    } catch (e) {
+      setError(e);
     }
-    if (accessToken) {
-      populate();
-      const refreshInterval = setInterval(populate, 10000);
-      return () => {
-        clearInterval(refreshInterval);
-      };
-    }
+  };
+
+  useInterval(async () => {
+    refresh();
+  }, refreshInterval);
+
+  useEffect(() => {
+    if (accessToken)
+      refresh();
   }, [accessToken]);
 
   if (window.location.pathname === '/callback') {
