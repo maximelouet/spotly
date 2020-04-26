@@ -12,7 +12,7 @@ function Footer() {
   return (
     <footer className={s.root}>
       <div>
-        <p><b>Spotly</b> { version }</p>
+        <p><span className="light-bold">Spotly</span> { version }</p>
         <p><a href="https://github.com/maximelouet/spotly" className="link">View this project on GitHub</a></p>
       </div>
       <div>
