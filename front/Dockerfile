@@ -2,6 +2,9 @@ FROM node:12-slim as build
 
 ENV NODE_ENV=production
 
+ARG REACT_APP_API_URL=http://localhost:3001
+ENV REACT_APP_API_URL=$REACT_APP_API_URL
+
 WORKDIR /app
 
 COPY ./package*.json ./
