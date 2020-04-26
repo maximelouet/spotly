@@ -58,7 +58,8 @@ const authenticatedRequest = async (route, params = {}) => {
   let accessToken = localStorage.getItem('accessToken');
   const expiresAt = new Date(localStorage.getItem('expiresAt') * 1000);
   const now = new Date();
-  if (now.getTime() + (55 * 60 * 1000) > expiresAt.getTime()) {
+  // refresh access token if it expires in less than 10 minutes (or is already expired)
+  if (now.getTime() + (10 * 60 * 1000) > expiresAt.getTime()) {
     const authData = await request('/refreshToken', {
       refreshToken: localStorage.getItem('refreshToken'),
     });
