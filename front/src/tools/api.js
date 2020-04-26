@@ -92,6 +92,9 @@ export default {
   exchangeCode: async (code) => {
     return request('/exchangeCode', { code });
   },
+  getPlaybackState: async () => {
+    return authenticatedRequest('/getPlaybackState');
+  },
   getPlaybackLyrics: async () => {
     return authenticatedRequest('/getPlaybackLyrics');
   },
