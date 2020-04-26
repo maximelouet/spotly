@@ -39,6 +39,7 @@ body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-align: left;
+    line-height: 1.4;
 }
 code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
