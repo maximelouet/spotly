@@ -24,6 +24,13 @@ class Spot {
     return authData.body;
   }
 
+  static async refreshToken(rToken) {
+    const authData = await this.getApiInstance({
+      refreshToken: rToken,
+    }).refreshAccessToken();
+    return authData.body;
+  }
+
   static async getPlaybackState(accessToken) {
     const api = this.getApiInstance({
       accessToken,

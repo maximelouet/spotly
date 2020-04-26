@@ -19,6 +19,8 @@ fastify.get('/getAuthorizeUrl', async (request, reply) => Spot.getAuthorizeUrl()
 
 fastify.post('/exchangeCode', async (request, reply) => Spot.exchangeCode(request.body.code));
 
+fastify.post('/refreshToken', async (request, reply) => Spot.refreshToken(request.body.refreshToken));
+
 fastify.post('/getPlaybackState', async (request, reply) => Spot.getPlaybackState(request.body.accessToken));
 
 fastify.post('/getPlaybackLyrics', async (request, reply) => Spot.getSongLyrics(request.body.accessToken));

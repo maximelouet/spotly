@@ -1,4 +1,5 @@
 import React from 'react';
+import tokenHelper from '../tools/tokenHelper';
 
 const API_URL = process.env.REACT_APP_API_URL ?? 'http://localhost:3001';
 const headers = {
@@ -11,14 +12,22 @@ export function formatError(error) {
   }
   switch (error) {
     case 'NOTHING_PLAYING':
-      return <p><span className="light-bold">No song is currently playing.</span></p>;
+      return (
+        <p>
+          <span className="light-bold">No song is currently playing.</span>
+        </p>
+      );
     case 'LYRICS_NOT_FOUND':
-      return <p><span className="light-bold">No lyrics found for this track.</span></p>;
+      return (
+        <p>
+          <span className="light-bold">No lyrics found for this track.</span>
+        </p>
+      );
     default:
       return (
         <>
           <p>
-            <span className="light-bold">An error occurred while connecting to the server:</span>
+            <span className="light-bold">An error occurred:</span>
             <br />
             <code>{ error }</code>
           </p>
@@ -30,7 +39,7 @@ export function formatError(error) {
   }
 }
 
-const request = (route, params) => {
+const request = async (route, params) => {
   if (params) {
     return fetch(`${API_URL}${route}`, {
       method: 'POST',
@@ -45,8 +54,21 @@ const request = (route, params) => {
   }).then(r => r.json());
 };
 
-const authenticatedRequest = (route, params = {}) => {
-  const accessToken = localStorage.getItem('accessToken');
+const authenticatedRequest = async (route, params = {}) => {
+  let accessToken = localStorage.getItem('accessToken');
+  const expiresAt = new Date(localStorage.getItem('expiresAt') * 1000);
+  const now = new Date();
+  if (now.getTime() + (55 * 60 * 1000) > expiresAt.getTime()) {
+    const authData = await request('/refreshToken', {
+      refreshToken: localStorage.getItem('refreshToken'),
+    });
+    if (!authData.access_token || !authData.expires_in) {
+      throw new Error('Unable to refresh OAuth access token.');
+    }
+    localStorage.setItem('accessToken', authData.access_token);
+    localStorage.setItem('expiresAt', tokenHelper.getExpirationTimestamp(authData.expires_in));
+    accessToken = authData.access_token;
+  }
   const body = JSON.stringify({
     accessToken,
     ...params,

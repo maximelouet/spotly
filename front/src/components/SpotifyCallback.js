@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import api, { formatError } from '../tools/api';
+import tokenHelper from '../tools/tokenHelper';
 import s from './SpotifyCallback.module.css';
 
 function SpotifyCallback() {
@@ -11,10 +12,12 @@ function SpotifyCallback() {
     async function exchangeCode() {
       try {
         const authData = await api.exchangeCode(code);
-        if (!authData.access_token) {
-          throw new Error();
+        if (!authData.access_token || !authData.refresh_token || !authData.expires_in) {
+          throw new Error('Unable to retrieve an OAuth access token.');
         }
         localStorage.setItem('accessToken', authData.access_token);
+        localStorage.setItem('refreshToken', authData.refresh_token);
+        localStorage.setItem('expiresAt', tokenHelper.getExpirationTimestamp(authData.expires_in));
         window.location.replace('/');
       } catch (e) {
         setError(e);
