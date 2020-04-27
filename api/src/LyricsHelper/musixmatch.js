@@ -37,11 +37,17 @@ const fetchFromMusixmatch = async (artistName, songName, headers) => {
     headers,
   }).then(r => r.text());
   const root = parse(lyricsPage);
-  const lyricsNode = root.querySelector('.mxm-lyrics span');
-  if (!lyricsNode || lyricsNode.text.includes('submitted the lyrics for this song. Are the lyrics correct?')) {
+  const lyricsNode = root.querySelectorAll('.mxm-lyrics__content');
+  const lyricsFor = root.querySelector('div.lyrics-to.hidden-xs.hidden-sm');
+  if (!lyricsNode
+    || !lyricsNode[0]
+    || root.text.includes('submitted the lyrics for this song. Are the lyrics correct?')
+    || root.text.includes('These lyrics are waiting for review')
+    || !lyricsFor.text.toLowerCase().includes(artistName.split(' ')[0].toLowerCase())) {
     throw new Error('LYRICS_NOT_FOUND');
   }
-  return htmlToArray(lyricsNode.toString());
+  const lyricsString = lyricsNode.reduce((acc, curr) => acc + curr.toString(), '');
+  return htmlToArray(lyricsString);
 };
 
 export default fetchFromMusixmatch;

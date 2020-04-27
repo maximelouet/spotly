@@ -38,7 +38,7 @@ class LyricsHelper {
         const lyrics = await fetchFromGoogle(artistName, songName, headers);
         return {
           lyrics,
-          source: 'Google (LyricFind / Musixmatch)',
+          source: 'Google',
         };
       }
     }
