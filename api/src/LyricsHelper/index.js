@@ -1,5 +1,6 @@
-import fetchFromGoogle from './google';
 import fetchFromGenius from './genius';
+import fetchFromMusixmatch from './musixmatch';
+import fetchFromGoogle from './google';
 
 const computeRequestHeaders = (clientHeaders) => {
   return {
@@ -23,12 +24,23 @@ class LyricsHelper {
         lyrics,
         source: 'Genius',
       };
-    } catch (e) {
-      const lyrics = await fetchFromGoogle(artistName, songName, headers);
-      return {
-        lyrics,
-        source: 'Google (LyricFind / Musixmatch)',
-      };
+    } catch (e1) {
+      try {
+        const lyrics = await fetchFromMusixmatch(artistName, songName, headers);
+        if (!lyrics) {
+          throw new Error();
+        }
+        return {
+          lyrics,
+          source: 'Musixmatch',
+        };
+      } catch (e) {
+        const lyrics = await fetchFromGoogle(artistName, songName, headers);
+        return {
+          lyrics,
+          source: 'Google (LyricFind / Musixmatch)',
+        };
+      }
     }
   }
 }
