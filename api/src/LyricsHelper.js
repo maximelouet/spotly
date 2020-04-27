@@ -24,7 +24,8 @@ const generateGoogleSearchUrl = (artistName, songName) => {
   random = Math.random();
   const begin = random > 0.5 ? 'lyrics+' : '';
   const end = random > 0.5 ? '' : '+lyrics';
-  return `https://www.google.${domain}/search?q=${begin}${encodeURIComponent(artistName.toLowerCase()).replace('%20', '+')}+${encodeURIComponent(songName.toLowerCase()).replace('%20', '+')}${end}`;
+  const trackInfo = `${encodeURIComponent(artistName.toLowerCase()).replace(/%20/g, '+')}+${encodeURIComponent(songName.toLowerCase()).replace(/%20/g, '+')}`;
+  return `https://www.google.${domain}/search?q=${begin}${trackInfo}${end}`;
 };
 
 const cleanUpGoogleResult = (html) => {
@@ -63,7 +64,6 @@ class LyricsHelper {
 
   static async fromGoogle(artistName, songName, headers) {
     const url = generateGoogleSearchUrl(artistName, songName);
-    console.log(url);
     const result = await fetch(url, {
       headers,
     }).then(r => r.text()).then(text => text.split('\n').slice(1).join('\n'));
