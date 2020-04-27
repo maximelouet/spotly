@@ -26,9 +26,27 @@ embedded lyrics that Google displays.
 
 ## Running locally
 
-This project uses [nvm](https://github.com/nvm-sh/nvm) to ensure NodeJS version
-consistency. If you are not running NodeJS v12, please install nvm and run `nvm
-use` in the repository.
+### With Docker
+
+The `docker-compose.yml` allows you to run the app locally. Prior to starting it
+you must set some environment variables in `./api/.env`. See `./api/README.md`
+for more informations. Set `http://localhost` as `FRONT_URL`.
+
+Once the environment variables are set, run the project with:
+
+```shell
+$ docker-compose up
+```
+
+The frontend will be available on `http://localhost/` (port 80).
+
+### Standard way
+
+This method is recommended if you are developing and want auto-reload upon code
+change.
+
+If you are not running NodeJS v12, please install
+[nvm](https://github.com/nvm-sh/nvm) and run `nvm use` in the repository.
 
 See the respective README files in `api/` and `front/` for instructions on how
 to run each part.
