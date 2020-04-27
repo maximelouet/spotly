@@ -36,3 +36,8 @@
     padding-left: .7em;
     align-self: center;
 }
+
+.imagePreload {
+    opacity: 0.00001;
+    max-width: 1em;
+}
