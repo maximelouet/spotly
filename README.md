@@ -29,7 +29,8 @@ embedded lyrics that Google displays.
 ### With Docker
 
 The `docker-compose.yml` allows you to run the app locally. Prior to starting it
-you must set some environment variables in `./api/.env`. See `./api/README.md`
+you must set some environment variables in `api/.env`. See
+[`api/README.md`](https://github.com/maximelouet/spotly/blob/master/api/README.md)
 for more informations. Set `http://localhost` as `FRONT_URL`.
 
 Once the environment variables are set, run the project with:
