@@ -11,10 +11,6 @@ fastify.use(cors({
   origin: process.env.FRONT_URL,
 }));
 
-fastify.get('/', async (request, reply) => {
-  return { hello: 'world' };
-});
-
 fastify.get('/getAuthorizeUrl', async (request, reply) => Spotly.getAuthorizeUrl());
 
 fastify.post('/exchangeCode', async (request, reply) => Spotly.exchangeCode(request.body.code));
