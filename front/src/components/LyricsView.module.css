@@ -1,8 +1,14 @@
 .root {
-    padding-bottom: 5em;
+    padding-bottom: 3em;
     min-height: 70vh;
 }
 
 .minHeight {
     min-height: 70vh;
+}
+
+.lyricsSource {
+    margin-top: 5em;
+    text-align: right;
+    font-style: italic;
 }

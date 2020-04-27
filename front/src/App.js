@@ -11,6 +11,7 @@ import logout from './tools/logout';
 function App() {
   const [playbackState, setPlaybackState] = useState(undefined);
   const [lyrics, setLyrics] = useState(undefined);
+  const [lyricsSource, setLyricsSource] = useState(undefined);
   const [error, setError] = useState(undefined);
   const [refreshInterval, setRefreshInterval] = useState(7000);
 
@@ -24,6 +25,7 @@ function App() {
         const ps = await api.getPlaybackLyrics();
         setPlaybackState(ps.playbackState);
         setLyrics(ps.lyrics);
+        setLyricsSource(ps.source);
         setError(ps.error);
         const finishesIn = ps.playbackState?.item?.duration_ms - ps.playbackState?.progress_ms;
         if (finishesIn < 7000) {
@@ -39,6 +41,7 @@ function App() {
         if (ps?.item?.id !== playbackState?.item?.id) {
           setPlaybackState(ps);
           setLyrics(undefined);
+          setLyricsSource(undefined);
           setError(undefined);
           return refresh(true);
         }
@@ -102,7 +105,7 @@ function App() {
   return (
     <main>
       <PlaybackStateView playbackState={playbackState} error={error} />
-      <LyricsView lyrics={lyrics} error={error} />
+      <LyricsView lyrics={lyrics} lyricsSource={lyricsSource} error={error} />
       <Footer />
     </main>
   );

@@ -2,7 +2,7 @@ import React from 'react';
 import { formatError } from '../tools/api';
 import s from './LyricsView.module.css';
 
-function LyricsView({ lyrics, error }) {
+function LyricsView({ lyrics, lyricsSource, error }) {
   if (lyrics === '' || (!lyrics && error)) {
     return (
       <div className={s.minHeight}>
@@ -29,6 +29,14 @@ function LyricsView({ lyrics, error }) {
           </React.Fragment>
         )) }</p>
       )) }
+      { lyricsSource && (
+        <p className={s.lyricsSource}>
+          <span className="light-bold">
+            Lyrics source
+          </span>:{ ' ' }
+          { lyricsSource }
+        </p>
+      ) }
     </div>
   );
 }

@@ -63,8 +63,7 @@ const fetchFromGoogle = async (artistName, songName, headers) => {
     throw new Error('LYRICS_NOT_FOUND');
   }
   const lyricsHtml = cleanUpResult(lyricsNode.toString());
-  const lyrics = htmlToArray(lyricsHtml);
-  return { lyrics };
+  return htmlToArray(lyricsHtml);
 };
 
 export default fetchFromGoogle;
