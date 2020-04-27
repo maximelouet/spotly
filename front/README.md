@@ -26,6 +26,7 @@ The frontend auto-reloads on code changes.
 
 - Run `docker build . --build-arg REACT_APP_API_URL=http://localhost:3001 -t
   spotly-api`
-- Run `docker run -p 3001:3001 spotly-api`
+- Run `docker run --network host spotly-api`
+- The frontend is accessible from port 80
 
 Please note that auto-reload is disabled with Docker.
