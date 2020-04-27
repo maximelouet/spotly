@@ -26,7 +26,7 @@ export function formatError(error) {
     case 'GOOGLE_ANTI_CRAWL_LIMIT':
       return (
         <p>
-          <span className="light-bold">The server reached the Google anti-crawl limit.</span>
+          <span className="light-bold">Unable to retrieve lyrics for this track.</span>
         </p>
       );
     default:
