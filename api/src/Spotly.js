@@ -53,7 +53,7 @@ class Spotly {
     return { playbackState };
   }
 
-  static async getSongLyrics(accessToken) {
+  static async getSongLyrics(accessToken, clientHeaders) {
     const playbackState = await this.getPlaybackState(accessToken).then(ps => ps.playbackState);
     const isPlaying = playbackState.item && playbackState.item.artists[0];
     if (!isPlaying) {
@@ -63,7 +63,7 @@ class Spotly {
     }
     try {
       const lyrics = await LyricsHelper.findLyrics(playbackState.item.artists[0].name,
-        playbackState.item.name);
+        playbackState.item.name, clientHeaders);
       return {
         playbackState,
         ...lyrics,

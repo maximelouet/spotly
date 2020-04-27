@@ -1,6 +1,32 @@
 import fetch from 'node-fetch';
 import { parse } from 'node-html-parser';
 
+const computeRequestHeaders = (clientHeaders) => {
+  return {
+    'User-Agent': clientHeaders.userAgent || 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.122 Safari/537.36',
+    'Accept-Language': clientHeaders.acceptLanguage || 'en-GB,en;q=0.8,fr-FR;q=0.5,fr;q=0.3',
+    Accept: 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
+    'Upgrade-Insecure-Requests': 1,
+    'Cache-Control': 'max-age=0',
+  };
+};
+
+const generateGoogleSearchUrl = (artistName, songName) => {
+  let random = Math.random();
+  let domain;
+  if (random < 0.3) {
+    domain = 'fr';
+  } else if (random < 0.6) {
+    domain = 'co.uk';
+  } else {
+    domain = 'com';
+  }
+  random = Math.random();
+  const begin = random > 0.5 ? 'lyrics+' : '';
+  const end = random > 0.5 ? '' : '+lyrics';
+  return `https://www.google.${domain}/search?q=${begin}${encodeURIComponent(artistName.toLowerCase()).replace('%20', '+')}+${encodeURIComponent(songName.toLowerCase()).replace('%20', '+')}${end}`;
+};
+
 const cleanUpGoogleResult = (html) => {
   let cleanedUp = html;
   cleanedUp = cleanedUp.replace(/<\/?span.*?>/gi, '');
@@ -29,19 +55,17 @@ const htmlToArray = (html) => {
 };
 
 class LyricsHelper {
-  static async findLyrics(artistName, songName) {
+  static async findLyrics(artistName, songName, clientHeaders) {
+    const headers = computeRequestHeaders(clientHeaders);
     // TODO: implement other fetching methods
-    return this.fromGoogle(artistName, songName);
+    return this.fromGoogle(artistName, songName, headers);
   }
 
-  static async fromGoogle(artistName, songName) {
-    const url = `https://www.google.com/search?q=Lyrics+${encodeURIComponent(artistName).replace('%20', '+')}+${encodeURIComponent(songName).replace('%20', '+')}`;
+  static async fromGoogle(artistName, songName, headers) {
+    const url = generateGoogleSearchUrl(artistName, songName);
+    console.log(url);
     const result = await fetch(url, {
-      headers: {
-        'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64; rv:76.0) Gecko/20100101 Firefox/76.0',
-        Accept: 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
-        'Accept-Language': 'en-GB,en;q=0.8,fr-FR;q=0.5,fr;q=0.3',
-      },
+      headers,
     }).then(r => r.text()).then(text => text.split('\n').slice(1).join('\n'));
     const root = parse(result);
     const lyricsNode = root.querySelector('[data-lyricid]');
