@@ -7,7 +7,7 @@ function Footer() {
     window.location.replace('/');
   };
 
-  const version = process.env.REACT_APP_VERSION ? `v${process.env.REACT_APP_VERSION}` : 'development version';
+  const version = process.env.REACT_APP_VERSION ? `version ${process.env.REACT_APP_VERSION}` : 'development version';
 
   return (
     <footer className={s.root}>
