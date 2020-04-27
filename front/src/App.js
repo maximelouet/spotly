@@ -82,6 +82,15 @@ function App() {
     return logout();
   }
 
+  if (window.location.pathname !== '/') {
+    return (
+      <main>
+        <div className="top-padding" />
+        <p>Page not found</p>
+      </main>
+    );
+  }
+
   if (!accessToken) {
     return (
       <main>
