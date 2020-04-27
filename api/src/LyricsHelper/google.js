@@ -53,7 +53,8 @@ const fetchFromGoogle = async (artistName, songName, headers) => {
   const root = parse(result);
   const lyricsNode = root.querySelector('[data-lyricid]');
   if (!lyricsNode) {
-    if (result.includes('Our systems have detected unusual traffic from your computer network')) {
+    if (result.includes('Our systems have detected unusual traffic from your computer network')
+    || result.includes('Your client does not have permission to get URL')) {
       throw new Error('GOOGLE_ANTI_CRAWL_LIMIT');
     }
     if (songName.includes('feat')) {
