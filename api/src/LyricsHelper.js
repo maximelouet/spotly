@@ -70,6 +70,9 @@ class LyricsHelper {
     const root = parse(result);
     const lyricsNode = root.querySelector('[data-lyricid]');
     if (!lyricsNode) {
+      if (result.includes('Our systems have detected unusual traffic from your computer network')) {
+        throw new Error('GOOGLE_ANTI_CRAWL_LIMIT');
+      }
       if (songName.includes('feat')) {
         return this.fromGoogle(artistName, songName.substring(0, songName.indexOf('feat')));
       }

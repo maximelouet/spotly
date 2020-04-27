@@ -23,6 +23,12 @@ export function formatError(error) {
           <span className="light-bold">No lyrics found for this track.</span>
         </p>
       );
+    case 'GOOGLE_ANTI_CRAWL_LIMIT':
+      return (
+        <p>
+          <span className="light-bold">The server reached the Google anti-crawl limit.</span>
+        </p>
+      );
     default:
       return (
         <>
