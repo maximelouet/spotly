@@ -29,3 +29,16 @@ The server auto-reloads on code changes.
 - Run `docker run --env-file=.env -p 3001:3001 spotly-api`. If you changed the `PORT`, change the `-p` parameter accordingly
 
 Please note that auto-reload is disabled with Docker.
+
+## Help! What are `client_id` and `client_secret`?
+
+The Spotify API uses [OAuth2](https://oauth.net/2/) as an authentication
+mechanism. To access the Spotify API (and run Spotly) you need to register an
+"app" on [the Spotify developer
+portal](https://developer.spotify.com/dashboard/). The https://spotly.fi
+instance uses my own credentials, but I don't share them with anyone as the API
+is rate limited.
+
+Creating a Spotify developer app takes only a few minutes, no verification is
+needed on Spotify's side. Make sure to add the URL of your front + `/callback`
+to the list of your Authorized URLs.
