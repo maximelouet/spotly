@@ -9,16 +9,14 @@ Display the current song you play on Spotify along with its lyrics, updated in
 
 ## How it works
 
-The backend (`api/`) parses Google (other sites will be added in the future) for
-lyrics and returns them to the frontend (`front/`) for display. It performs a
-Google search query in the form of `ARTIST SONG lyrics` and tries to find the
-embedded lyrics that Google displays.
+The backend (`api/`) parses several lyric sites for lyrics and returns the first
+found to the frontend (`front/`) for display.
 
 ## Limitations
 
-- The backend only polls Google for lyrics. As such, if Google does not display
-  them, the API cannot return them either. I plan to add other lyrics sites as a
-  fallback.
+- Google has advanced scraping detection mechanisms. Low rate scraping (i.e.
+  running Spotly locally) is not detected but the https://spotly.fi instance is.
+
 - Some song titles are unrecognised by Google because they contain additional
   unneeded data for lyrics, such as "Remastered", "2020 Mix", etc. In most cases
   it still manages to find the lyrics though. See

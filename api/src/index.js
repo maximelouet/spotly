@@ -19,7 +19,7 @@ fastify.post('/refreshToken', async (request, reply) => Spotly.refreshToken(requ
 
 fastify.post('/getPlaybackState', async (request, reply) => Spotly.getPlaybackState(request.body.accessToken));
 
-fastify.post('/getPlaybackLyrics', async (request, reply) => Spotly.getSongLyrics(request.body.accessToken, request.headers));
+fastify.post('/getPlaybackLyrics', async (request, reply) => Spotly.getPlaybackLyrics(request.body.accessToken, request.headers));
 
 fastify.setNotFoundHandler(async (request, reply) => {
   return {
