@@ -6,6 +6,7 @@ import LoginWithSpotify from './components/LoginWithSpotify';
 import SpotifyCallback from './components/SpotifyCallback';
 import useInterval from './tools/useInterval';
 import api from './tools/api';
+import logout from './tools/logout';
 
 function App() {
   const [playbackState, setPlaybackState] = useState(undefined);
@@ -75,6 +76,10 @@ function App() {
         <SpotifyCallback />
       </main>
     )
+  }
+
+  if (window.location.pathname === '/logout') {
+    return logout();
   }
 
   if (!accessToken) {

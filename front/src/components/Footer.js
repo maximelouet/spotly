@@ -1,12 +1,8 @@
 import React from 'react';
+import logout from '../tools/logout';
 import s from './Footer.module.css';
 
 function Footer() {
-  const onLogout = () => {
-    localStorage.clear();
-    window.location.replace('/');
-  };
-
   const version = process.env.REACT_APP_VERSION ? `version ${process.env.REACT_APP_VERSION}` : 'development version';
 
   return (
@@ -17,7 +13,7 @@ function Footer() {
       </div>
       <div>
         <p><a href="https://github.com/maximelouet/spotly/issues" className="link">Report an issue</a></p>
-        <p><button onClick={onLogout} className="link">Logout</button>
+        <p><a href="/logout" onClick={(e) => { e.preventDefault(); logout(); } } className="link">Logout</a>
         </p>
       </div>
     </footer>
