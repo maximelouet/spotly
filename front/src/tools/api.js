@@ -23,11 +23,22 @@ export function formatError(error) {
           <span className="light-bold">No lyrics found for this track.</span>
         </p>
       );
-    case 'GOOGLE_ANTI_CRAWL_LIMIT':
+    case 'WAITING_FOR_FOCUS':
       return (
-        <p>
-          <span className="light-bold">Unable to retrieve lyrics for this track.</span>
-        </p>
+        <>
+          <p>
+            <span className="light-bold">Waiting for tab focus to load lyrics...</span>
+          </p>
+          <p>
+            <a
+              href="/"
+              onClick={(e) => { e.preventDefault(); window.location.reload(); }}
+              className="link"
+            >
+              Reload page
+            </a>
+          </p>
+        </>
       );
     default:
       return (

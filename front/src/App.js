@@ -41,7 +41,7 @@ function App() {
           const data = JSON.parse(cached);
           setLyrics(data.lyrics);
           setError(data.error);
-        } else {
+        } else if (!document.hidden) {
           const lyricsResponse = await api.getPlaybackLyrics();
           const ps = lyricsResponse.playbackState;
           const responseError = lyricsResponse.error;
@@ -56,6 +56,8 @@ function App() {
             };
             sessionStorage.setItem(ps.item.id, JSON.stringify(toCache));
           }
+        } else {
+          setError('WAITING_FOR_FOCUS');
         }
       }
     } catch (e) {
