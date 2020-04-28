@@ -1,10 +1,15 @@
 .root {
-    padding-bottom: 7em;
-    min-height: 70vh;
+    padding-bottom: calc(5vh + 5em);
 }
 
-.minHeight {
-    min-height: 70vh;
+.root, .minHeight {
+    min-height: calc(98vh - 17em);
+}
+
+@media all and (max-width: 500px) {
+    .root, .minHeight {
+        min-height: calc(98vh - 21em);
+    }
 }
 
 .geniusIndicator {
