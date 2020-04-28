@@ -1,0 +1,50 @@
+---
+
+name: Lint
+
+on: push
+
+env:
+  CI: true
+
+jobs:
+
+  lint-api:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: ['12.16']
+    steps:
+
+      - uses: actions/checkout@v2
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - run: npm ci
+        working-directory: api/
+
+      - run: npm run lint
+        working-directory: api/
+
+  lint-front:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: ['12.16']
+    steps:
+
+      - uses: actions/checkout@v2
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - run: npm ci
+        working-directory: front/
+
+      - run: npm run lint
+        working-directory: front/
