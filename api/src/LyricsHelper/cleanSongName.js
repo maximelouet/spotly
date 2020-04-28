@@ -6,6 +6,8 @@ const cleanSongName = (songName) => {
   cleanedUp = cleanedUp.replace(/ \(Live.*\)$/gi, '');
   cleanedUp = cleanedUp.replace(/ - Remix$/gi, '');
   cleanedUp = cleanedUp.replace(/ \(Remix\)$/gi, '');
+  cleanedUp = cleanedUp.replace(/ - Electro Mix$/gi, '');
+  cleanedUp = cleanedUp.replace(/ \(Electro Mix\)$/gi, '');
   cleanedUp = cleanedUp.replace(/ - Bonus$/gi, '');
   cleanedUp = cleanedUp.replace(/ \(Bonus\)$/gi, '');
   cleanedUp = cleanedUp.replace(/ - Acoustic$/gi, '');
