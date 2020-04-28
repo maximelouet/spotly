@@ -1,4 +1,5 @@
 import React from 'react';
+import logout from '../tools/logout';
 import tokenHelper from '../tools/tokenHelper';
 
 const API_URL = process.env.REACT_APP_API_URL ? process.env.REACT_APP_API_URL.replace(/\/$/, '') : 'http://localhost:3001';
@@ -37,6 +38,32 @@ export function formatError(error) {
             >
               Reload page
             </a>
+          </p>
+        </>
+      );
+    case 'Unauthorized':
+      return (
+        <>
+          <p>
+            <span className="light-bold">An error occured (401).</span>
+          </p>
+          <p>
+            <a
+              href="/"
+              onClick={(e) => { e.preventDefault(); window.location.reload(); }}
+              className="link"
+            >
+              Reload page
+            </a>
+            <span> or try </span>
+            <a
+              href="/logout"
+              onClick={(e) => { e.preventDefault(); logout(); }}
+              className="link"
+            >
+              logging out
+            </a>
+            <span> and logging back in.</span>
           </p>
         </>
       );
