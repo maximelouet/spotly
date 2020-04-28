@@ -12,16 +12,6 @@ Display the current song you play on Spotify along with its lyrics, updated in
 The backend (`api/`) parses several lyric sites for lyrics and returns the first
 found to the frontend (`front/`) for display.
 
-## Limitations
-
-- Google has advanced scraping detection mechanisms. Low rate scraping (i.e.
-  running Spotly locally) is not detected but the https://spotly.fi instance is.
-
-- Some song titles are unrecognised by Google because they contain additional
-  unneeded data for lyrics, such as "Remastered", "2020 Mix", etc. In most cases
-  it still manages to find the lyrics though. See
-  https://github.com/maximelouet/spotly/issues/4
-
 ## Running locally
 
 ### With Docker

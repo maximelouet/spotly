@@ -1,6 +1,7 @@
 import fetchFromGenius from './sources/genius';
 import fetchFromMusixmatch from './sources/musixmatch';
 import fetchFromGoogle from './sources/google';
+import cleanSongName from './cleanSongName';
 
 const computeRequestHeaders = (clientHeaders) => {
   return {
@@ -15,8 +16,9 @@ const computeRequestHeaders = (clientHeaders) => {
 class LyricsHelper {
   static async findLyrics(artistName, songName, clientHeaders) {
     const headers = computeRequestHeaders(clientHeaders);
+    const cleanedSongName = cleanSongName(songName);
     try {
-      const lyrics = await fetchFromGenius(artistName, songName, headers);
+      const lyrics = await fetchFromGenius(artistName, cleanedSongName, headers);
       if (!lyrics) {
         throw new Error();
       }
@@ -26,7 +28,7 @@ class LyricsHelper {
       };
     } catch (e1) {
       try {
-        const lyrics = await fetchFromMusixmatch(artistName, songName, headers);
+        const lyrics = await fetchFromMusixmatch(artistName, cleanedSongName, headers);
         if (!lyrics) {
           throw new Error();
         }
@@ -35,7 +37,7 @@ class LyricsHelper {
           source: 'Musixmatch',
         };
       } catch (e) {
-        const lyrics = await fetchFromGoogle(artistName, songName, headers);
+        const lyrics = await fetchFromGoogle(artistName, cleanedSongName, headers);
         return {
           lyrics,
           source: 'Google',
