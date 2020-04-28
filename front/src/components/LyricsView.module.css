@@ -1,16 +1,10 @@
 .root {
-    padding-bottom: 3em;
+    padding-bottom: 7em;
     min-height: 70vh;
 }
 
 .minHeight {
     min-height: 70vh;
-}
-
-.lyricsSource {
-    margin-top: 5em;
-    text-align: right;
-    font-style: italic;
 }
 
 .geniusIndicator {
