@@ -16,7 +16,6 @@ const cleanSongName = (songName) => {
   cleanedUp = cleanedUp.replace(/ \(Remaster.+\)$/gi, '');
   cleanedUp = cleanedUp.replace(/ - From .* Soundtrack$/gi, '');
   cleanedUp = cleanedUp.replace(/ \(From .* Soundtrack\)$/gi, '');
-  console.log(`SONG NAME ${cleanedUp}`);
   return cleanedUp;
 };
 
