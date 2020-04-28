@@ -32,7 +32,7 @@ function App() {
       if (finishesIn < 7000) {
         setTimeout(refresh, finishesIn + 300);
       }
-      if (ps.item.id !== playbackState?.item?.id) {
+      if (ps.item.id !== playbackState?.item?.id || error === 'WAITING_FOR_FOCUS') {
         setPlaybackState(ps);
         setLyrics(undefined);
         setError(undefined);
@@ -63,7 +63,7 @@ function App() {
     } catch (e) {
       setError(e);
     }
-  }, [accessToken, playbackState]);
+  }, [accessToken, error, playbackState]);
 
   useInterval(() => {
     refresh();
