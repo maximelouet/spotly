@@ -12,3 +12,7 @@
     text-align: right;
     font-style: italic;
 }
+
+.geniusIndicator {
+    opacity: 0.85;
+}

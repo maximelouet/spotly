@@ -1,5 +1,6 @@
 import React from 'react';
 import { formatError } from '../tools/api';
+import cl from 'classnames';
 import s from './LyricsView.module.css';
 
 function LyricsView({ lyricsData, error }) {
@@ -22,9 +23,12 @@ function LyricsView({ lyricsData, error }) {
   return (
     <div className={s.root}>
       { lyricsData.lyrics.map((paragraph, p_index) => (
-        <p key={p_index}>{ paragraph.map((line, l_index) => (
+        <p key={p_index}>
+          { paragraph.map((line, l_index) => (
           <React.Fragment key={l_index}>
-            { line }
+            { (line.startsWith('[') && line.endsWith(']')) ? (
+              <span className={cl(s.geniusIndicator, "light-bold")}>{ line }</span>
+            ) : line }
             <br />
           </React.Fragment>
         )) }</p>
