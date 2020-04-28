@@ -70,7 +70,7 @@ function App() {
   useEffect(() => {
     const onFocusChange = () => {
       if (document.hidden) {
-        setRefreshInterval(30000);
+        setRefreshInterval(600000); // refresh every 10 min when unfocused to reduce useless requests
       } else {
         refresh();
         setRefreshInterval(7000);
