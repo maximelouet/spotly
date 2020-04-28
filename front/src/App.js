@@ -22,12 +22,15 @@ function App() {
     try {
       const response = await api.getPlaybackState();
       const ps = response.playbackState;
+      if (!ps?.item?.id) {
+        setPlaybackState(ps);
+        setLyricsData({ lyrics: '', source: undefined });
+        setError(response.error);
+        return;
+      }
       const finishesIn = ps?.item?.duration_ms - ps?.progress_ms;
       if (finishesIn < 7000) {
         setTimeout(refresh, finishesIn + 300);
-      }
-      if (!ps?.item?.id) {
-        throw new Error('Invalid response returned from the API');
       }
       if (ps.item.id !== playbackState?.item?.id) {
         setPlaybackState(ps);

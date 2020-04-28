@@ -36,6 +36,11 @@ class Spotly {
       accessToken,
     });
     const playbackState = await api.getMyCurrentPlaybackState({}).then((res) => res.body);
+    if (!playbackState.item || !playbackState.item.artists[0]) {
+      return {
+        error: 'NOTHING_PLAYING',
+      };
+    }
     // remove unused fields to save network resources and protect the user's privacy
     if (playbackState.actions) {
       delete playbackState.actions;

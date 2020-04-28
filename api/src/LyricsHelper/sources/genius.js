@@ -4,7 +4,6 @@ import urlify from '../urlify';
 
 const generateGeniusUrl = (artistName, songName) => {
   const trackInfo = `${encodeURIComponent(urlify(artistName))}-${encodeURIComponent(urlify(songName))}`;
-  console.log(`https://genius.com/${trackInfo}-lyrics`);
   return `https://genius.com/${trackInfo}-lyrics`;
 };
 
