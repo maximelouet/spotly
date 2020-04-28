@@ -3,8 +3,8 @@ import { formatError } from '../tools/api';
 import cl from 'classnames';
 import s from './LyricsView.module.css';
 
-function LyricsView({ lyricsData, error }) {
-  if (lyricsData?.lyrics === '' || (!lyricsData?.lyrics && error)) {
+function LyricsView({ lyrics, error }) {
+  if (lyrics === '' || (!lyrics && error)) {
     return (
       <div className={s.minHeight}>
         { formatError(error) }
@@ -12,7 +12,7 @@ function LyricsView({ lyricsData, error }) {
     );
   }
 
-  if (!lyricsData?.lyrics) {
+  if (!lyrics) {
     return (
       <div className={s.minHeight}>
         <p>Loading...</p>
@@ -22,7 +22,7 @@ function LyricsView({ lyricsData, error }) {
 
   return (
     <div className={s.root}>
-      { lyricsData.lyrics.map((paragraph, p_index) => (
+      { lyrics.map((paragraph, p_index) => (
         <p key={p_index}>
           { paragraph.map((line, l_index) => (
           <React.Fragment key={l_index}>
@@ -33,14 +33,6 @@ function LyricsView({ lyricsData, error }) {
           </React.Fragment>
         )) }</p>
       )) }
-      { lyricsData.source && (
-        <p className={s.lyricsSource}>
-          <span className="light-bold">
-            Lyrics source
-          </span>:{ ' ' }
-          { lyricsData.source }
-        </p>
-      ) }
     </div>
   );
 }

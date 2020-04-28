@@ -10,7 +10,7 @@ import logout from './tools/logout';
 
 function App() {
   const [playbackState, setPlaybackState] = useState(undefined);
-  const [lyricsData, setLyricsData] = useState(undefined);
+  const [lyrics, setLyrics] = useState(undefined);
   const [error, setError] = useState(undefined);
   const [refreshInterval, setRefreshInterval] = useState(7000);
 
@@ -24,7 +24,7 @@ function App() {
       const ps = response.playbackState;
       if (!ps?.item?.id) {
         setPlaybackState(ps);
-        setLyricsData({ lyrics: '', source: undefined });
+        setLyrics(undefined);
         setError(response.error);
         return;
       }
@@ -34,27 +34,27 @@ function App() {
       }
       if (ps.item.id !== playbackState?.item?.id) {
         setPlaybackState(ps);
-        setLyricsData(undefined);
+        setLyrics(undefined);
         setError(undefined);
         const cached = sessionStorage.getItem(ps.item.id);
         if (cached) {
           const data = JSON.parse(cached);
-          setLyricsData({ lyrics: data.lyrics, source: data.source });
+          setLyrics(data.lyrics);
           setError(data.error);
         } else {
           const lyricsResponse = await api.getPlaybackLyrics();
           const ps = lyricsResponse.playbackState;
           const responseError = lyricsResponse.error;
-          const lyricsData = lyricsResponse.lyricsData ?? { lyrics: undefined, source: undefined };
+          const lyricsData = lyricsResponse.lyricsData ?? { lyrics: '', source: undefined };
           setPlaybackState(ps);
-          setLyricsData(lyricsData);
+          setLyrics(lyricsData.lyrics);
           setError(responseError);
           if (!responseError || responseError === 'LYRICS_NOT_FOUND') {
-            const lyricsDataToSave = {
-              lyrics: lyricsData.lyrics ?? '',
-              source: lyricsData.source,
+            const toCache = {
+              lyrics: lyricsData.lyrics,
+              error: responseError,
             };
-            sessionStorage.setItem(ps.item.id, JSON.stringify({ ...lyricsDataToSave, error: responseError }));
+            sessionStorage.setItem(ps.item.id, JSON.stringify(toCache));
           }
         }
       }
@@ -117,7 +117,7 @@ function App() {
   return (
     <main>
       <PlaybackStateView playbackState={playbackState} error={error} />
-      <LyricsView lyricsData={lyricsData} error={error} />
+      <LyricsView lyrics={lyrics} error={error} />
       <Footer />
     </main>
   );
