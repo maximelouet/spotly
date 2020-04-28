@@ -8,7 +8,7 @@ const generateSearchUrl = (artistName, songName) => {
 };
 
 const htmlToArray = (html) => {
-  const text = html.replace(/<span class="lyrics__content__ok">/gi, '\n');
+  const text = html.replace(/<p class="mxm-lyrics__content ">/gi, '\n');
   const lines = text.split('\n');
   let currentIndex = 0;
   const array = lines.reduce((acc, curr) => {
