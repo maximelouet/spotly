@@ -10,6 +10,11 @@ The API uses [fastify](https://www.fastify.io/) as a Web server framework.
 | SPOTIFY_CLIENT_ID     | `client_id` of your [Spotify app](https://developer.spotify.com/dashboard/)     | YES       |
 | SPOTIFY_CLIENT_SECRET | `client_secret` of your [Spotify app](https://developer.spotify.com/dashboard/) | YES       |
 | PORT                  | Fastify listen port. Defaults to 3001                                           | no        |
+| ENABLE_GOOGLE         | Enable Google lyrics fetching as a fallback. Defaults to false                  | no        |
+
+Note: `ENABLE_GOOGLE` is not recommended on shared instances as Google easily
+detects scraping and blocks the server's IP (or at least asks a human to solve a
+CAPTCHA).
 
 ## Running locally
 

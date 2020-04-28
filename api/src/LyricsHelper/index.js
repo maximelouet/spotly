@@ -38,11 +38,15 @@ class LyricsHelper {
           source: 'Musixmatch',
         };
       } catch (e) {
-        const lyrics = await fetchFromGoogle(artistName, cleanedSongName, headers);
-        return {
-          lyrics,
-          source: 'Google',
-        };
+        // eslint-disable-next-line eqeqeq
+        if (process.env.ENABLE_GOOGLE && (process.env.ENABLE_GOOGLE == 'true' || process.env.ENABLE_GOOGLE == '1')) {
+          const lyrics = await fetchFromGoogle(artistName, cleanedSongName, headers);
+          return {
+            lyrics,
+            source: 'Google',
+          };
+        }
+        throw e;
       }
     }
   }
