@@ -47,6 +47,10 @@ const htmlToArray = (html) => {
 };
 
 const fetchFromGoogle = async (artistName, songName, headers) => {
+  // eslint-disable-next-line eqeqeq
+  if (!process.env.ENABLE_GOOGLE || (process.env.ENABLE_GOOGLE != 'true' && process.env.ENABLE_GOOGLE != '1')) {
+    throw new Error();
+  }
   const url = generateGoogleUrl(artistName, songName);
   const result = await fetch(url, {
     headers,
@@ -54,13 +58,6 @@ const fetchFromGoogle = async (artistName, songName, headers) => {
   const root = parse(result);
   const lyricsNode = root.querySelector('[data-lyricid]');
   if (!lyricsNode) {
-    if (result.includes('Our systems have detected unusual traffic from your computer network')
-    || result.includes('Your client does not have permission to get URL')) {
-      throw new Error('LYRICS_NOT_FOUND');
-    }
-    if (songName.includes('feat')) {
-      return fetchFromGoogle(artistName, songName.substring(0, songName.indexOf('feat')));
-    }
     throw new Error('LYRICS_NOT_FOUND');
   }
   const lyricsHtml = cleanUpResult(lyricsNode.toString());

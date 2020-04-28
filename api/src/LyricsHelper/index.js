@@ -14,41 +14,40 @@ const computeRequestHeaders = (clientHeaders) => {
   };
 };
 
+const sources = [
+  {
+    name: 'Genius',
+    method: fetchFromGenius,
+  },
+  {
+    name: 'Musixmatch',
+    method: fetchFromMusixmatch,
+  },
+  {
+    name: 'Google',
+    method: fetchFromGoogle,
+  },
+];
+
 class LyricsHelper {
   static async findLyrics(artistName, songName, clientHeaders) {
     const headers = computeRequestHeaders(clientHeaders);
     const cleanedSongName = cleanSongName(songName);
-    try {
-      const lyrics = await fetchFromGenius(artistName, cleanedSongName, headers);
-      if (!lyrics) {
-        throw new Error();
-      }
-      return {
-        lyrics,
-        source: 'Genius',
-      };
-    } catch (e1) {
+    // eslint-disable-next-line no-restricted-syntax
+    for (const source of sources) {
       try {
-        const lyrics = await fetchFromMusixmatch(artistName, cleanedSongName, headers);
+        // eslint-disable-next-line no-await-in-loop
+        const lyrics = await source.method(artistName, cleanedSongName, headers);
         if (!lyrics) {
           throw new Error();
         }
         return {
           lyrics,
-          source: 'Musixmatch',
+          source: source.name,
         };
-      } catch (e) {
-        // eslint-disable-next-line eqeqeq
-        if (process.env.ENABLE_GOOGLE && (process.env.ENABLE_GOOGLE == 'true' || process.env.ENABLE_GOOGLE == '1')) {
-          const lyrics = await fetchFromGoogle(artistName, cleanedSongName, headers);
-          return {
-            lyrics,
-            source: 'Google',
-          };
-        }
-        throw e;
-      }
+      } catch { } // eslint-disable-line no-empty
     }
+    throw new Error('LYRICS_NOT_FOUND');
   }
 }
 
