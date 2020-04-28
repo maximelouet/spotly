@@ -55,7 +55,7 @@ const fetchFromGoogle = async (artistName, songName, headers) => {
   if (!lyricsNode) {
     if (result.includes('Our systems have detected unusual traffic from your computer network')
     || result.includes('Your client does not have permission to get URL')) {
-      throw new Error('GOOGLE_ANTI_CRAWL_LIMIT');
+      throw new Error('LYRICS_NOT_FOUND');
     }
     if (songName.includes('feat')) {
       return fetchFromGoogle(artistName, songName.substring(0, songName.indexOf('feat')));
