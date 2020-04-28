@@ -30,9 +30,9 @@ const sources = [
 ];
 
 class LyricsHelper {
-  static async findLyrics(artistName, songName, clientHeaders, cleanFeat = false) {
+  static async findLyrics(artistName, songName, clientHeaders, remFeat = false) {
     const headers = computeRequestHeaders(clientHeaders);
-    const cleanedSongName = cleanFeat ? cleanSongName(removeFeat(songName)) : cleanSongName(songName);
+    const cleanedSongName = remFeat ? cleanSongName(removeFeat(songName)) : cleanSongName(songName);
     // eslint-disable-next-line no-restricted-syntax
     for (const source of sources) {
       try {
@@ -47,7 +47,7 @@ class LyricsHelper {
         };
       } catch { } // eslint-disable-line no-empty
     }
-    if (!cleanFeat && songName.includes('feat.')) {
+    if (!remFeat && songName.includes('feat.')) {
       return this.findLyrics(artistName, songName, clientHeaders, true);
     }
     throw new Error('LYRICS_NOT_FOUND');
