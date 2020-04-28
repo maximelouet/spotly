@@ -1,4 +1,4 @@
-const cleanSongName = (songName) => {
+export const cleanSongName = (songName) => {
   let cleanedUp = songName;
   cleanedUp = cleanedUp.replace(/ - ?\d{0,4} Remaster(ed)?$/gi, '');
   cleanedUp = cleanedUp.replace(/ \(\d{0,4} ?Remaster(ed)?\)$/gi, '');
@@ -19,4 +19,9 @@ const cleanSongName = (songName) => {
   return cleanedUp;
 };
 
-export default cleanSongName;
+export const removeFeat = (songName) => {
+  let cleanedUp = songName;
+  cleanedUp = cleanedUp.replace(/ ?(\(|\[)feat\.? .*(\)|\]) ?/, '');
+  cleanedUp = cleanedUp.replace(/ ?\(with .*\) ?/, '');
+  return cleanedUp;
+};

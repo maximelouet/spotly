@@ -1,7 +1,7 @@
 import fetchFromGenius from './sources/genius';
 import fetchFromMusixmatch from './sources/musixmatch';
 import fetchFromGoogle from './sources/google';
-import cleanSongName from './cleanSongName';
+import { cleanSongName, removeFeat } from './cleaners';
 
 const computeRequestHeaders = (clientHeaders) => {
   const userAgent = (clientHeaders['user-agent'] && !clientHeaders['user-agent'].match(/mobile/gi)) ? clientHeaders['user-agent'] : 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.122 Safari/537.36';
@@ -30,9 +30,9 @@ const sources = [
 ];
 
 class LyricsHelper {
-  static async findLyrics(artistName, songName, clientHeaders) {
+  static async findLyrics(artistName, songName, clientHeaders, cleanFeat = false) {
     const headers = computeRequestHeaders(clientHeaders);
-    const cleanedSongName = cleanSongName(songName);
+    const cleanedSongName = cleanFeat ? cleanSongName(removeFeat(songName)) : cleanSongName(songName);
     // eslint-disable-next-line no-restricted-syntax
     for (const source of sources) {
       try {
@@ -46,6 +46,9 @@ class LyricsHelper {
           source: source.name,
         };
       } catch { } // eslint-disable-line no-empty
+    }
+    if (!cleanFeat && songName.includes('feat.')) {
+      return this.findLyrics(artistName, songName, clientHeaders, true);
     }
     throw new Error('LYRICS_NOT_FOUND');
   }
