@@ -1,5 +1,6 @@
 import fetch from 'node-fetch';
 import { parse } from 'node-html-parser';
+import urlify from '../urlify';
 
 const generateGoogleUrl = (artistName, songName) => {
   let random = Math.random();
@@ -14,7 +15,7 @@ const generateGoogleUrl = (artistName, songName) => {
   random = Math.random();
   const begin = random > 0.5 ? 'lyrics+' : '';
   const end = random > 0.5 ? '' : '+lyrics';
-  const trackInfo = `${encodeURIComponent(artistName.toLowerCase()).replace(/%20/g, '+')}+${encodeURIComponent(songName.toLowerCase()).replace(/%20/g, '+')}`;
+  const trackInfo = `${encodeURIComponent(urlify(artistName, '+'))}+${encodeURIComponent(urlify(songName, '+'))}`;
   return `https://www.google.${domain}/search?q=${begin}${trackInfo}${end}`;
 };
 

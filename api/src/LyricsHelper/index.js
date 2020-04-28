@@ -1,6 +1,6 @@
-import fetchFromGenius from './genius';
-import fetchFromMusixmatch from './musixmatch';
-import fetchFromGoogle from './google';
+import fetchFromGenius from './sources/genius';
+import fetchFromMusixmatch from './sources/musixmatch';
+import fetchFromGoogle from './sources/google';
 
 const computeRequestHeaders = (clientHeaders) => {
   return {
