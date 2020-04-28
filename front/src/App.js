@@ -10,46 +10,55 @@ import logout from './tools/logout';
 
 function App() {
   const [playbackState, setPlaybackState] = useState(undefined);
-  const [lyrics, setLyrics] = useState(undefined);
-  const [lyricsSource, setLyricsSource] = useState(undefined);
+  const [lyricsData, setLyricsData] = useState(undefined);
   const [error, setError] = useState(undefined);
   const [refreshInterval, setRefreshInterval] = useState(7000);
 
   const accessToken = localStorage.getItem('accessToken');
 
-  const refresh = useCallback(async (force = false) => {
+  const refresh = useCallback(async () => {
     if (!accessToken)
       return;
     try {
-      if (!playbackState || (!lyrics && error !== 'LYRICS_NOT_FOUND') || force) {
-        const ps = await api.getPlaybackLyrics();
-        setPlaybackState(ps.playbackState);
-        setLyrics(ps.lyrics);
-        setLyricsSource(ps.source);
-        setError(ps.error);
-        const finishesIn = ps.playbackState?.item?.duration_ms - ps.playbackState?.progress_ms;
-        if (finishesIn < 7000) {
-          setTimeout(refresh, finishesIn + 300);
-        }
-      } else {
-        const response = await api.getPlaybackState();
-        const ps = response.playbackState;
-        const finishesIn = ps?.item?.duration_ms - ps?.progress_ms;
-        if (finishesIn < 7000) {
-          setTimeout(refresh, finishesIn + 300);
-        }
-        if (ps?.item?.id !== playbackState?.item?.id) {
+      const response = await api.getPlaybackState();
+      const ps = response.playbackState;
+      const finishesIn = ps?.item?.duration_ms - ps?.progress_ms;
+      if (finishesIn < 7000) {
+        setTimeout(refresh, finishesIn + 300);
+      }
+      if (!ps?.item?.id) {
+        throw new Error('Invalid response returned from the API');
+      }
+      if (ps.item.id !== playbackState?.item?.id) {
+        setPlaybackState(ps);
+        setLyricsData(undefined);
+        setError(undefined);
+        const cached = sessionStorage.getItem(ps.item.id);
+        if (cached) {
+          const data = JSON.parse(cached);
+          setLyricsData({ lyrics: data.lyrics, source: data.source });
+          setError(data.error);
+        } else {
+          const lyricsResponse = await api.getPlaybackLyrics();
+          const ps = lyricsResponse.playbackState;
+          const responseError = lyricsResponse.error;
+          const lyricsData = lyricsResponse.lyricsData ?? { lyrics: undefined, source: undefined };
           setPlaybackState(ps);
-          setLyrics(undefined);
-          setLyricsSource(undefined);
-          setError(undefined);
-          return refresh(true);
+          setLyricsData(lyricsData);
+          setError(responseError);
+          if (!responseError || responseError === 'LYRICS_NOT_FOUND') {
+            const lyricsDataToSave = {
+              lyrics: lyricsData.lyrics ?? '',
+              source: lyricsData.source,
+            };
+            sessionStorage.setItem(ps.item.id, JSON.stringify({ ...lyricsDataToSave, error: responseError }));
+          }
         }
       }
     } catch (e) {
       setError(e);
     }
-  }, [accessToken, playbackState, lyrics, error]);
+  }, [accessToken, playbackState]);
 
   useInterval(() => {
     refresh();
@@ -105,7 +114,7 @@ function App() {
   return (
     <main>
       <PlaybackStateView playbackState={playbackState} error={error} />
-      <LyricsView lyrics={lyrics} lyricsSource={lyricsSource} error={error} />
+      <LyricsView lyricsData={lyricsData} error={error} />
       <Footer />
     </main>
   );

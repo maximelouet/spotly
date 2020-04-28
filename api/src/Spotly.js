@@ -62,16 +62,15 @@ class Spotly {
       };
     }
     try {
-      const lyrics = await LyricsHelper.findLyrics(playbackState.item.artists[0].name,
+      const lyricsData = await LyricsHelper.findLyrics(playbackState.item.artists[0].name,
         playbackState.item.name, clientHeaders);
       return {
         playbackState,
-        ...lyrics,
+        lyricsData,
       };
     } catch (e) {
       return {
         playbackState,
-        lyrics: '',
         error: e.message,
       };
     }
