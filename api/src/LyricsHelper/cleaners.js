@@ -8,8 +8,8 @@ export const cleanSongName = (songName) => {
   cleanedUp = cleanedUp.replace(/ \(Remix\)$/gi, '');
   cleanedUp = cleanedUp.replace(/ - Electro Mix$/gi, '');
   cleanedUp = cleanedUp.replace(/ \(Electro Mix\)$/gi, '');
-  cleanedUp = cleanedUp.replace(/ - Bonus$/gi, '');
-  cleanedUp = cleanedUp.replace(/ \(Bonus\)$/gi, '');
+  cleanedUp = cleanedUp.replace(/ - Bonus( Track)?$/gi, '');
+  cleanedUp = cleanedUp.replace(/ \(Bonus( Track)?\)$/gi, '');
   cleanedUp = cleanedUp.replace(/ - Acoustic$/gi, '');
   cleanedUp = cleanedUp.replace(/ \(Acoustic\)$/gi, '');
   cleanedUp = cleanedUp.replace(/ - Remaster.+$/gi, '');
