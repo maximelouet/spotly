@@ -3,6 +3,7 @@
     width: auto;
     margin: .5em 0 1.5em;
     min-height: 5em;
+    position: relative;
 }
 
 .root img {
@@ -19,4 +20,33 @@
 
 .songInfo > span:first-child {
     font-weight: 600;
+}
+
+.root img, .songInfo {
+    transition: opacity .2s;
+}
+.root.faded img, .faded .songInfo {
+    transition: opacity 1s;
+    opacity: 0.5;
+}
+
+.offlineIndicator {
+    color: #fff;
+    background: #D34F4F;
+    padding: .2em .5em;
+    font-weight: 600;
+    align-self: center;
+    margin-left: auto;
+    text-transform: uppercase;
+    border-radius: 5px;
+}
+
+@media all and (max-width: 500px) {
+    .offlineIndicator {
+        position: absolute;
+        bottom: -2em;
+        left: 50%;
+        transform: translateX(-50%);
+        width: auto;
+    }
 }

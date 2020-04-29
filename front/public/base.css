@@ -1,18 +1,8 @@
 :root {
     --bg-color: #fff;
-    --bg-light: #eee;
-    --bg-mid: #a8a8a8;
     --text-color: #111;
     --spotify-green: #1DB954;
 }
-/*@media (prefers-color-scheme: dark) {
-    :root {
-        --bg-color: #1e1d1d;
-        --bg-light: #333;
-        --bg-mid: #555;
-        --text-color: #fff;
-    }
-}*/
 
 ::-moz-focus-inner {
     border: 0;

@@ -27,6 +27,10 @@ function App() {
         setError(response.error);
         return;
       }
+      // reset error after a network failure
+      if (error !== 'LYRICS_NOT_FOUND') {
+        setError(undefined);
+      }
       // eslint-disable-next-line camelcase
       const finishesIn = ps?.item?.duration_ms - ps?.progress_ms;
       if (finishesIn < 7000) {
@@ -117,7 +121,7 @@ function App() {
 
   return (
     <main>
-      <PlaybackStateView playbackState={playbackState} />
+      <PlaybackStateView playbackState={playbackState} error={lyrics !== undefined && error} />
       <LyricsView lyrics={lyrics} error={error} />
       <Footer />
     </main>

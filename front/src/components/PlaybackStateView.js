@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
+import cl from 'classnames';
 import s from './PlaybackStateView.module.css';
 
-function PlaybackStateView({ playbackState }) {
+function PlaybackStateView({ playbackState, error }) {
   const [song, setSong] = useState(undefined);
+  const [offline, setOffline] = useState(false);
   const songId = playbackState?.item?.id;
 
   useEffect(() => {
@@ -24,8 +26,16 @@ function PlaybackStateView({ playbackState }) {
     window.scrollTo(0, 0);
   }, [songId]);
 
+  useEffect(() => {
+    setOffline(error && error !== 'NOTHING_PLAYING' && error !== 'LYRICS_NOT_FOUND');
+  }, [error]);
+
+  useEffect(() => {
+    document.title = offline ? 'Spotly (offline)' : 'Spotly';
+  }, [offline]);
+
   return (
-    <div className={s.root}>
+    <div className={cl(s.root, offline && s.faded)} title={offline ? 'Unable to refresh data' : undefined}>
       { song && (
         <>
           <img src={song.image} alt="Cover art" />
@@ -37,6 +47,11 @@ function PlaybackStateView({ playbackState }) {
               { song.otherArtists.join(', ') }
             </span>
           </p>
+          { offline && (
+            <span className={s.offlineIndicator}>
+              Offline
+            </span>
+          ) }
         </>
       )}
     </div>
