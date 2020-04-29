@@ -1,27 +1,39 @@
+const removalRules = [
+  / - ?\d{0,4} Remaster(ed)?$/gi,
+  / \(\d{0,4} ?Remaster(ed)?\)$/gi,
+  / - Live.*$/gi,
+  / \(Live.*\)$/gi,
+  / - Remix$/gi,
+  / \(Remix\)$/gi,
+  / - Electro Mix$/gi,
+  / \(Electro Mix\)$/gi,
+  / - Bonus( Track)?$/gi,
+  / \(Bonus( Track)?\)$/gi,
+  / - Acoustic$/gi,
+  / \(Acoustic\)$/gi,
+  / - Remaster.+$/gi,
+  / \(Remaster.+\)$/gi,
+  / - From .* Soundtrack$/gi,
+  / \(From .* Soundtrack\)$/gi,
+];
+
 export const cleanSongName = (songName) => {
   let cleanedUp = songName;
-  cleanedUp = cleanedUp.replace(/ - ?\d{0,4} Remaster(ed)?$/gi, '');
-  cleanedUp = cleanedUp.replace(/ \(\d{0,4} ?Remaster(ed)?\)$/gi, '');
-  cleanedUp = cleanedUp.replace(/ - Live.*$/gi, '');
-  cleanedUp = cleanedUp.replace(/ \(Live.*\)$/gi, '');
-  cleanedUp = cleanedUp.replace(/ - Remix$/gi, '');
-  cleanedUp = cleanedUp.replace(/ \(Remix\)$/gi, '');
-  cleanedUp = cleanedUp.replace(/ - Electro Mix$/gi, '');
-  cleanedUp = cleanedUp.replace(/ \(Electro Mix\)$/gi, '');
-  cleanedUp = cleanedUp.replace(/ - Bonus( Track)?$/gi, '');
-  cleanedUp = cleanedUp.replace(/ \(Bonus( Track)?\)$/gi, '');
-  cleanedUp = cleanedUp.replace(/ - Acoustic$/gi, '');
-  cleanedUp = cleanedUp.replace(/ \(Acoustic\)$/gi, '');
-  cleanedUp = cleanedUp.replace(/ - Remaster.+$/gi, '');
-  cleanedUp = cleanedUp.replace(/ \(Remaster.+\)$/gi, '');
-  cleanedUp = cleanedUp.replace(/ - From .* Soundtrack$/gi, '');
-  cleanedUp = cleanedUp.replace(/ \(From .* Soundtrack\)$/gi, '');
+  removalRules.forEach((regexp) => {
+    cleanedUp = cleanedUp.replace(regexp, '');
+  });
   return cleanedUp;
 };
 
+const featRemovalRules = [
+  / ?(\(|\[)feat\.? .*(\)|\]) ?/,
+  / ?\(with .*\) ?/,
+];
+
 export const removeFeat = (songName) => {
   let cleanedUp = songName;
-  cleanedUp = cleanedUp.replace(/ ?(\(|\[)feat\.? .*(\)|\]) ?/, '');
-  cleanedUp = cleanedUp.replace(/ ?\(with .*\) ?/, '');
+  featRemovalRules.forEach((regexp) => {
+    cleanedUp = cleanedUp.replace(regexp, '');
+  });
   return cleanedUp;
 };
