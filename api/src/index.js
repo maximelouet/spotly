@@ -7,6 +7,16 @@ const fastify = new Fastify({
   logger: true,
 });
 
+const requiredEnvironmentVariables = [
+  'FRONT_URL',
+  'SPOTIFY_CLIENT_ID',
+  'SPOTIFY_CLIENT_SECRET',
+];
+
+requiredEnvironmentVariables.forEach((envVar) => {
+  if (process.env[envVar] === undefined) throw new Error('Missing required environment variable');
+});
+
 fastify.use(cors({
   origin: process.env.FRONT_URL,
 }));
