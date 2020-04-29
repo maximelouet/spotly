@@ -5,9 +5,19 @@ const headers = {
   'Content-Type': 'application/json',
 };
 
+const controller = new AbortController();
+const { signal } = controller;
+
 const request = async (route, params) => {
+  if (!navigator.onLine) {
+    controller.abort();
+    throw new Error('No Internet connection');
+  } else if (signal.aborted) {
+    window.location.reload();
+  }
   if (params) {
     return fetch(`${API_URL}${route}`, {
+      signal,
       method: 'POST',
       headers,
       body: JSON.stringify({
@@ -21,6 +31,12 @@ const request = async (route, params) => {
 };
 
 const authenticatedRequest = async (route, params = {}) => {
+  if (!navigator.onLine) {
+    controller.abort();
+    throw new Error('No Internet connection');
+  } else if (signal.aborted) {
+    window.location.reload();
+  }
   let accessToken = localStorage.getItem('accessToken');
   const expiresAt = new Date(localStorage.getItem('expiresAt') * 1000);
   const now = new Date();
@@ -42,6 +58,7 @@ const authenticatedRequest = async (route, params = {}) => {
   });
 
   return fetch(`${API_URL}${route}`, {
+    signal,
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
