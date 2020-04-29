@@ -1,6 +1,6 @@
-import fetchFromGenius from './sources/genius';
-import fetchFromMusixmatch from './sources/musixmatch';
-import fetchFromGoogle from './sources/google';
+import fetchFromGenius from './providers/genius';
+import fetchFromMusixmatch from './providers/musixmatch';
+import fetchFromGoogle from './providers/google';
 import { cleanSongName, removeFeat } from './cleaners';
 
 const computeRequestHeaders = (clientHeaders) => {
