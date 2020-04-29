@@ -12,7 +12,7 @@ const textToArray = (text) => {
   let currentIndex = 0;
   const array = lines.reduce((acc, curr) => {
     const line = curr.trim();
-    if (!line) {
+    if (!line || line === 'Intéressé(e) par l\'explication des paroles de cette chanson ou d\'autres ? Venez faire l\'analyse des textes avec nous !') {
       currentIndex += 1;
     } else {
       if (!acc[currentIndex]) {
