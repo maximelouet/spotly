@@ -6,6 +6,7 @@ on:
   push:
     paths:
       - 'front/**'
+      - '.github/workflows/*'
 
 defaults:
   run:
