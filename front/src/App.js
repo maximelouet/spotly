@@ -41,7 +41,7 @@ function App() {
           const data = JSON.parse(cached);
           setLyrics(data.lyrics);
           setError(data.error);
-        } else if (!document.hidden) {
+        } else if (!document.hidden) { // do not fetch lyrics if app is unfocused to save resources
           const lyricsResponse = await api.getPlaybackLyrics();
           const lyricsPs = lyricsResponse.playbackState;
           const responseError = lyricsResponse.error;
@@ -72,7 +72,7 @@ function App() {
   useEffect(() => {
     const onFocusChange = () => {
       if (document.hidden) {
-        setRefreshInterval(180000); // refresh every 3 min when unfocused to reduce useless requests
+        setRefreshInterval(180000); // refresh every 3 min when unfocused to save resources
       } else {
         refresh();
         setRefreshInterval(7000);

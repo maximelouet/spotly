@@ -40,6 +40,8 @@ const fetchFromMusixmatch = async (artistName, songName, headers) => {
   const root = parse(lyricsPage);
   const lyricsNode = root.querySelectorAll('.mxm-lyrics__content');
   const lyricsFor = root.querySelector('div.lyrics-to.hidden-xs.hidden-sm');
+  // reject "waiting for review"/unconfirmed Musixmatch lyrics as they may be wrong
+  // we prefer to return no lyrics for many songs rather than wrong lyrics for a few ones
   if (!lyricsNode
     || !lyricsNode[0]
     || root.text.includes('submitted the lyrics for this song. Are the lyrics correct?')

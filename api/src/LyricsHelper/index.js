@@ -4,6 +4,7 @@ import fetchFromGoogle from './providers/google';
 import { cleanSongName, removeFeat } from './cleaners';
 
 const computeRequestHeaders = (clientHeaders) => {
+  // site respond differently to mobile user agents so we always choose a desktop one
   const userAgent = (clientHeaders['user-agent'] && !clientHeaders['user-agent'].match(/mobile/gi)) ? clientHeaders['user-agent'] : 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.122 Safari/537.36';
   return {
     'user-agent': userAgent,
@@ -32,6 +33,7 @@ const sources = [
 class LyricsHelper {
   static async findLyrics(artistName, songName, clientHeaders, remFeat = false) {
     const headers = computeRequestHeaders(clientHeaders);
+    // remove "Remastered" and other noisy suffixes from Spotify
     const cleanedSongName = remFeat ? cleanSongName(removeFeat(songName)) : cleanSongName(songName);
     // eslint-disable-next-line no-restricted-syntax
     for (const source of sources) {
@@ -48,6 +50,8 @@ class LyricsHelper {
       } catch { } // eslint-disable-line no-empty
     }
     if (!remFeat && songName.includes('feat.')) {
+      // try again without "feat" or other identifiers
+      // we do not remove them in cleanSongName as some songs have different non-feat lyrics
       return this.findLyrics(artistName, songName, clientHeaders, true);
     }
     throw new Error('LYRICS_NOT_FOUND');

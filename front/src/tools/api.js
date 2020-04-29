@@ -39,6 +39,7 @@ export function formatError(originalError) {
           </p>
         </>
       );
+    // may happen only if Spotify revokes the user's token
     case 'Unauthorized':
       return (
         <>
