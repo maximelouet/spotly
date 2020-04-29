@@ -5,7 +5,7 @@ Display lyrics from your currently playing song on Spotify.
 ## Features
 
 Display the current song you play on Spotify along with its lyrics, updated in
-~real-time.
+~real-time, in a minimalist design lightweight page.
 
 ## How it works
 
