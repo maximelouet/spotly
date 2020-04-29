@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import api, { formatError } from '../tools/api';
+import api from '../tools/api';
+import formatError from '../tools/formatError';
 import s from './LoginWithSpotify.module.css';
 
 function LoginWithSpotify() {

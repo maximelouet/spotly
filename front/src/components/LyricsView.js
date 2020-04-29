@@ -1,6 +1,6 @@
 import React from 'react';
 import cl from 'classnames';
-import { formatError } from '../tools/api';
+import formatError from '../tools/formatError';
 import s from './LyricsView.module.css';
 
 function LyricsView({ lyrics, error }) {
