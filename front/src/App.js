@@ -33,7 +33,7 @@ function App() {
       }
       // eslint-disable-next-line camelcase
       const finishesIn = ps?.item?.duration_ms - ps?.progress_ms;
-      if (finishesIn < 7000) {
+      if (finishesIn < 7000 && ps.is_playing) {
         setTimeout(refresh, finishesIn + 300);
       }
       if (ps.item.id !== playbackState?.item?.id || error === 'WAITING_FOR_FOCUS') {
