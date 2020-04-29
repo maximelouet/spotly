@@ -59,7 +59,7 @@ class Spotly {
   }
 
   static async getPlaybackLyrics(accessToken, clientHeaders) {
-    const playbackState = await this.getPlaybackState(accessToken).then(ps => ps.playbackState);
+    const playbackState = await this.getPlaybackState(accessToken).then((ps) => ps.playbackState);
     const isPlaying = playbackState.item && playbackState.item.artists[0];
     if (!isPlaying) {
       return {

@@ -21,12 +21,10 @@ fastify.post('/getPlaybackState', async (request, reply) => Spotly.getPlaybackSt
 
 fastify.post('/getPlaybackLyrics', async (request, reply) => Spotly.getPlaybackLyrics(request.body.accessToken, request.headers));
 
-fastify.setNotFoundHandler(async (request, reply) => {
-  return {
-    error: 'NOT_FOUND',
-    message: 'API route not found',
-  };
-});
+fastify.setNotFoundHandler(async (request, reply) => ({
+  error: 'NOT_FOUND',
+  message: 'API route not found',
+}));
 
 const start = async () => {
   try {

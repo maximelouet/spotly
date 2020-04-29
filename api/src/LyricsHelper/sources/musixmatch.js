@@ -23,20 +23,20 @@ const htmlToArray = (html) => {
     }
     return acc;
   }, []);
-  return array.filter(e => e.length);
+  return array.filter((e) => e.length);
 };
 
 const fetchFromMusixmatch = async (artistName, songName, headers) => {
   const url = generateSearchUrl(artistName, songName);
   const searchPage = await fetch(url, {
     headers,
-  }).then(r => r.text());
+  }).then((r) => r.text());
   const searchRoot = parse(searchPage);
   const resultsDiv = searchRoot.querySelector('#search-all-results .box-style-plain .media-card-title .title');
   const link = resultsDiv.toString().replace(/<a class="title" href="(.*?)".*/gi, '$1');
   const lyricsPage = await fetch(`https://www.musixmatch.com${link}`, {
     headers,
-  }).then(r => r.text());
+  }).then((r) => r.text());
   const root = parse(lyricsPage);
   const lyricsNode = root.querySelectorAll('.mxm-lyrics__content');
   const lyricsFor = root.querySelector('div.lyrics-to.hidden-xs.hidden-sm');

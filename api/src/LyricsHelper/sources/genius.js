@@ -22,14 +22,14 @@ const textToArray = (text) => {
     }
     return acc;
   }, []);
-  return array.filter(e => e.length);
+  return array.filter((e) => e.length);
 };
 
 const fetchFromGenius = async (artistName, songName, headers) => {
   const url = generateGeniusUrl(artistName, songName);
   const result = await fetch(url, {
     headers,
-  }).then(r => r.text()).then(text => text.split('\n').slice(1).join('\n'));
+  }).then((r) => r.text()).then((text) => text.split('\n').slice(1).join('\n'));
   const root = parse(result);
   const lyricsNode = root.querySelector('[initial-content-for="lyrics"]');
   if (!lyricsNode) {

@@ -39,10 +39,10 @@ const cleanUpResult = (html) => {
 const htmlToArray = (html) => {
   const paragraphs = html.split('</p><p>');
   let final = [];
-  paragraphs.forEach(elm => {
-    final.push(elm.split('<br>').filter(e => e !== '<p>' && e !== '</p>' && e.length));
+  paragraphs.forEach((elm) => {
+    final.push(elm.split('<br>').filter((e) => e !== '<p>' && e !== '</p>' && e.length));
   });
-  final = final.filter(e => e.length);
+  final = final.filter((e) => e.length);
   return final;
 };
 
@@ -54,7 +54,7 @@ const fetchFromGoogle = async (artistName, songName, headers) => {
   const url = generateGoogleUrl(artistName, songName);
   const result = await fetch(url, {
     headers,
-  }).then(r => r.text()).then(text => text.split('\n').slice(1).join('\n'));
+  }).then((r) => r.text()).then((text) => text.split('\n').slice(1).join('\n'));
   const root = parse(result);
   const lyricsNode = root.querySelector('[data-lyricid]');
   if (!lyricsNode) {
