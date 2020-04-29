@@ -1,6 +1,8 @@
 const removalRules = [
-  / - ?\d{0,4} Remaster(ed)?$/gi,
-  / \(\d{0,4} ?Remaster(ed)?\)$/gi,
+  / - ?\d{0,4} Remaster.*$/gi,
+  / \(\d{0,4} ?Remaster.*\)$/gi,
+  / - Remaster.+$/gi,
+  / \(Remaster.+\)$/gi,
   / - Live.*$/gi,
   / \(Live.*\)$/gi,
   / - Remix$/gi,
@@ -11,8 +13,6 @@ const removalRules = [
   / \(Bonus( Track)?\)$/gi,
   / - Acoustic$/gi,
   / \(Acoustic\)$/gi,
-  / - Remaster.+$/gi,
-  / \(Remaster.+\)$/gi,
   / - From .* Soundtrack$/gi,
   / \(From .* Soundtrack\)$/gi,
 ];

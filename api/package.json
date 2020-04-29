@@ -6,7 +6,8 @@
   "scripts": {
     "start": "nodemon -r esm -r dotenv/config src/index.js",
     "prod": "node -r esm src/index.js",
-    "lint": "eslint ./src"
+    "lint": "eslint ./src",
+    "test": "mocha -r esm tests"
   },
   "keywords": [],
   "author": "Maxime Louet <maxime@saumon.io>",
@@ -22,9 +23,11 @@
     "spotify-web-api-node": "^4.0.0"
   },
   "devDependencies": {
+    "chai": "^4.2.0",
     "eslint": "^6.8.0",
     "eslint-config-airbnb-base": "^14.1.0",
     "eslint-plugin-import": "^2.20.2",
+    "mocha": "^7.1.2",
     "nodemon": "^2.0.3"
   }
 }
