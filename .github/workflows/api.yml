@@ -1,15 +1,19 @@
 ---
 
-name: Lint
+name: API
 
-on: push
+on:
+  push:
+    paths:
+      - 'api/**'
 
-env:
-  CI: true
+defaults:
+  run:
+    working-directory: api/
 
 jobs:
 
-  lint-api:
+  lint:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -24,12 +28,10 @@ jobs:
           node-version: ${{ matrix.node-version }}
 
       - run: npm ci
-        working-directory: api/
 
       - run: npm run lint
-        working-directory: api/
 
-  lint-front:
+  test:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -44,7 +46,5 @@ jobs:
           node-version: ${{ matrix.node-version }}
 
       - run: npm ci
-        working-directory: front/
 
-      - run: npm run lint
-        working-directory: front/
+      - run: npm run test
