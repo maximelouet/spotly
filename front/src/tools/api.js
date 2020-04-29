@@ -1,16 +1,14 @@
 import React from 'react';
-import logout from '../tools/logout';
-import tokenHelper from '../tools/tokenHelper';
+import logout from './logout';
+import tokenHelper from './tokenHelper';
 
 const API_URL = process.env.REACT_APP_API_URL ? process.env.REACT_APP_API_URL.replace(/\/$/, '') : 'http://localhost:3001';
 const headers = {
   'Content-Type': 'application/json',
 };
 
-export function formatError(error) {
-  if (error?.message) {
-    error = error.message;
-  }
+export function formatError(originalError) {
+  const error = (originalError?.message) ? originalError.message : originalError;
   switch (error) {
     case 'NOTHING_PLAYING':
       return (
@@ -97,11 +95,11 @@ const request = async (route, params) => {
       body: JSON.stringify({
         ...params,
       }),
-    }).then(r => r.json());
+    }).then((r) => r.json());
   }
   return fetch(`${API_URL}${route}`, {
     headers,
-  }).then(r => r.json());
+  }).then((r) => r.json());
 };
 
 const authenticatedRequest = async (route, params = {}) => {
@@ -131,7 +129,7 @@ const authenticatedRequest = async (route, params = {}) => {
       'Content-Type': 'application/json',
     },
     body,
-  }).then(r => r.json());
+  }).then((r) => r.json());
 };
 
 export default {
@@ -139,13 +137,7 @@ export default {
     const res = await request('/getAuthorizeUrl');
     return res.url;
   },
-  exchangeCode: async (code) => {
-    return request('/exchangeCode', { code });
-  },
-  getPlaybackState: async () => {
-    return authenticatedRequest('/getPlaybackState');
-  },
-  getPlaybackLyrics: async () => {
-    return authenticatedRequest('/getPlaybackLyrics');
-  },
-}
+  exchangeCode: async (code) => request('/exchangeCode', { code }),
+  getPlaybackState: async () => authenticatedRequest('/getPlaybackState'),
+  getPlaybackLyrics: async () => authenticatedRequest('/getPlaybackLyrics'),
+};

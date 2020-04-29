@@ -17,8 +17,7 @@ function App() {
   const accessToken = localStorage.getItem('accessToken');
 
   const refresh = useCallback(async () => {
-    if (!accessToken)
-      return;
+    if (!accessToken) return;
     try {
       const response = await api.getPlaybackState();
       const ps = response.playbackState;
@@ -28,6 +27,7 @@ function App() {
         setError(response.error);
         return;
       }
+      // eslint-disable-next-line camelcase
       const finishesIn = ps?.item?.duration_ms - ps?.progress_ms;
       if (finishesIn < 7000) {
         setTimeout(refresh, finishesIn + 300);
@@ -43,10 +43,10 @@ function App() {
           setError(data.error);
         } else if (!document.hidden) {
           const lyricsResponse = await api.getPlaybackLyrics();
-          const ps = lyricsResponse.playbackState;
+          const lyricsPs = lyricsResponse.playbackState;
           const responseError = lyricsResponse.error;
           const lyricsData = lyricsResponse.lyricsData ?? { lyrics: '', source: undefined };
-          setPlaybackState(ps);
+          setPlaybackState(lyricsPs);
           setLyrics(lyricsData.lyrics);
           setError(responseError);
           if (!responseError || responseError === 'LYRICS_NOT_FOUND') {
@@ -54,7 +54,7 @@ function App() {
               lyrics: lyricsData.lyrics,
               error: responseError,
             };
-            sessionStorage.setItem(ps.item.id, JSON.stringify(toCache));
+            sessionStorage.setItem(lyricsPs.item.id, JSON.stringify(toCache));
           }
         } else {
           setError('WAITING_FOR_FOCUS');
@@ -83,8 +83,7 @@ function App() {
   }, [accessToken, refresh]);
 
   useEffect(() => {
-    if (accessToken)
-      refresh();
+    if (accessToken) refresh();
   }, [accessToken]); // eslint-disable-line react-hooks/exhaustive-deps
 
   if (window.location.pathname === '/callback') {
@@ -92,7 +91,7 @@ function App() {
       <main>
         <SpotifyCallback />
       </main>
-    )
+    );
   }
 
   if (window.location.pathname === '/logout') {
@@ -113,12 +112,12 @@ function App() {
       <main>
         <LoginWithSpotify />
       </main>
-    )
+    );
   }
 
   return (
     <main>
-      <PlaybackStateView playbackState={playbackState} error={error} />
+      <PlaybackStateView playbackState={playbackState} />
       <LyricsView lyrics={lyrics} error={error} />
       <Footer />
     </main>

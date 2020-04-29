@@ -10,8 +10,7 @@ function LoginWithSpotify() {
     async function retrieveAuthorizeUrl() {
       try {
         const url = await api.getAuthorizeUrl();
-        if (!url)
-          throw new Error();
+        if (!url) throw new Error();
         setAuthorizeUrl(url);
       } catch (e) {
         setError(e);
@@ -31,7 +30,10 @@ function LoginWithSpotify() {
   if (!authorizeUrl) {
     return (
       <div className={s.root}>
-        <p>Loading...<img src="/spotify_white.png" alt="Spotify" className={s.imagePreload} /></p>
+        <p>
+          Loading...
+          <img src="/spotify_white.png" alt="Spotify" className={s.imagePreload} />
+        </p>
       </div>
     );
   }

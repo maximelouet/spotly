@@ -7,13 +7,14 @@ export default function useInterval(callback, delay) {
     savedCallback.current = callback;
   }, [callback]);
 
+  // eslint-disable-next-line consistent-return
   useEffect(() => {
     function tick() {
       savedCallback.current();
     }
     if (delay !== null) {
-      let id = setInterval(tick, delay);
+      const id = setInterval(tick, delay);
       return () => clearInterval(id);
     }
   }, [delay]);
-};
+}

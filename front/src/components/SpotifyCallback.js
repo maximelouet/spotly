@@ -30,7 +30,7 @@ function SpotifyCallback() {
     return (
       <div className={s.root}>
         <p>Invalid callback.</p>
-        <p><a href='/' className="link">Return to home</a></p>
+        <p><a href="/" className="link">Return to home</a></p>
       </div>
     );
   }
