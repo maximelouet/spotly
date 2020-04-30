@@ -12,7 +12,7 @@ function App() {
   const [playbackState, setPlaybackState] = useState(undefined);
   const [lyrics, setLyrics] = useState(undefined);
   const [error, setError] = useState(undefined);
-  const [refreshInterval, setRefreshInterval] = useState(7000);
+  const [refreshInterval, setRefreshInterval] = useState(10000);
 
   const accessToken = localStorage.getItem('accessToken');
 
