@@ -5,17 +5,15 @@ import s from './PlaybackStateView.module.css';
 function PlaybackStateView({ playbackState, error }) {
   const [song, setSong] = useState(undefined);
   const [offline, setOffline] = useState(false);
-  const songId = playbackState?.item?.id;
+  const songId = playbackState?.song?.id;
 
   useEffect(() => {
-    if (playbackState && playbackState.item) {
-      const otherArtists = [];
-      playbackState.item.artists.slice(1).forEach((e) => otherArtists.push(e.name));
+    if (playbackState && playbackState.song) {
       setSong({
-        name: playbackState.item.name,
-        image: playbackState.item.album.images.find((e) => e.height === 64).url,
-        mainArtist: playbackState.item.artists[0].name,
-        otherArtists,
+        name: playbackState.song.name,
+        image: playbackState.song.image,
+        mainArtist: playbackState.song.artists[0],
+        otherArtists: playbackState.song.artists.slice(1).reduce((acc, cur) => [...acc, cur], []),
       });
     } else {
       setSong(undefined);
@@ -42,7 +40,7 @@ function PlaybackStateView({ playbackState, error }) {
           <p className={s.songInfo}>
             <span>{ song.name }</span>
             <span>
-              <span className={s.mainArtist}>{ song.mainArtist }</span>
+              { song.mainArtist }
               { song.otherArtists.length > 0 && ', '}
               { song.otherArtists.join(', ') }
             </span>

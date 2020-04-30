@@ -23,7 +23,7 @@ function App() {
     try {
       const response = await api.getPlaybackState();
       const ps = response.playbackState;
-      if (!ps?.item?.id) {
+      if (!ps?.song?.id) {
         setPlaybackState(ps);
         setLyrics(undefined);
         setError(response.error);
@@ -34,15 +34,15 @@ function App() {
         setError(undefined);
       }
       // eslint-disable-next-line camelcase
-      const finishesIn = ps?.item?.duration_ms - ps?.progress_ms;
-      if (finishesIn < 7000 && ps.is_playing) {
+      const finishesIn = ps?.song?.durationMs - ps?.song.progressMs;
+      if (finishesIn < 7000 && ps.isPlaying) {
         setTimeout(refresh, finishesIn + 300);
       }
-      if (ps.item.id !== playbackState?.item?.id || error === 'WAITING_FOR_FOCUS') {
+      if (ps.song.id !== playbackState?.song?.id || error === 'WAITING_FOR_FOCUS') {
         setPlaybackState(ps);
         setLyrics(undefined);
         setError(undefined);
-        const cached = sessionStorage.getItem(ps.item.id);
+        const cached = sessionStorage.getItem(ps.song.id);
         if (cached) {
           const data = JSON.parse(cached);
           setLyrics(data.lyrics);
@@ -60,7 +60,7 @@ function App() {
               lyrics: lyricsData.lyrics,
               error: responseError,
             };
-            sessionStorage.setItem(lyricsPs.item.id, JSON.stringify(toCache));
+            sessionStorage.setItem(lyricsPs.song.id, JSON.stringify(toCache));
           }
         } else {
           setError('WAITING_FOR_FOCUS');

@@ -3,6 +3,25 @@ import LyricsHelper from './LyricsHelper';
 
 const scopes = ['user-read-playback-state', 'user-read-currently-playing'];
 
+const serializePlaybackStateFromSpotify = (ps) => {
+  if (!ps.item || !ps.item.artists[0]) {
+    return {
+      isPlaying: false,
+    };
+  }
+  return {
+    isPlaying: ps.is_playing,
+    song: {
+      id: ps.item.id,
+      name: ps.item.name,
+      artists: ps.item.artists.reduce((acc, cur) => [...acc, cur.name], []),
+      image: ps.item.album.images[ps.item.album.images.length - 1].url,
+      progressMs: ps.progress_ms,
+      durationMs: ps.item.duration_ms,
+    },
+  };
+};
+
 class Spotly {
   static getApiInstance(params) {
     return new SpotifyWebApi({
@@ -35,40 +54,28 @@ class Spotly {
     const api = this.getApiInstance({
       accessToken,
     });
-    const playbackState = await api.getMyCurrentPlaybackState({}).then((res) => res.body);
-    if (!playbackState.item || !playbackState.item.artists[0]) {
+    const psResponse = await api.getMyCurrentPlaybackState({}).then((res) => res.body);
+    const playbackState = serializePlaybackStateFromSpotify(psResponse);
+    if (!playbackState.song) {
       return {
         error: 'NOTHING_PLAYING',
       };
     }
-    // remove unused fields to save network resources and protect the user's privacy
-    if (playbackState.actions) {
-      delete playbackState.actions;
-    }
-    if (playbackState.item && playbackState.item.available_markets) {
-      delete playbackState.item.available_markets;
-    }
-    if (playbackState.item && playbackState.item.album
-      && playbackState.item.album.available_markets) {
-      delete playbackState.item.album.available_markets;
-    }
-    if (playbackState.device) {
-      delete playbackState.device;
-    }
-    return { playbackState };
+    return {
+      playbackState,
+    };
   }
 
   static async getPlaybackLyrics(accessToken, clientHeaders) {
     const playbackState = await this.getPlaybackState(accessToken).then((ps) => ps.playbackState);
-    const isPlaying = playbackState.item && playbackState.item.artists[0];
-    if (!isPlaying) {
+    if (playbackState.error) {
       return {
-        error: 'NOTHING_PLAYING',
+        playbackState,
       };
     }
     try {
-      const lyricsData = await LyricsHelper.findLyrics(playbackState.item.artists[0].name,
-        playbackState.item.name, clientHeaders);
+      const lyricsData = await LyricsHelper.findLyrics(playbackState.song.artists[0],
+        playbackState.song.name, clientHeaders);
       return {
         playbackState,
         lyricsData,
