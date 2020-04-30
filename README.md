@@ -1,11 +1,7 @@
 # Spotly
 
-Display lyrics from your currently playing song on Spotify.
-
-## Features
-
 Display the current song you play on Spotify along with its lyrics, updated in
-~real-time, in a minimalist design lightweight page.
+~real-time, in a minimalist and lightweight Web page.
 
 ## How it works
 
