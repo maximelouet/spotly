@@ -1,5 +1,6 @@
 .root {
-    margin-top: 7em;
+    margin-top: var(--header-min-height);
+    flex-grow: 1;
 }
 
 .buttonContainer {
@@ -8,7 +9,7 @@
 }
 
 .button {
-    margin-top: 25vh;
+    margin-top: 10vh;
     text-align: center;
     background: var(--spotify-green);
     padding: .7em 1.5em .7em 1.4em;

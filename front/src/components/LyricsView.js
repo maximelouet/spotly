@@ -6,7 +6,7 @@ import s from './LyricsView.module.css';
 function LyricsView({ lyrics, error }) {
   if (lyrics === '' || (!lyrics && error)) {
     return (
-      <div className={s.minHeight}>
+      <div className={s.root}>
         { formatError(error) }
       </div>
     );
@@ -14,8 +14,8 @@ function LyricsView({ lyrics, error }) {
 
   if (!lyrics) {
     return (
-      <div className={s.minHeight}>
-        <p>Loading...</p>
+      <div className={s.root}>
+        <p className="light-bold">Loading...</p>
       </div>
     );
   }

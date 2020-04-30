@@ -46,7 +46,7 @@ function SpotifyCallback() {
 
   return (
     <div className={s.root}>
-      <p>Connecting to Spotify...</p>
+      <p className="light-bold">Connecting to Spotify...</p>
     </div>
   );
 }

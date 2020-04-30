@@ -20,7 +20,7 @@ const formatError = (originalError) => {
       return (
         <>
           <p>
-            <span className="light-bold">Waiting for tab focus to load lyrics...</span>
+            <span className="light-bold">Waiting for focus...</span>
           </p>
           <p>
             <a

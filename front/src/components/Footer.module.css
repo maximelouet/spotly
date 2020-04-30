@@ -1,17 +1,30 @@
 .root {
     border-top: 1px solid #ddd;
-    padding: 1em;
+    padding: 1.8em 1em;
+    margin-top: calc(7vh + 2vw + 2em);
     display: flex;
-    flex: auto;
 }
 
 .root div {
     flex: auto;
+    display: flex;
+    flex-direction: column;
 }
 .root div:last-child {
     text-align: right;
 }
+.root div p {
+    margin: .5em 0;
+}
 
+.projectName {
+    font-weight: bold;
+    color: var(--spotly-color);
+}
+
+.hiddenLogout {
+    visibility: hidden;
+}
 
 @media all and (max-width: 500px) {
     .root {
@@ -19,6 +32,12 @@
     }
     .root div:last-child {
         text-align: left;
-        margin-top: -1em;
+    }
+    /* Display logout button as last item on mobile to reach it easily */
+    .logout {
+        order: 1;
+    }
+    .hiddenLogout {
+        display: none;
     }
 }

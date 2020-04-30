@@ -16,6 +16,8 @@ function App() {
 
   const accessToken = localStorage.getItem('accessToken');
 
+  const loggedIn = Boolean(accessToken);
+
   const refresh = useCallback(async () => {
     if (!accessToken) return;
     try {
@@ -106,15 +108,17 @@ function App() {
     return (
       <main>
         <div className="top-padding" />
-        <p>Page not found</p>
+        <p className="light-bold">Page not found.</p>
+        <Footer loggedIn={loggedIn} />
       </main>
     );
   }
 
-  if (!accessToken) {
+  if (!loggedIn) {
     return (
       <main>
         <LoginWithSpotify />
+        <Footer loggedIn={loggedIn} />
       </main>
     );
   }
@@ -123,7 +127,7 @@ function App() {
     <main>
       <PlaybackStateView playbackState={playbackState} error={lyrics !== undefined && error} />
       <LyricsView lyrics={lyrics} error={error} />
-      <Footer />
+      <Footer loggedIn={loggedIn} />
     </main>
   );
 }

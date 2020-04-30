@@ -31,7 +31,7 @@ function LoginWithSpotify() {
   if (!authorizeUrl) {
     return (
       <div className={s.root}>
-        <p>
+        <p className="light-bold">
           Loading...
           <img src="/spotify_white.png" alt="Spotify" className={s.imagePreload} />
         </p>

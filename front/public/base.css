@@ -2,6 +2,19 @@
     --bg-color: #fff;
     --text-color: #111;
     --spotify-green: #1DB954;
+    --spotly-color: #ec51ec;
+    --header-min-height: 7em;
+}
+
+@media all and (max-height: 700px) {
+    :root {
+        --header-min-height: 8vh;
+    }
+}
+@media all and (max-height: 500px) {
+    :root {
+        --header-min-height: 2vh;
+    }
 }
 
 ::-moz-focus-inner {
@@ -40,6 +53,7 @@ main {
     max-width: 39em;
     margin: calc(2vw + 0.5em) auto 0;
     padding: 0 1.5em;
+    min-height: calc(100vh - (2vw + 0.5em) - 1px);
 }
 
 .top-padding {
