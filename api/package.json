@@ -2,16 +2,20 @@
   "name": "spotly-api",
   "version": "0.1.0",
   "description": "",
+  "keywords": [],
+  "license": "Apache-2.0",
+  "author": "Maxime Louet <maxime@saumon.io>",
   "main": "src/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/maximelouet/spotly.git"
+  },
   "scripts": {
     "start": "nodemon -r esm -r dotenv/config src/index.js",
     "prod": "node -r esm src/index.js",
     "lint": "eslint ./src",
     "test": "mocha -r esm tests"
   },
-  "keywords": [],
-  "author": "Maxime Louet <maxime@saumon.io>",
-  "license": "Apache-2.0",
   "dependencies": {
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
@@ -30,5 +34,9 @@
     "eslint-plugin-import": "^2.20.2",
     "mocha": "^7.1.2",
     "nodemon": "^2.0.3"
-  }
+  },
+  "engines": {
+    "node": ">=12 <13"
+  },
+  "private": true
 }
