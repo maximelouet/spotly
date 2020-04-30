@@ -2,6 +2,7 @@
 import Fastify from 'fastify';
 import cors from 'cors';
 import fastifyRateLimit from 'fastify-rate-limit';
+import { exchangeCodeSchema, refreshTokenSchema, loggedInSchema } from './validation';
 import Spotly from './Spotly';
 
 const fastify = new Fastify({
@@ -31,15 +32,23 @@ fastify.register(fastifyRateLimit, {
   ,
 });
 
-fastify.get('/getAuthorizeUrl', async (request, reply) => Spotly.getAuthorizeUrl());
+fastify.get('/getAuthorizeUrl', async (req, reply) => Spotly.getAuthorizeUrl());
 
-fastify.post('/exchangeCode', async (request, reply) => Spotly.exchangeCode(request.body.code));
+fastify.post('/exchangeCode', {
+  schema: exchangeCodeSchema,
+}, async (req, reply) => Spotly.exchangeCode(req.body.code));
 
-fastify.post('/refreshToken', async (request, reply) => Spotly.refreshToken(request.body.refreshToken));
+fastify.post('/refreshToken', {
+  schema: refreshTokenSchema,
+}, async (req, reply) => Spotly.refreshToken(req.body.refreshToken));
 
-fastify.post('/getPlaybackState', async (request, reply) => Spotly.getPlaybackState(request.body.accessToken));
+fastify.post('/getPlaybackState', {
+  schema: loggedInSchema,
+}, async (req, reply) => Spotly.getPlaybackState(req.body.accessToken));
 
-fastify.post('/getPlaybackLyrics', async (request, reply) => Spotly.getPlaybackLyrics(request.body.accessToken, request.headers));
+fastify.post('/getPlaybackLyrics', {
+  schema: loggedInSchema,
+}, async (req, reply) => Spotly.getPlaybackLyrics(req.body.accessToken, req.headers));
 
 fastify.setNotFoundHandler(async (request, reply) => ({
   error: 'NOT_FOUND',
