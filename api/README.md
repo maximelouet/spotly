@@ -44,6 +44,6 @@ portal](https://developer.spotify.com/dashboard/). The https://spotly.fi
 instance uses my own credentials, but I don't share them with anyone as the API
 is rate limited.
 
-Creating a Spotify developer app takes only a few minutes, no verification is
-needed on Spotify's side. Make sure to add the URL of your front + `/callback`
-to the list of your Authorized URLs.
+Creating a Spotify developer app only takes a few seconds, no verification is
+required on Spotify's side. Make sure to add your front URL followed by
+`/callback` to the list of your Authorized URLs.
