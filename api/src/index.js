@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 import Fastify from 'fastify';
 import cors from 'cors';
+import fastifyRateLimit from 'fastify-rate-limit';
 import Spotly from './Spotly';
 
 const fastify = new Fastify({
@@ -20,6 +21,15 @@ requiredEnvironmentVariables.forEach((envVar) => {
 fastify.use(cors({
   origin: process.env.FRONT_URL,
 }));
+
+fastify.register(fastifyRateLimit, {
+  max: (req, key) => ((req.body && req.body.accessToken) ? 5 : 10),
+  timeWindow: 2000,
+  keyGenerator: (req) => (req.body && req.body.accessToken)
+      || req.headers['x-real-ip']
+      || req.raw.ip
+  ,
+});
 
 fastify.get('/getAuthorizeUrl', async (request, reply) => Spotly.getAuthorizeUrl());
 
