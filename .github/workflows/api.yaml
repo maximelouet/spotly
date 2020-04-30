@@ -6,7 +6,7 @@ on:
   push:
     paths:
       - 'api/**'
-      - '.github/workflows/*'
+      - '.github/workflows/api.yaml'
 
 defaults:
   run:
