@@ -35,7 +35,7 @@ function App() {
       }
       // eslint-disable-next-line camelcase
       const finishesIn = ps?.song?.durationMs - ps?.song.progressMs;
-      if (finishesIn < 7000 && ps.isPlaying) {
+      if (finishesIn < 10000 && ps.isPlaying) {
         setTimeout(refresh, finishesIn + 300);
       }
       if (ps.song.id !== playbackState?.song?.id || error === 'WAITING_FOR_FOCUS') {
@@ -81,7 +81,7 @@ function App() {
         setRefreshInterval(180000); // refresh every 3 min when unfocused to save resources
       } else {
         refresh();
-        setRefreshInterval(7000);
+        setRefreshInterval(10000);
       }
     };
     document.addEventListener('visibilitychange', onFocusChange);
