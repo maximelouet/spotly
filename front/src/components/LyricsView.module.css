@@ -6,6 +6,9 @@
 .lyrics p {
     margin: 1.2em 0;
 }
+.lyrics p:first-child {
+    margin-top: 1em;
+}
 
 .geniusIndicator {
     opacity: 0.85;
