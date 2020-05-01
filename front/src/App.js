@@ -28,7 +28,9 @@ function App() {
         setLyrics(undefined);
         return;
       }
-      setError(response.error);
+      if (error !== 'LYRICS_NOT_FOUND') {
+        setError(response.error);
+      }
       // eslint-disable-next-line camelcase
       const finishesIn = ps?.song?.durationMs - ps?.song.progressMs;
       if (finishesIn < 10000 && ps.isPlaying) {
