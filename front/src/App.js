@@ -26,13 +26,9 @@ function App() {
       if (!ps?.song?.id) {
         setPlaybackState(ps);
         setLyrics(undefined);
-        setError(response.error);
         return;
       }
-      // reset error after a network failure
-      if (error !== 'LYRICS_NOT_FOUND') {
-        setError(undefined);
-      }
+      setError(response.error);
       // eslint-disable-next-line camelcase
       const finishesIn = ps?.song?.durationMs - ps?.song.progressMs;
       if (finishesIn < 10000 && ps.isPlaying) {
