@@ -3,7 +3,7 @@ import cl from 'classnames';
 import formatError from '../tools/formatError';
 import s from './LyricsView.module.css';
 
-function LyricsView({ lyrics, error }) {
+function LyricsView({ lyrics, playbackState, error }) {
   if (lyrics === '' || (!lyrics && error)) {
     return (
       <div className={s.root}>
@@ -15,7 +15,11 @@ function LyricsView({ lyrics, error }) {
   if (!lyrics) {
     return (
       <div className={s.root}>
-        <p className="light-bold">Loading lyrics...</p>
+        <p className="light-bold">
+          Loading
+          { playbackState && ' lyrics'}
+          ...
+        </p>
       </div>
     );
   }

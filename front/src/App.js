@@ -126,7 +126,7 @@ function App() {
   return (
     <main>
       <PlaybackStateView playbackState={playbackState} error={lyrics !== undefined && error} />
-      <LyricsView lyrics={lyrics} error={error} />
+      <LyricsView lyrics={lyrics} playbackState={playbackState} error={error} />
       <Footer loggedIn={loggedIn} />
     </main>
   );
