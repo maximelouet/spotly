@@ -1,4 +1,4 @@
-const removalRules = [
+const safeSuffixes = [
   / - ?\d{0,4} Remaster.*$/gi,
   / \(\d{0,4} ?Remaster.*\)$/gi,
   / - Remaster.+$/gi,
@@ -17,23 +17,31 @@ const removalRules = [
   / \(From .* Soundtrack\)$/gi,
 ];
 
-export const cleanSongName = (songName) => {
-  let cleanedUp = songName;
-  removalRules.forEach((regexp) => {
-    cleanedUp = cleanedUp.replace(regexp, '');
-  });
-  return cleanedUp;
-};
-
-const featRemovalRules = [
+const secondSuffixes = [
   / ?(\(|\[)feat\.? .*(\)|\]) ?/,
   / ?\(with .*\) ?/,
 ];
 
-export const removeFeat = (songName) => {
+const cleanSongTitle = (songName, aggressive) => {
   let cleanedUp = songName;
-  featRemovalRules.forEach((regexp) => {
+  safeSuffixes.forEach((regexp) => {
     cleanedUp = cleanedUp.replace(regexp, '');
   });
+  if (aggressive) {
+    secondSuffixes.forEach((regexp) => {
+      cleanedUp = cleanedUp.replace(regexp, '');
+    });
+  }
   return cleanedUp;
 };
+
+const hasRemovableSuffixes = (songName) => {
+  // eslint-disable-next-line no-restricted-syntax
+  for (const regexp of secondSuffixes) {
+    if (songName.match(regexp)) return true;
+  }
+  return false;
+};
+
+export default cleanSongTitle;
+export { hasRemovableSuffixes };

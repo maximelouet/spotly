@@ -13,7 +13,7 @@
   "scripts": {
     "start": "nodemon -r esm -r dotenv/config src/index.js",
     "prod": "node -r esm src/index.js",
-    "lint": "eslint ./src",
+    "lint": "eslint ./src ./tests",
     "test": "mocha -r esm tests"
   },
   "dependencies": {

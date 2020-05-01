@@ -1,7 +1,7 @@
 import fetchFromGenius from './providers/genius';
 import fetchFromMusixmatch from './providers/musixmatch';
 import fetchFromGoogle from './providers/google';
-import { cleanSongName, removeFeat } from './cleaners';
+import cleanSongTitle, { hasRemovableSuffixes } from './cleanSongTitle';
 
 const computeRequestHeaders = (clientHeaders) => {
   // site respond differently to mobile user agents so we always choose a desktop one
@@ -31,10 +31,10 @@ const sources = [
 ];
 
 class LyricsHelper {
-  static async findLyrics(artistName, songName, clientHeaders, remFeat = false) {
+  static async findLyrics(artistName, songName, clientHeaders, secondAttempt = false) {
     const headers = computeRequestHeaders(clientHeaders);
     // remove "Remastered" and other noisy suffixes from Spotify
-    const cleanedSongName = remFeat ? cleanSongName(removeFeat(songName)) : cleanSongName(songName);
+    const cleanedSongName = cleanSongTitle(songName, secondAttempt);
     // eslint-disable-next-line no-restricted-syntax
     for (const source of sources) {
       try {
@@ -49,9 +49,9 @@ class LyricsHelper {
         };
       } catch { } // eslint-disable-line no-empty
     }
-    if (!remFeat && songName.includes('feat.')) {
+    if (!secondAttempt && hasRemovableSuffixes(songName)) {
       // try again without "feat" or other identifiers
-      // we do not remove them in cleanSongName as some songs have different non-feat lyrics
+      // we do not remove them initially as some songs have different non-feat lyrics
       return this.findLyrics(artistName, songName, clientHeaders, true);
     }
     throw new Error('LYRICS_NOT_FOUND');

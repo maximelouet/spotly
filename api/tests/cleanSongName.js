@@ -1,6 +1,6 @@
 import { describe, it } from 'mocha';
 import { expect } from 'chai';
-import { cleanSongName } from '../src/LyricsHelper/cleaners';
+import cleanSongTitle from '../src/LyricsHelper/cleanSongTitle';
 
 const songsToClean = [
   {
@@ -76,10 +76,12 @@ const songsToKeep = [
 
 describe('Clean song name', () => {
   it('removes noisy Spotify suffixes', () => {
-    songsToClean.forEach((song) => expect(cleanSongName(song.original)).to.equal(song.expected));
+    songsToClean.forEach(
+      (song) => expect(cleanSongTitle(song.original, false)).to.equal(song.expected),
+    );
   });
 
   it('keeps some safe suffixes', () => {
-    songsToKeep.forEach((song) => expect(cleanSongName(song)).to.equal(song));
+    songsToKeep.forEach((song) => expect(cleanSongTitle(song, false)).to.equal(song));
   });
 });
