@@ -15,7 +15,7 @@ function LyricsView({ lyrics, error }) {
   if (!lyrics) {
     return (
       <div className={s.root}>
-        <p className="light-bold">Loading...</p>
+        <p className="light-bold">Loading lyrics...</p>
       </div>
     );
   }
