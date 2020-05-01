@@ -24,8 +24,8 @@ fastify.use(cors({
 }));
 
 fastify.register(fastifyRateLimit, {
-  max: (req, key) => ((req.body && req.body.accessToken) ? 5 : 10),
-  timeWindow: 2000,
+  max: 8,
+  timeWindow: 3000,
   keyGenerator: (req) => (req.body && req.body.accessToken)
       || req.headers['x-real-ip']
       || req.raw.ip
