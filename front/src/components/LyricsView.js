@@ -21,7 +21,7 @@ function LyricsView({ lyrics, error }) {
   }
 
   return (
-    <div className={s.root}>
+    <div className={cl(s.root, s.lyrics)}>
       { lyrics.map((paragraph, pIndex) => (
         <p key={pIndex}>
           { paragraph.map((line, lIndex) => (
