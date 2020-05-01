@@ -33,7 +33,7 @@ const request = async (route, params) => {
 const authenticatedRequest = async (route, params = {}) => {
   if (!navigator.onLine) {
     controller.abort();
-    throw new Error('No Internet connection');
+    throw new Error('NO_INTERNET');
   } else if (signal.aborted) {
     window.location.reload();
   }

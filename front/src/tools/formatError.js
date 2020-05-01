@@ -3,6 +3,8 @@ import logout from './logout';
 
 const formatError = (originalError) => {
   const error = (originalError?.message) ? originalError.message : originalError;
+  const accessToken = localStorage.getItem('accessToken');
+  const suggestLogout = Boolean(accessToken);
   switch (error) {
     case 'NOTHING_PLAYING':
       return (
@@ -33,12 +35,13 @@ const formatError = (originalError) => {
           </p>
         </>
       );
-    // may happen only if Spotify revokes the user's token
-    case 'Unauthorized':
+    case 'OAUTH_EXCHANGE_ERROR':
       return (
         <>
           <p>
-            <span className="light-bold">An error occured (401).</span>
+            <span className="light-bold">An error occurred:</span>
+            <br />
+            <code>Unable to retrieve an OAuth access token from Spotify.</code>
           </p>
           <p>
             <a
@@ -46,17 +49,41 @@ const formatError = (originalError) => {
               onClick={(e) => { e.preventDefault(); window.location.reload(); }}
               className="link"
             >
-              Reload page
+              Try again
             </a>
-            <span> or try </span>
+            <span> or </span>
             <a
-              href="/logout"
-              onClick={(e) => { e.preventDefault(); logout(); }}
+              href="/"
               className="link"
             >
-              logging out
+              start over
             </a>
-            <span> and logging back in.</span>
+            .
+          </p>
+        </>
+      );
+    case 'NO_INTERNET':
+    case 'Failed to fetch':
+    case 'NetworkError when attempting to fetch resource.':
+      return (
+        <>
+          <p>
+            <span className="light-bold">Error: unable to reach the server.</span>
+            { error === 'NO_INTERNET' && (
+              <>
+                <br />
+                <span>Your device is offline.</span>
+              </>
+            )}
+          </p>
+          <p>
+            <a
+              href="/"
+              onClick={(e) => { e.preventDefault(); window.location.reload(); }}
+              className="link"
+            >
+              Try again
+            </a>
           </p>
         </>
       );
@@ -74,8 +101,21 @@ const formatError = (originalError) => {
               onClick={(e) => { e.preventDefault(); window.location.reload(); }}
               className="link"
             >
-              Try again
+              Reload page
             </a>
+            { suggestLogout && (
+              <>
+                <span> or try </span>
+                <a
+                  href="/logout"
+                  onClick={(e) => { e.preventDefault(); logout(); }}
+                  className="link"
+                >
+                  logging out
+                </a>
+                <span> and logging back in.</span>
+              </>
+            ) }
           </p>
         </>
       );
