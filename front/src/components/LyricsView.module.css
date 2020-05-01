@@ -3,6 +3,10 @@
     flex-grow: 1;
 }
 
+.root p {
+    margin: 1.2em 0;
+}
+
 .geniusIndicator {
     opacity: 0.85;
 }
