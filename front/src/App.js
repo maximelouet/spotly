@@ -26,6 +26,7 @@ function App() {
       if (!ps?.song?.id) {
         setPlaybackState(ps);
         setLyrics(undefined);
+        setError(response.error);
         return;
       }
       if (error !== 'LYRICS_NOT_FOUND') {
