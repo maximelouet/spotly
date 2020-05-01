@@ -1,3 +1,4 @@
+// noisy suffixes that can probably be removed without getting different lyrics
 const safeSuffixes = [
   / - ?\d{0,4} Remaster.*$/gi,
   / \(\d{0,4} ?Remaster.*\)$/gi,
@@ -15,11 +16,19 @@ const safeSuffixes = [
   / \(Acoustic\)$/gi,
   / - From .* Soundtrack$/gi,
   / \(From .* Soundtrack\)$/gi,
+  /Side \d{1,2}, Pt\. \d{1,2}:/gi,
 ];
 
-const secondSuffixes = [
+// suffixes that should only be removed if we do not find lyrics with them
+const unsafeSuffixes = [
   / ?(\(|\[)feat\.? .*(\)|\]) ?/,
   / ?\(with .*\) ?/,
+  / - .* Version$/gi,
+  / \(.* Version\)$/gi,
+  / - .* Remix$/gi,
+  / \(.* Remix\)$/gi,
+  / - Original Mix$/gi,
+  / \(Original Mix\)$/gi,
 ];
 
 const cleanSongTitle = (songName, aggressive) => {
@@ -28,7 +37,7 @@ const cleanSongTitle = (songName, aggressive) => {
     cleanedUp = cleanedUp.replace(regexp, '');
   });
   if (aggressive) {
-    secondSuffixes.forEach((regexp) => {
+    unsafeSuffixes.forEach((regexp) => {
       cleanedUp = cleanedUp.replace(regexp, '');
     });
   }
@@ -37,7 +46,7 @@ const cleanSongTitle = (songName, aggressive) => {
 
 const hasRemovableSuffixes = (songName) => {
   // eslint-disable-next-line no-restricted-syntax
-  for (const regexp of secondSuffixes) {
+  for (const regexp of unsafeSuffixes) {
     if (songName.match(regexp)) return true;
   }
   return false;
