@@ -67,12 +67,11 @@ class Spotly {
   }
 
   static async getPlaybackLyrics(accessToken, clientHeaders, logger) {
-    const playbackState = await this.getPlaybackState(accessToken).then((ps) => ps.playbackState);
-    if (playbackState.error) {
-      return {
-        playbackState,
-      };
+    const rawPlaybackState = await this.getPlaybackState(accessToken);
+    if (rawPlaybackState.error) {
+      return rawPlaybackState;
     }
+    const { playbackState } = rawPlaybackState;
     try {
       const lyricsData = await LyricsHelper.findLyrics(playbackState.song.artists[0],
         playbackState.song.name, clientHeaders, logger);
