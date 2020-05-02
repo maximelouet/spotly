@@ -35,7 +35,11 @@ const fetchFromGenius = async (artistName, songName, headers) => {
   if (!lyricsNode) {
     throw new Error('LYRICS_NOT_FOUND');
   }
-  return textToArray(lyricsNode.text);
+  const array = textToArray(lyricsNode.text);
+  if (array.length === 1 && array[0].length === 1 && array[0][0] === '[Instrumental]') {
+    throw new Error('INSTRUMENTAL');
+  }
+  return array;
 };
 
 export default fetchFromGenius;

@@ -52,6 +52,12 @@ class LyricsHelper {
           source: source.name,
         };
       } catch (e) {
+        if (e.message === 'INSTRUMENTAL') {
+          return {
+            lyrics: [['Instrumental']],
+            source: source.name,
+          };
+        }
         if (e.message !== 'LYRICS_NOT_FOUND') {
           logger.warn(e);
         }
