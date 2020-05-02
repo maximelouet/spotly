@@ -30,7 +30,7 @@ function LyricsView({ lyrics, playbackState, error }) {
         <p key={pIndex}>
           { paragraph.map((line, lIndex) => (
             <React.Fragment key={lIndex}>
-              { (line.startsWith('[') && line.endsWith(']')) ? (
+              { (line.match(/^\[.*\]( x\d)?/)) ? (
                 <span className={cl(s.geniusIndicator, 'light-bold')}>{ line }</span>
               ) : line }
               <br />
