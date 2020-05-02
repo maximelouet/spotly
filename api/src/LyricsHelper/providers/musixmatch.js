@@ -33,6 +33,9 @@ const fetchFromMusixmatch = async (artistName, songName, headers) => {
   }).then((r) => r.text());
   const searchRoot = parse(searchPage);
   const resultsDiv = searchRoot.querySelector('#search-all-results .box-style-plain .media-card-title .title');
+  if (!resultsDiv) {
+    throw new Error('LYRICS_NOT_FOUND');
+  }
   const link = resultsDiv.toString().replace(/<a class="title" href="(.*?)".*/gi, '$1');
   const lyricsPage = await fetch(`https://www.musixmatch.com${link}`, {
     headers,
