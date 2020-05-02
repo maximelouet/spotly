@@ -48,7 +48,7 @@ fastify.post('/getPlaybackState', {
 
 fastify.post('/getPlaybackLyrics', {
   schema: loggedInSchema,
-}, async (req, reply) => Spotly.getPlaybackLyrics(req.body.accessToken, req.headers));
+}, async (req, reply) => Spotly.getPlaybackLyrics(req.body.accessToken, req.headers, req.log));
 
 fastify.setNotFoundHandler(async (request, reply) => ({
   error: 'NOT_FOUND',

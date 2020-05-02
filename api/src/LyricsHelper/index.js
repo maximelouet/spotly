@@ -34,7 +34,7 @@ const sources = [
 ];
 
 class LyricsHelper {
-  static async findLyrics(artistName, songName, clientHeaders, secondAttempt = false) {
+  static async findLyrics(artistName, songName, clientHeaders, logger, secondAttempt = false) {
     const headers = computeRequestHeaders(clientHeaders);
     // remove "Remastered" and other noisy suffixes from Spotify
     const cleanedSongName = cleanSongTitle(songName, secondAttempt);
@@ -45,19 +45,25 @@ class LyricsHelper {
         // eslint-disable-next-line no-await-in-loop
         const lyrics = await source.method(artistName, cleanedSongName, headers);
         if (!lyrics) {
-          throw new Error();
+          throw new Error('EMPTY_LYRICS_OBJECT');
         }
         return {
           lyrics,
           source: source.name,
         };
-      } catch { } // eslint-disable-line no-empty
+      } catch (e) {
+        if (e.message !== 'LYRICS_NOT_FOUND') {
+          logger.warn(e);
+        }
+      }
     }
     if (!secondAttempt && hasRemovableSuffixes(songName)) {
       // try again without "feat" or other identifiers
       // we do not remove them initially as some songs have different non-feat lyrics
-      return this.findLyrics(artistName, songName, clientHeaders, true);
+      logger.info({ artistName, songName }, 'Trying without removable suffixes');
+      return this.findLyrics(artistName, songName, clientHeaders, logger, true);
     }
+    logger.info({ artistName, songName }, 'Lyrics not found');
     throw new Error('LYRICS_NOT_FOUND');
   }
 }
