@@ -41,6 +41,11 @@ const fetchFromMusixmatch = async (artistName, songName, headers) => {
     headers,
   }).then((r) => r.text());
   const root = parse(lyricsPage);
+  // check for "Instrumental" message
+  const notFoundInfo = root.querySelector('.mxm-lyrics-not-available .mxm-empty__title');
+  if (notFoundInfo && notFoundInfo.text === 'Instrumental') {
+    throw new Error('INSTRUMENTAL');
+  }
   const lyricsNode = root.querySelectorAll('.mxm-lyrics__content');
   const lyricsFor = root.querySelector('div.lyrics-to.hidden-xs.hidden-sm');
   // reject "waiting for review"/unconfirmed Musixmatch lyrics as they may be wrong
