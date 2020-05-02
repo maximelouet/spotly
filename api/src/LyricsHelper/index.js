@@ -19,14 +19,17 @@ const sources = [
   {
     name: 'Genius',
     method: fetchFromGenius,
+    enabled: true,
   },
   {
     name: 'Musixmatch',
     method: fetchFromMusixmatch,
+    enabled: true,
   },
   {
     name: 'Google',
     method: fetchFromGoogle,
+    enabled: (process.env.ENABLE_GOOGLE && (process.env.ENABLE_GOOGLE === 'true' || process.env.ENABLE_GOOGLE === '1')),
   },
 ];
 
@@ -37,6 +40,7 @@ class LyricsHelper {
     const cleanedSongName = cleanSongTitle(songName, secondAttempt);
     // eslint-disable-next-line no-restricted-syntax
     for (const source of sources) {
+      if (!source.enabled) continue; // eslint-disable-line no-continue
       try {
         // eslint-disable-next-line no-await-in-loop
         const lyrics = await source.method(artistName, cleanedSongName, headers);

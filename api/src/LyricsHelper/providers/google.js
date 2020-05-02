@@ -47,10 +47,6 @@ const htmlToArray = (html) => {
 };
 
 const fetchFromGoogle = async (artistName, songName, headers) => {
-  // eslint-disable-next-line eqeqeq
-  if (!process.env.ENABLE_GOOGLE || (process.env.ENABLE_GOOGLE != 'true' && process.env.ENABLE_GOOGLE != '1')) {
-    throw new Error();
-  }
   const url = generateGoogleUrl(artistName, songName);
   const result = await fetch(url, {
     headers,
