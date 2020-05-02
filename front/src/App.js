@@ -7,6 +7,7 @@ import SpotifyCallback from './components/SpotifyCallback';
 import useInterval from './tools/useInterval';
 import api from './tools/api';
 import logout from './tools/logout';
+import isConnectionError from './tools/isConnectionError';
 
 function App() {
   const [playbackState, setPlaybackState] = useState(undefined);
@@ -29,10 +30,16 @@ function App() {
         setError(response.error);
         return;
       }
+      if (isConnectionError(error) && response) {
+        // refresh page after restoring connectivity
+        // this is simpler for state management, but a lost API connection may also indicate an
+        //   API upgrade so refreshing is a good idea in case the front should be upgraded as well
+        window.location.reload(true);
+        return;
+      }
       if (error !== 'LYRICS_NOT_FOUND') {
         setError(response.error);
       }
-      // eslint-disable-next-line camelcase
       const finishesIn = ps?.song?.durationMs - ps?.song.progressMs;
       if (finishesIn < 10000 && ps.isPlaying) {
         setTimeout(refresh, finishesIn + 300);
