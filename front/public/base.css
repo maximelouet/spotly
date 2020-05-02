@@ -54,6 +54,9 @@ main {
     margin: calc(2vw + 0.5em) auto 0;
     padding: 0 1.5em;
     min-height: calc(100vh - (2vw + 0.5em) - 1px);
+    /* workaround to get perfect height on mobile */
+    /* https://css-tricks.com/the-trick-to-viewport-units-on-mobile/ */
+    min-height: calc(calc(var(--vh, 1vh) * 100) - (2vw + 0.5em) - 1px);
 }
 
 .top-padding {

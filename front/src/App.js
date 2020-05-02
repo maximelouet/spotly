@@ -98,6 +98,16 @@ function App() {
     if (accessToken) refresh();
   }, [accessToken]); // eslint-disable-line react-hooks/exhaustive-deps
 
+  // workaround to get perfect height on mobile
+  useEffect(() => {
+    const viewportHeight = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty('--vh', `${viewportHeight}px`);
+    window.addEventListener('resize', () => {
+      const vh = window.innerHeight * 0.01;
+      document.documentElement.style.setProperty('--vh', `${vh}px`);
+    });
+  }, []);
+
   if (window.location.pathname === '/callback') {
     return (
       <main>
