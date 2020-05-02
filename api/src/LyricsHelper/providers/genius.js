@@ -7,12 +7,27 @@ const generateGeniusUrl = (artistName, songName) => {
   return `https://genius.com/${trackInfo}-lyrics`;
 };
 
+const isSkippableLine = (line) => {
+  const triggers = [
+    /Intéressé\(e\) par l'explication des paroles de cette chanson ou d'autres \? Venez faire l'analyse des textes avec nous !/,
+    /^\[Click here to.*]$/i,
+    /^\[Music Video]$/i,
+  ];
+  // eslint-disable-next-line no-restricted-syntax
+  for (const trig of triggers) {
+    if (line.match(trig)) {
+      return true;
+    }
+  }
+  return false;
+};
+
 const textToArray = (text) => {
   const lines = text.split('\n');
   let currentIndex = 0;
   const array = lines.reduce((acc, curr) => {
     const line = curr.trim();
-    if (!line || line === 'Intéressé(e) par l\'explication des paroles de cette chanson ou d\'autres ? Venez faire l\'analyse des textes avec nous !') {
+    if (!line || isSkippableLine(line)) {
       currentIndex += 1;
     } else {
       if (!acc[currentIndex]) {
