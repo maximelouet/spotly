@@ -44,13 +44,4 @@ const cleanSongTitle = (songName, aggressive) => {
   return cleanedUp;
 };
 
-const hasRemovableSuffixes = (songName) => {
-  // eslint-disable-next-line no-restricted-syntax
-  for (const regexp of unsafeSuffixes) {
-    if (songName.match(regexp)) return true;
-  }
-  return false;
-};
-
 export default cleanSongTitle;
-export { hasRemovableSuffixes };

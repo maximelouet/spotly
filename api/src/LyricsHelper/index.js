@@ -1,7 +1,7 @@
 import fetchFromGenius from './providers/genius';
 import fetchFromMusixmatch from './providers/musixmatch';
 import fetchFromGoogle from './providers/google';
-import cleanSongTitle, { hasRemovableSuffixes } from './cleanSongTitle';
+import cleanSongTitle from './cleanSongTitle';
 
 const computeRequestHeaders = (clientHeaders) => {
   // site respond differently to mobile user agents so we always choose a desktop one
@@ -57,10 +57,11 @@ class LyricsHelper {
         }
       }
     }
-    if (!secondAttempt && hasRemovableSuffixes(songName)) {
-      // try again without "feat" or other identifiers
+    if (!secondAttempt) {
+      // try again, without "feat" or other identifiers
       // we do not remove them initially as some songs have different non-feat lyrics
-      logger.info({ artistName, songName }, 'Trying without removable suffixes');
+      // we try again even if there are no removable suffixes since some requests fail randomly
+      logger.info({ artistName, songName }, 'Second attempt');
       return this.findLyrics(artistName, songName, clientHeaders, logger, true);
     }
     logger.info({ artistName, songName }, 'Lyrics not found');
