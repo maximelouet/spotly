@@ -58,7 +58,9 @@ const fetchFromMusixmatch = async (artistName, songName, headers) => {
     throw new Error('LYRICS_NOT_FOUND');
   }
   const lyricsString = lyricsNode.reduce((acc, curr) => acc + curr.toString(), '');
-  return htmlToArray(lyricsString);
+  return {
+    lyrics: htmlToArray(lyricsString),
+  };
 };
 
 export default fetchFromMusixmatch;

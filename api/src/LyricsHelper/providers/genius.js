@@ -42,9 +42,13 @@ const textToArray = (text) => {
 
 const fetchFromGenius = async (artistName, songName, headers) => {
   const url = generateGeniusUrl(artistName, songName);
+  let finalUrl;
   const result = await fetch(url, {
     headers,
-  }).then((r) => r.text()).then((text) => text.split('\n').slice(1).join('\n'));
+  }).then((r) => {
+    finalUrl = r.url;
+    return r.text();
+  }).then((text) => text.split('\n').slice(1).join('\n'));
   const root = parse(result);
   const lyricsNode = root.querySelector('[initial-content-for="lyrics"]');
   if (!lyricsNode) {
@@ -54,7 +58,10 @@ const fetchFromGenius = async (artistName, songName, headers) => {
   if (array.length === 1 && array[0].length === 1 && array[0][0] === '[Instrumental]') {
     throw new Error('INSTRUMENTAL');
   }
-  return array;
+  return {
+    lyrics: array,
+    url: finalUrl,
+  };
 };
 
 export default fetchFromGenius;

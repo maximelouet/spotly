@@ -44,11 +44,11 @@ class LyricsHelper {
       try {
         // eslint-disable-next-line no-await-in-loop
         const lyrics = await source.method(artistName, cleanedSongName, headers);
-        if (!lyrics) {
+        if (!lyrics || !lyrics.lyrics) {
           throw new Error('EMPTY_LYRICS_OBJECT');
         }
         return {
-          lyrics,
+          ...lyrics,
           source: source.name,
         };
       } catch (e) {
