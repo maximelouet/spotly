@@ -52,7 +52,14 @@ function LyricsView({
       )) }
       { lyricsUrl && (
         <p className={s.geniusLink}>
-          <a href={lyricsUrl} title="Open song Genius page" target="_blank" rel="noopener noreferrer">
+          <a
+            href={lyricsUrl}
+            title="Open song Genius page in a new tab"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Open on Genius
+            { ' ' }
             <img src="/genius.png" alt="" />
           </a>
         </p>
