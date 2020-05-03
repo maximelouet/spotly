@@ -114,6 +114,10 @@ const songsToCleanAggressive = [
     original: 'Faces - Original Extended Version',
     expected: 'Faces',
   },
+  {
+    original: 'Trop vite - Version single',
+    expected: 'Trop vite',
+  },
 ];
 
 const songsToKeep = [
@@ -129,6 +133,7 @@ const songsToKeep = [
   'A song with remix in it',
   'Solo (Reprise)',
   'Faces - Original Extended Version',
+  'Trop vite - Version single',
 ];
 
 const songsToKeepAggressive = [
