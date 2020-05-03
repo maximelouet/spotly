@@ -40,27 +40,51 @@ const textToArray = (text) => {
   return array.filter((e) => e.length);
 };
 
-const fetchFromGenius = async (artistName, songName, headers) => {
-  const url = generateGeniusUrl(artistName, songName);
+const fetchPage = async (url, headers) => {
   let finalUrl = '';
+  let status = 404;
   const result = await fetch(url, {
     headers,
   }).then((r) => {
     finalUrl = r.url;
+    status = r.status;
     return r.text();
   }).then((text) => text.split('\n').slice(1).join('\n'));
+  return {
+    result,
+    status,
+    url: finalUrl,
+  };
+};
+
+const fetchFromGenius = async (artistName, songName, headers) => {
+  let fetchUrl = generateGeniusUrl(artistName, songName);
+  const fetchResult = await fetchPage(fetchUrl, headers);
+  let { result, url } = fetchResult;
+  const { status } = fetchResult;
+  if (status === 404) {
+    // some Genius song names include "ft" instead of "feat"
+    if (songName.includes('feat')) {
+      fetchUrl = generateGeniusUrl(artistName, songName.replace('feat', 'ft'));
+      const newResult = await fetchPage(fetchUrl, headers);
+      result = newResult.result;
+      url = newResult.url;
+    } else {
+      throw new Error('LYRICS_NOT_FOUND');
+    }
+  }
   const root = parse(result);
   const lyricsNode = root.querySelector('[initial-content-for="lyrics"]');
   if (!lyricsNode) {
     throw new Error('LYRICS_NOT_FOUND');
   }
-  const array = textToArray(lyricsNode.text);
-  if (array.length === 1 && array[0].length === 1 && array[0][0] === '[Instrumental]') {
+  const lyrics = textToArray(lyricsNode.text);
+  if (lyrics.length === 1 && lyrics[0].length === 1 && lyrics[0][0] === '[Instrumental]') {
     throw new Error('INSTRUMENTAL');
   }
   return {
-    lyrics: array,
-    url: finalUrl,
+    lyrics,
+    url,
   };
 };
 
