@@ -12,6 +12,7 @@ import isConnectionError from './tools/isConnectionError';
 function App() {
   const [playbackState, setPlaybackState] = useState(undefined);
   const [lyrics, setLyrics] = useState(undefined);
+  const [lyricsUrl, setLyricsUrl] = useState(undefined);
   const [error, setError] = useState(undefined);
   const [refreshInterval, setRefreshInterval] = useState(10000);
 
@@ -27,6 +28,7 @@ function App() {
       if (!ps?.song?.id) {
         setPlaybackState(ps);
         setLyrics(undefined);
+        setLyricsUrl(undefined);
         setError(response.error);
         return;
       }
@@ -47,23 +49,27 @@ function App() {
       if (ps.song.id !== playbackState?.song?.id || error === 'WAITING_FOR_FOCUS') {
         setPlaybackState(ps);
         setLyrics(undefined);
+        setLyricsUrl(undefined);
         setError(undefined);
         const cached = sessionStorage.getItem(ps.song.id);
         if (cached) {
           const data = JSON.parse(cached);
           setLyrics(data.lyrics);
+          setLyricsUrl(data.url);
           setError(data.error);
         } else if (!document.hidden) { // do not fetch lyrics if app is unfocused to save resources
           const lyricsResponse = await api.getPlaybackLyrics();
           const lyricsPs = lyricsResponse.playbackState;
           const responseError = lyricsResponse.error;
-          const lyricsData = lyricsResponse.lyricsData ?? { lyrics: '', source: undefined };
+          const lyricsData = lyricsResponse.lyricsData ?? { lyrics: '', url: '' };
           setPlaybackState(lyricsPs);
           setLyrics(lyricsData.lyrics);
+          setLyricsUrl(lyricsData.url);
           setError(responseError);
           if (!responseError || responseError === 'LYRICS_NOT_FOUND') {
             const toCache = {
               lyrics: lyricsData.lyrics,
+              url: lyricsData.url,
               error: responseError,
             };
             sessionStorage.setItem(lyricsPs.song.id, JSON.stringify(toCache));
@@ -141,8 +147,16 @@ function App() {
 
   return (
     <main>
-      <PlaybackStateView playbackState={playbackState} error={lyrics !== undefined && error} />
-      <LyricsView lyrics={lyrics} playbackState={playbackState} error={error} />
+      <PlaybackStateView
+        playbackState={playbackState}
+        error={lyrics !== undefined && error}
+      />
+      <LyricsView
+        lyrics={lyrics}
+        lyricsUrl={lyricsUrl}
+        playbackState={playbackState}
+        error={error}
+      />
       <Footer loggedIn={loggedIn} />
     </main>
   );

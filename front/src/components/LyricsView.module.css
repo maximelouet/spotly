@@ -10,6 +10,29 @@
     margin-top: 1em;
 }
 
+p.geniusLink {
+    margin-top: 3em;
+    margin-bottom: 0;
+    display: flex;
+}
+.geniusLink a {
+    margin-left: auto;
+    padding: .6em;
+    display: flex;
+    outline: none!important;
+}
+.geniusLink img {
+    max-width: 1.6em;
+    filter: drop-shadow(0 .01em .02em rgba(0, 0, 0, 0.3)) drop-shadow(0 .02em .04em rgba(0, 0, 0, 0.5));
+    transition: filter .1s;
+}
+.geniusLink a:hover img {
+    filter: drop-shadow(0 .03em .04em rgba(0, 0, 0, 0.4)) drop-shadow(0 .04em .06em rgba(0, 0, 0, 0.5));
+}
+.geniusLink a:active img, .geniusLink a:focus img {
+    opacity: 0.7;
+}
+
 .geniusIndicator {
     opacity: 0.85;
 }

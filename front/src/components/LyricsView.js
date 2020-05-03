@@ -3,7 +3,9 @@ import cl from 'classnames';
 import formatError from '../tools/formatError';
 import s from './LyricsView.module.css';
 
-function LyricsView({ lyrics, playbackState, error }) {
+function LyricsView({
+  lyrics, lyricsUrl, playbackState, error,
+}) {
   if (lyrics === '' || (!lyrics && error)) {
     return (
       <div className={s.root}>
@@ -48,6 +50,13 @@ function LyricsView({ lyrics, playbackState, error }) {
           )) }
         </p>
       )) }
+      { lyricsUrl && (
+        <p className={s.geniusLink}>
+          <a href={lyricsUrl} title="Open song Genius page" target="_blank" rel="noopener noreferrer">
+            <img src="/genius.png" alt="" />
+          </a>
+        </p>
+      ) }
     </div>
   );
 }
