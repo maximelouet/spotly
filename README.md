@@ -6,8 +6,9 @@ Display the current song you play on Spotify along with its lyrics, updated in
 ## How it works
 
 Once you login to Spotify, we query the Spotify API to retrieve your currently
-playing track. The backend (`api/`) parses several lyrics sites for lyrics and
-returns the first found to the frontend (`front/`) for display.
+playing track. The backend (`api/`) then searches several lyrics sites for the
+corresponding lyrics and returns the first found to the frontend (`front/`) for
+display.
 
 ## Running locally
 
