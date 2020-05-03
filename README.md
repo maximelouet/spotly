@@ -5,8 +5,9 @@ Display the current song you play on Spotify along with its lyrics, updated in
 
 ## How it works
 
-The backend (`api/`) parses several lyric sites for lyrics and returns the first
-found to the frontend (`front/`) for display.
+Once you login to Spotify, we query the Spotify API to retrieve your currently
+playing track. The backend (`api/`) parses several lyrics sites for lyrics and
+returns the first found to the frontend (`front/`) for display.
 
 ## Running locally
 
@@ -15,7 +16,7 @@ found to the frontend (`front/`) for display.
 The `docker-compose.yml` allows you to run the app locally. Prior to starting it
 you must set some environment variables in `api/.env`. See
 [`api/README.md`](https://github.com/maximelouet/spotly/blob/master/api/README.md)
-for more informations. Set `http://localhost` as `FRONT_URL`.
+for more informations. Set `FRONT_URL` to `http://localhost`.
 
 Once the environment variables are set, run the project with:
 
