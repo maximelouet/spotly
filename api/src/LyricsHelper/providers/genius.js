@@ -42,7 +42,7 @@ const textToArray = (text) => {
 
 const fetchFromGenius = async (artistName, songName, headers) => {
   const url = generateGeniusUrl(artistName, songName);
-  let finalUrl;
+  let finalUrl = '';
   const result = await fetch(url, {
     headers,
   }).then((r) => {
