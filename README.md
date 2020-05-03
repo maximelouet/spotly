@@ -12,11 +12,12 @@ display.
 
 ## Limitations
 
-- We cannot update in perfect real-time as the Spotify API does not provide a
-  listening/socket feature. The frontend polls the API regularly to check for
-  song changes, and it automatically queries the API after an automatic song
-  change, but cannot detect a user-triggered change. Feel free to refresh the
-  page to update.
+- Perfect real-time updates are not possible as the Spotify API does not provide
+  a listening/socket feature. The frontend polls the API every 10 seconds to
+  check for song changes, and it automatically queries the API after an
+  automatic song change, but it cannot detect a user-triggered change
+  immediately — it will only be reflected a few seconds later. Feel free to
+  refresh the page manually to update.
 
 - We do not invent lyrics! If the popular sites we fetch do not know a song's
   lyrics, we cannot either. "Lyrics not found" errors for low-popularity songs
