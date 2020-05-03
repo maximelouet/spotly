@@ -52,12 +52,67 @@ const songsToClean = [
     expected: 'Backyard',
   },
   {
+    original: 'Backyard - Bonus',
+    expected: 'Backyard',
+  },
+  {
     original: 'Ready For You - Acoustic',
+    expected: 'Ready For You',
+  },
+  {
+    original: 'Ready For You - Acoustic Version',
     expected: 'Ready For You',
   },
   {
     original: 'Night Fever - From "Saturday Night Fever" Soundtrack',
     expected: 'Night Fever',
+  },
+  {
+    original: 'Side 4, Pt. 4: Louder Than Words',
+    expected: 'Louder Than Words',
+  },
+];
+
+const songsToCleanAggressive = [
+  {
+    original: 'Drive My Car - Remastered 2009',
+    expected: 'Drive My Car',
+  },
+  {
+    original: 'The Modjo Radio Gang - Radio Version',
+    expected: 'The Modjo Radio Gang',
+  },
+  {
+    original: 'Solo (Reprise)',
+    expected: 'Solo',
+  },
+  {
+    original: 'Solo - Reprise',
+    expected: 'Solo',
+  },
+  {
+    original: 'Heroine - Radio Edit',
+    expected: 'Heroine',
+  },
+  {
+    original: 'Heroine - Radio Edit',
+    expected: 'Heroine',
+  },
+  {
+    original: 'Test & Recognise - Flume Re-work',
+    expected: 'Test & Recognise',
+  },
+  {
+    original: 'Faded (Interlude)',
+    expected: 'Faded',
+  },
+  {
+    original: 'Faded - Interlude',
+    expected: 'Faded',
+  },
+  {
+    original: 'Faces - Original Extended Version',
+    expected: 'Faces',
   },
 ];
 
@@ -72,6 +127,16 @@ const songsToKeep = [
   'One Slip - 2019 Remix',
   'Don\'t Stop Me Now - 2011 Mix',
   'A song with remix in it',
+  'Solo (Reprise)',
+  'Faces - Original Extended Version',
+];
+
+const songsToKeepAggressive = [
+  'It\'s Time To Wake Up (2023)',
+  'Be Somebody - Instrumental',
+  'Acoustic song',
+  'A song with remix in it',
+  'Interlude',
 ];
 
 describe('Clean song name', () => {
@@ -81,7 +146,17 @@ describe('Clean song name', () => {
     );
   });
 
-  it('keeps some safe suffixes', () => {
+  it('aggressively removes Spotify suffixes', () => {
+    songsToCleanAggressive.forEach(
+      (song) => expect(cleanSongTitle(song.original, true)).to.equal(song.expected),
+    );
+  });
+
+  it('keeps some safe suffixes on first try', () => {
     songsToKeep.forEach((song) => expect(cleanSongTitle(song, false)).to.equal(song));
+  });
+
+  it('keeps some safe suffixes in aggressive mode', () => {
+    songsToKeepAggressive.forEach((song) => expect(cleanSongTitle(song, true)).to.equal(song));
   });
 });
