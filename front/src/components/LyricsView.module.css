@@ -22,7 +22,6 @@ p.geniusLink {
     align-items: center;
     outline: none!important;
     text-decoration: none!important;
-    font-style: italic;
     color: #666;
     font-weight: 600;
     transition: color .1s;
