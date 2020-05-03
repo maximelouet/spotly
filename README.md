@@ -10,6 +10,24 @@ playing track. The backend (`api/`) then searches several lyrics sites for the
 corresponding lyrics and returns the first found to the frontend (`front/`) for
 display.
 
+## Limitations
+
+- We cannot update in perfect real-time as the Spotify API does not provide a
+  listening/socket feature. The frontend polls the API regularly to check for
+  song changes, and it automatically queries the API after an automatic song
+  change, but cannot detect a user-triggered change. Feel free to refresh the
+  page to update.
+
+- We do not invent lyrics! If the popular sites we fetch do not know a song's
+  lyrics, we cannot either. "Lyrics not found" errors for low-popularity songs
+  are "normal".
+
+- Some lyrics are marked as "unverified"/"waiting for review" on Musixmatch. The
+  current strategy is to drop them as they may be completely invalid: we prefer
+  to return "Lyrics not found" for many songs rather than incorrect lyrics for
+  some songs. A possible strategy to adopt would be to show these lyrics (if no
+  other source are found) with an "unverified" indicator.
+
 ## Running locally
 
 ### With Docker
