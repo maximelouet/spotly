@@ -2,7 +2,7 @@ import slugify from 'slugify';
 
 const urlify = (string, separator = '-') => {
   slugify.extend({
-    '&': separator,
+    '&': separator === '-' ? 'and' : separator,
     '+': separator,
   });
   return slugify(string, {
