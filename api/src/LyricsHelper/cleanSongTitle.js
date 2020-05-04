@@ -12,6 +12,7 @@ const safeSuffixes = [
   / \(Electro Mix\)$/i,
   / - Bonus( Track)?$/i,
   / \(Bonus( Track)?\)$/i,
+  / \[Bonus( Track)?]$/i,
   / - Acoustic.*$/i,
   / \(Acoustic.*\)$/i,
   / - From .* Soundtrack$/i,
@@ -23,7 +24,7 @@ const safeSuffixes = [
 const unsafeSuffixes = [
   / - Explicit$/i,
   / \(Explicit\)$/i,
-  / ?(\(|\[)feat\.? .*(\)|\]) ?/i,
+  / ?(\(|\[)feat\.? .*(\)|]) ?/i,
   / ?\(with .*\) ?/i,
   / - .*Version.*$/i,
   / \(.*Version.*\)$/i,

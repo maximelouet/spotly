@@ -71,6 +71,10 @@ const songsToClean = [
     original: 'Side 4, Pt. 4: Louder Than Words',
     expected: 'Louder Than Words',
   },
+  {
+    original: 'Que veux-tu (Madeon Remix) [Bonus Track]',
+    expected: 'Que veux-tu (Madeon Remix)',
+  },
 ];
 
 const songsToCleanAggressive = [
