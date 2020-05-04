@@ -1,3 +1,4 @@
+/* eslint-disable quote-props */
 import slugify from 'slugify';
 
 const geniusUrlify = (string) => {
