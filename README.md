@@ -1,7 +1,7 @@
 # Spotly
 
-Display the current song you play on Spotify along with its lyrics, updated in
-~real-time, in a minimalist and lightweight Web page.
+Display the current song you play on Spotify along with its lyrics, in a
+minimalist and lightweight Web page.
 
 ## How it works
 
@@ -12,10 +12,10 @@ display.
 
 ## Limitations
 
-- Perfect real-time updates are not possible as the Spotify API does not provide
-  a listening/socket feature. The frontend polls the API every 10 seconds to
-  check for song changes, and it automatically queries the API after an
-  automatic song change, but it cannot detect a user-triggered change
+- Perfect real-time song updates are not possible as the Spotify API does not
+  provide a listening/socket feature. The frontend polls the API every 10
+  seconds to check for song changes, and it automatically queries the API after
+  an automatic song change, but it cannot detect a user-triggered change
   immediately — it will only be reflected a few seconds later. Feel free to
   refresh the page manually to update.
 
