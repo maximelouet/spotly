@@ -20,6 +20,7 @@
     border-radius: 1.8em;
     font-weight: 600;
     transition: opacity .07s;
+    align-items: center;
 }
 
 .button:hover {
@@ -30,7 +31,8 @@
 }
 
 .button img {
-    max-width: 1.4em;
+    width: 1.4em;
+    height: 1.4em;
 }
 
 .button span {
