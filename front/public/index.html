@@ -2,14 +2,21 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
+    <title>Spotly</title>
     <link rel="icon" href="%PUBLIC_URL%/spotly.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#dc51dc" />
     <meta name="description" content="Display lyrics from your currently playing song on Spotify" />
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/spotly-192x192.png" />
+    <script>
+      const darkTheme = localStorage.getItem('dark-theme');
+      if (darkTheme && darkTheme === '1'
+        || !darkTheme && window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) {
+        document.documentElement.classList.add('dark-theme');
+      }
+    </script>
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
     <link rel="stylesheet" href="%PUBLIC_URL%/base.css" />
-    <title>Spotly</title>
   </head>
   <body>
     <noscript>You need to enable JavaScript to use Spotly.</noscript>

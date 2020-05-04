@@ -1,19 +1,28 @@
 .root {
-    border-top: 1px solid #ddd;
-    padding: 1.8em 1em;
+    border-top: 1px solid var(--border-line-color);
+    transition: border-top-color .2s;
+    padding: 0 1em 1.8em;
     margin-top: calc(7vh + 2vw + 2em);
     display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-.root div {
+.root > div {
+    display: flex;
+    width: 100%;
+    margin-top: .6em;
+}
+
+.root div div {
     flex: auto;
     display: flex;
     flex-direction: column;
 }
-.root div:last-child {
+.root div div:last-child {
     text-align: right;
 }
-.root div p {
+.root div div p {
     margin: .5em 0;
 }
 
@@ -22,15 +31,38 @@
     color: var(--spotly-color);
 }
 
+.themeToggler {
+    margin-top: -1em;
+    padding: .4em;
+    text-align: center;
+    background: var(--bg-color);
+    transition: background-color .2s;
+    outline: none;
+    border: none;
+    font: inherit;
+    cursor: pointer;
+}
+.themeToggler svg {
+    width: 1.2em;
+}
+.themeToggler svg path:last-child {
+    fill: var(--text-color);
+    opacity: .8;
+    transition: opacity .1s;
+}
+.themeToggler:hover svg path:last-child {
+    opacity: 1;
+}
+
 .hiddenLogout {
     visibility: hidden;
 }
 
 @media all and (max-width: 500px) {
-    .root {
+    .root > div {
         flex-direction: column;
     }
-    .root div:last-child {
+    .root div div:last-child {
         text-align: left;
     }
     /* Display logout button as last item on mobile to reach it easily */

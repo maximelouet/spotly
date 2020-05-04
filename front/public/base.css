@@ -4,6 +4,23 @@
     --spotify-green: #1DB954;
     --spotly-color: #dc51dc;
     --header-min-height: 7em;
+    --border-line-color: #ddd;
+    --link-color: #0B63CE;
+    --link-hover-color: #0C1751;
+    --light-bold-color: #444;
+    --faded-link-color: #666;
+    --faded-link-hover-color: #333;
+}
+
+:root.dark-theme {
+    --bg-color: #2b2b2b;
+    --text-color: #fff;
+    --border-line-color: #666;
+    --link-color: #5bc2ff;
+    --link-hover-color: #3ea4ff;
+    --light-bold-color: #d2d2d2;
+    --faded-link-color: #ccc;
+    --faded-link-hover-color: #eee;
 }
 
 @media all and (max-height: 700px) {
@@ -30,6 +47,10 @@ html {
 }
 html, body {
     background: var(--bg-color);
+    color: var(--text-color);
+}
+/* Somehow this makes color transitions work on Chromium-based browsers */
+body p {
     color: var(--text-color);
 }
 body {
@@ -65,14 +86,14 @@ main {
 
 .light-bold {
     font-weight: 600;
-    color: #444;
+    color: var(--light-bold-color);
 }
 
 
 a.link, button.link {
     text-decoration: none!important;
     outline: none!important;
-    color: #0D57B1;
+    color: var(--link-color);
     background: none!important;
     border: none;
     border-bottom: 1px solid;
@@ -82,9 +103,13 @@ a.link, button.link {
     line-height: inherit;
 }
 a.link:hover, button.link:hover {
-    color: #0C1751;
+    color: var(--link-hover-color);
 }
 a.link:active, a.link:focus, button.link:active, button.link:focus {
-    color: #0C1751;
+    color: var(--link-hover-color);
     opacity: .8;
+}
+
+.transitioning, .transitioning * {
+    transition: all .2s!important;
 }

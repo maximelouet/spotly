@@ -10,8 +10,8 @@
     width: 64px;
     height: 64px;
     align-self: center;
-    background: #fff;
-    outline: 1px solid #eee;
+    background: var(--bg-color);
+    outline: 1px solid var(--border-line-color);
 }
 
 .songInfo {

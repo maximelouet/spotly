@@ -22,12 +22,12 @@ p.geniusLink {
     align-items: center;
     outline: none!important;
     text-decoration: none!important;
-    color: #666;
+    color: var(--faded-link-color);
     font-weight: 600;
     transition: color .1s;
 }
 .geniusLink a:hover {
-    color: #333;
+    color: var(--faded-link-hover-color);
 }
 .geniusLink img {
     margin-left: .4em;
@@ -43,5 +43,5 @@ p.geniusLink {
 }
 
 .geniusIndicator {
-    opacity: 0.85;
+    opacity: 0.9;
 }
