@@ -6,6 +6,7 @@ import * as DomUtils from 'domutils';
 import CSSselect from 'css-select';
 import { XmlEntities as Entities } from 'html-entities';
 import { geniusUrlify } from '../urlify';
+import { removeFeat } from '../cleanSongTitle';
 
 const entities = new Entities();
 
@@ -67,7 +68,7 @@ const fetchPage = async (url, headers) => {
   };
 };
 
-const parseAlternativeLayout = (html) => new Promise((resolve) => {
+const parseAlternativeLayout = (html, removedFeatAttempt) => new Promise((resolve) => {
   const handler = new DomHandler((error, dom) => {
     if (error) {
       throw error;
@@ -77,7 +78,11 @@ const parseAlternativeLayout = (html) => new Promise((resolve) => {
       const instruNode = CSSselect('[class*="LyricsPlaceholder__Message"]', dom);
       if (instruNode) {
         if (DomUtils.getText(instruNode) === 'This song is an instrumental') {
-          throw new Error('INSTRUMENTAL');
+          if (removedFeatAttempt) {
+            throw new Error('LYRICS_NOT_FOUND');
+          } else {
+            throw new Error('INSTRUMENTAL');
+          }
         }
       } else {
         throw new Error('LYRICS_NOT_FOUND');
@@ -98,15 +103,28 @@ const parseAlternativeLayout = (html) => new Promise((resolve) => {
 const fetchFromGenius = async (artistName, songName, headers) => {
   let fetchUrl = generateGeniusUrl(artistName, songName);
   const fetchResult = await fetchPage(fetchUrl, headers);
-  let { result, url } = fetchResult;
-  const { status } = fetchResult;
+  let { result, status, url } = fetchResult;
+  let removedFeatAttempt = false;
   if (status === 404) {
     // some Genius song names include "ft" instead of "feat"
     if (songName.includes('feat')) {
       fetchUrl = generateGeniusUrl(artistName, songName.replace('feat', 'ft'));
-      const newResult = await fetchPage(fetchUrl, headers);
-      result = newResult.result;
-      url = newResult.url;
+      const ftResult = await fetchPage(fetchUrl, headers);
+      result = ftResult.result;
+      status = ftResult.status;
+      url = ftResult.url;
+      // retry without feat
+      if (status === 404) {
+        fetchUrl = generateGeniusUrl(artistName, removeFeat(songName));
+        const removedFeatResult = await fetchPage(fetchUrl, headers);
+        result = removedFeatResult.result;
+        status = removedFeatResult.status;
+        url = removedFeatResult.url;
+        removedFeatAttempt = true;
+        if (status === 404) {
+          throw new Error('LYRICS_NOT_FOUND');
+        }
+      }
     } else {
       throw new Error('LYRICS_NOT_FOUND');
     }
@@ -118,13 +136,17 @@ const fetchFromGenius = async (artistName, songName, headers) => {
     lyrics = textToArray(lyricsNode.text);
   } else {
     // Sometimes (every ~10 requests) Genius returns an alternative HTML page (A/B testing?)
-    lyrics = await parseAlternativeLayout(result);
+    lyrics = await parseAlternativeLayout(result, removedFeatAttempt);
     if (!lyrics) {
       throw new Error('LYRICS_NOT_FOUND');
     }
   }
   if (lyrics.length === 1 && lyrics[0].length === 1 && lyrics[0][0] === '[Instrumental]') {
-    throw new Error('INSTRUMENTAL');
+    if (removedFeatAttempt) {
+      throw new Error('LYRICS_NOT_FOUND');
+    } else {
+      throw new Error('INSTRUMENTAL');
+    }
   }
   return {
     lyrics,

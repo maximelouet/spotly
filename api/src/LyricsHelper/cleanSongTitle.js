@@ -1,3 +1,5 @@
+const featRegexp = / ?(\(|\[)feat\.? .*(\)|]) ?/i;
+
 // noisy suffixes that can probably be removed without getting different lyrics
 const safeSuffixes = [
   / - ?\d{0,4} Remaster.*$/i,
@@ -24,7 +26,7 @@ const safeSuffixes = [
 const unsafeSuffixes = [
   / - Explicit$/i,
   / \(Explicit\)$/i,
-  / ?(\(|\[)feat\.? .*(\)|]) ?/i,
+  featRegexp,
   / ?\(with .*\) ?/i,
   / - .*Version.*$/i,
   / \(.*Version.*\)$/i,
@@ -57,4 +59,11 @@ const cleanSongTitle = (songName, aggressive) => {
   return cleanedUp;
 };
 
+const removeFeat = (songName) => {
+  let cleanedUp = songName;
+  cleanedUp = songName.replace(featRegexp, '');
+  return cleanedUp;
+};
+
 export default cleanSongTitle;
+export { removeFeat };
