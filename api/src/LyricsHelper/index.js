@@ -44,20 +44,8 @@ class LyricsHelper {
     for (const source of sources) {
       if (!source.enabled) continue; // eslint-disable-line no-continue
       try {
-        let lyrics;
-        try {
-          // eslint-disable-next-line no-await-in-loop
-          lyrics = await source.method(artistName, cleanedSongName, headers);
-        } catch (e) {
-          if (source.name === 'Genius') {
-            // try again as some requests randomly fail
-            logger.warn({ artistName, songName, e }, 'Hot-retrying Genius request');
-            // eslint-disable-next-line no-await-in-loop
-            lyrics = await source.method(artistName, cleanedSongName, headers);
-          } else {
-            throw e;
-          }
-        }
+        // eslint-disable-next-line no-await-in-loop
+        const lyrics = await source.method(artistName, cleanedSongName, headers);
         if (!lyrics || !lyrics.lyrics) {
           throw new Error('EMPTY_LYRICS_OBJECT');
         }
