@@ -1,9 +1,9 @@
 import fetch from 'node-fetch';
 import { parse } from 'node-html-parser';
-import urlify from '../urlify';
+import { geniusUrlify } from '../urlify';
 
 const generateGeniusUrl = (artistName, songName) => {
-  const trackInfo = `${encodeURIComponent(urlify(artistName))}-${encodeURIComponent(urlify(songName))}`;
+  const trackInfo = `${encodeURIComponent(geniusUrlify(artistName))}-${encodeURIComponent(geniusUrlify(songName))}`;
   return `https://genius.com/${trackInfo}-lyrics`;
 };
 

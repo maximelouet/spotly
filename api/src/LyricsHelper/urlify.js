@@ -1,9 +1,24 @@
 import slugify from 'slugify';
 
-const urlify = (string, separator = '-') => {
+const geniusUrlify = (string) => {
   slugify.extend({
-    '&': separator === '-' ? 'and' : separator,
+    '&': 'and',
+    'ø': '',
+    'Ø': '',
+  });
+  return slugify(string, {
+    lower: true,
+    strict: true,
+    remove: /[*+~.()'"!:@]/g, // Genius strips special characters from its URLs
+  });
+};
+
+const searchify = (string, separator = ' ') => {
+  slugify.extend({
+    '&': '&',
     '+': separator,
+    'ø': 'o',
+    'Ø': 'o',
   });
   return slugify(string, {
     replacement: separator,
@@ -12,4 +27,7 @@ const urlify = (string, separator = '-') => {
   });
 };
 
-export default urlify;
+export {
+  geniusUrlify,
+  searchify,
+};

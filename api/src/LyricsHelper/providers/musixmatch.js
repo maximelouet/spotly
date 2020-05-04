@@ -1,9 +1,9 @@
 import fetch from 'node-fetch';
 import { parse } from 'node-html-parser';
-import urlify from '../urlify';
+import { searchify } from '../urlify';
 
 const generateSearchUrl = (artistName, songName) => {
-  const trackInfo = `${encodeURIComponent(urlify(artistName, ' '))} ${encodeURIComponent(urlify(songName, ' '))}`;
+  const trackInfo = `${encodeURIComponent(searchify(artistName))} ${encodeURIComponent(searchify(songName))}`;
   return `https://www.musixmatch.com/search/${trackInfo}`;
 };
 
