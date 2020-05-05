@@ -41,6 +41,20 @@
     border: none;
     font: inherit;
     cursor: pointer;
+    position: relative;
+}
+.themeToggler::before {
+    content: var(--dim-text);
+    position: absolute;
+    top: -1.8em;
+    display: block;
+    left: -1em;
+    right: -1em;
+    padding: .5em;
+    font-size: .75em;
+    color: var(--text-color);
+    opacity: .7;
+    transition: opacity .15s;
 }
 .themeToggler svg {
     width: 1.2em;
@@ -50,7 +64,7 @@
     opacity: .8;
     transition: opacity .1s;
 }
-.themeToggler:hover svg path:last-child {
+.themeToggler:hover svg path:last-child, .themeToggler:hover::before {
     opacity: 1;
 }
 
