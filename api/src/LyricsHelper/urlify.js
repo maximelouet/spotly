@@ -2,10 +2,13 @@
 import slugify from 'slugify';
 
 const geniusUrlify = (string) => {
+  const separator = '-';
   slugify.extend({
     '&': 'and',
     'ø': '',
     'Ø': '',
+    '/': separator,
+    ':': separator,
   });
   return slugify(string, {
     lower: true,
