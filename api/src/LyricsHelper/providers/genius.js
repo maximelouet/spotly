@@ -96,7 +96,8 @@ const parseAlternativeLayout = (html, removedFeatAttempt) => new Promise((resolv
     resolve(textToArray(decodedText, true));
   });
   const parser = new Parser(handler);
-  parser.write(html);
+  const fixedNewlineHtml = html.replace(/<\/div><div class="RightSidebar-.*?><div class="Lyrics__Container/g, '<br/><br/></div><div class="Lyrics__Container');
+  parser.write(fixedNewlineHtml);
   parser.end();
 });
 

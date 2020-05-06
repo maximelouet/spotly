@@ -60,8 +60,7 @@ const cleanSongTitle = (songName, aggressive) => {
 };
 
 const removeFeat = (songName) => {
-  let cleanedUp = songName;
-  cleanedUp = songName.replace(featRegexp, '');
+  const cleanedUp = songName.replace(featRegexp, '');
   return cleanedUp;
 };
 
