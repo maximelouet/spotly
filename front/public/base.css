@@ -10,7 +10,6 @@
     --light-bold-color: #444;
     --faded-link-color: #666;
     --faded-link-hover-color: #333;
-    --dim-text: 'dim';
 }
 
 :root.dark-theme {
@@ -22,7 +21,6 @@
     --light-bold-color: #d2d2d2;
     --faded-link-color: #ccc;
     --faded-link-hover-color: #eee;
-    --dim-text: 'lighten';
 }
 
 @media all and (max-height: 700px) {

@@ -33,7 +33,8 @@
 
 .themeToggler {
     margin-top: -1em;
-    padding: .4em;
+    margin-right: -1.1em;
+    padding: .4em .6em .4em .3em;
     text-align: center;
     background: var(--bg-color);
     transition: background-color .2s;
@@ -42,19 +43,7 @@
     font: inherit;
     cursor: pointer;
     position: relative;
-}
-.themeToggler::before {
-    content: var(--dim-text);
-    position: absolute;
-    top: -1.8em;
-    display: block;
-    left: -1em;
-    right: -1em;
-    padding: .5em;
-    font-size: .75em;
-    color: var(--text-color);
-    opacity: .7;
-    transition: opacity .15s;
+    align-self: flex-end;
 }
 .themeToggler svg {
     width: 1.2em;
@@ -64,7 +53,7 @@
     opacity: .8;
     transition: opacity .1s;
 }
-.themeToggler:hover svg path:last-child, .themeToggler:hover::before {
+.themeToggler:hover svg path:last-child {
     opacity: 1;
 }
 
