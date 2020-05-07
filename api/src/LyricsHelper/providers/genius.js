@@ -20,6 +20,7 @@ const isSkippableLine = (line) => {
     /Intéressé\(e\) par l'explication des paroles de cette chanson ou d'autres \? Venez faire l'analyse des textes avec nous !/,
     /^\[Click here to.*]$/i,
     /^\[Music Video]$/i,
+    /^\[Songtext zu .*]$/i,
   ];
   // eslint-disable-next-line no-restricted-syntax
   for (const trig of triggers) {
