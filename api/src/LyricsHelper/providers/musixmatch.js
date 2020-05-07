@@ -54,7 +54,7 @@ const fetchFromMusixmatch = async (artistName, songName, headers) => {
     || !lyricsNode[0]
     || root.text.includes('submitted the lyrics for this song. Are the lyrics correct?')
     || root.text.includes('These lyrics are waiting for review')
-    || !lyricsFor.text.toLowerCase().includes(artistName.split(' ')[0].toLowerCase())) {
+    || !lyricsFor.text.toLowerCase().includes(artistName.split(' ')[0].toLowerCase().replace(/-/g, ''))) {
     throw new Error('LYRICS_NOT_FOUND');
   }
   const lyricsString = lyricsNode.reduce((acc, curr) => acc + curr.toString(), '');
