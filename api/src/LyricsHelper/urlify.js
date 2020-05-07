@@ -24,6 +24,9 @@ const searchify = (string, separator = ' ') => {
     '+': separator,
     'ø': 'o',
     'Ø': 'o',
+    '/': '/',
+    ':': ':',
+    'ß': 'ß',
   });
   return slugify(string, {
     replacement: separator,
