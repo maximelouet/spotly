@@ -9,6 +9,7 @@ const geniusUrlify = (string) => {
     'Ø': '',
     '/': separator,
     ':': separator,
+    'ß': '',
   });
   return slugify(string, {
     lower: true,
