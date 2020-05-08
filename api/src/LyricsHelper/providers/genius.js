@@ -22,6 +22,7 @@ const isSkippableLine = (line) => {
     /^\[Music Video]$/i,
     /^\[Paroles de .*]$/i,
     /^\[Songtext zu .*]$/i,
+    /^\.$/,
   ];
   // eslint-disable-next-line no-restricted-syntax
   for (const trig of triggers) {
@@ -140,9 +141,9 @@ const fetchFromGenius = async (artistName, songName, headers) => {
   } else {
     // Sometimes (every ~10 requests) Genius returns an alternative HTML page (A/B testing?)
     lyrics = await parseAlternativeLayout(result, removedFeatAttempt);
-    if (!lyrics) {
-      throw new Error('LYRICS_NOT_FOUND');
-    }
+  }
+  if (!lyrics || !lyrics.length) {
+    throw new Error('LYRICS_NOT_FOUND');
   }
   if (lyrics.length === 1 && lyrics[0].length === 1 && lyrics[0][0] === '[Instrumental]') {
     if (removedFeatAttempt) {
