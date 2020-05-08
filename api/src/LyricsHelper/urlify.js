@@ -2,19 +2,16 @@
 import slugify from 'slugify';
 
 const geniusUrlify = (string) => {
-  const separator = '-';
   slugify.extend({
     '&': 'and',
     'ø': '',
     'Ø': '',
-    '/': separator,
-    ':': separator,
     'ß': '',
   });
   return slugify(string, {
     lower: true,
     strict: true,
-    remove: /[*+~.()'"!:@]/g, // Genius strips special characters from its URLs
+    remove: /[*+~.()'"!:@/?]/g, // Genius strips special characters from its URLs
   });
 };
 
@@ -24,8 +21,6 @@ const searchify = (string, separator = ' ') => {
     '+': separator,
     'ø': 'o',
     'Ø': 'o',
-    '/': '/',
-    ':': ':',
     'ß': 'ß',
   });
   return slugify(string, {
