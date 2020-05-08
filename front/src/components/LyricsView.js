@@ -40,14 +40,18 @@ function LyricsView({
     <div className={cl(s.root, s.lyrics)}>
       { lyrics.map((paragraph, pIndex) => (
         <p key={pIndex}>
-          { paragraph.map((line, lIndex) => (
-            <React.Fragment key={lIndex}>
-              { (line.match(/^\[.*\]( x\d)?$/)) ? (
-                <span className={cl(s.geniusIndicator, 'light-bold')}>{ line }</span>
-              ) : line }
-              <br />
-            </React.Fragment>
-          )) }
+          { paragraph.map((line, lIndex) => {
+            // use non-breaking spaces before some special characters
+            const nbspString = line.replace(/ ([!?:])/g, '\u00a0$1');
+            return (
+              <React.Fragment key={lIndex}>
+                {(line.match(/^\[.*]( x\d)?$/)) ? (
+                  <span className={cl(s.geniusIndicator, 'light-bold')}>{ nbspString }</span>
+                ) : nbspString }
+                <br />
+              </React.Fragment>
+            );
+          }) }
         </p>
       )) }
       { lyricsUrl && (
