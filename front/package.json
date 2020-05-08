@@ -29,6 +29,7 @@
   "browserslist": {
     "production": [
       ">0.1%",
+      "last 5 versions",
       "not dead"
     ],
     "development": [
