@@ -4,11 +4,9 @@ import slugify from 'slugify';
 const geniusUrlify = (string) => {
   slugify.extend({
     '&': 'and',
-    'ø': '',
-    'Ø': '',
-    'ß': '',
   });
-  return slugify(string, {
+  const asciiOnly = string.replace(/[^\x20-\xFF]/g, '');
+  return slugify(asciiOnly, {
     lower: true,
     strict: true,
     remove: /[*+~.()'"!:@/?]/g, // Genius strips special characters from its URLs
@@ -19,9 +17,6 @@ const searchify = (string, separator = ' ') => {
   slugify.extend({
     '&': '&',
     '+': separator,
-    'ø': 'o',
-    'Ø': 'o',
-    'ß': 'ß',
   });
   return slugify(string, {
     replacement: separator,
