@@ -1,8 +1,8 @@
-import fetchFromGenius from './providers/genius';
-import fetchFromMusixmatch from './providers/musixmatch';
-import fetchFromGoogle from './providers/google';
-import cleanSongTitle from './cleanSongTitle';
-import computeRequestHeaders from './computeRequestHeaders';
+const fetchFromGenius = require('./providers/genius');
+const fetchFromMusixmatch = require('./providers/musixmatch');
+const fetchFromGoogle = require('./providers/google');
+const { cleanSongTitle } = require('./cleanSongTitle');
+const computeRequestHeaders = require('./computeRequestHeaders');
 
 const sources = [
   {
@@ -64,4 +64,4 @@ class LyricsHelper {
   }
 }
 
-export default LyricsHelper;
+module.exports = LyricsHelper;

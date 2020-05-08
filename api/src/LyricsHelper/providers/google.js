@@ -1,6 +1,6 @@
-import fetch from 'node-fetch';
-import { parse } from 'node-html-parser';
-import { searchify } from '../urlify';
+const fetch = require('node-fetch');
+const { parse } = require('node-html-parser');
+const { searchify } = require('../urlify');
 
 const generateGoogleUrl = (artistName, songName) => {
   let random = Math.random();
@@ -62,4 +62,4 @@ const fetchFromGoogle = async (artistName, songName, headers) => {
   };
 };
 
-export default fetchFromGoogle;
+module.exports = fetchFromGoogle;

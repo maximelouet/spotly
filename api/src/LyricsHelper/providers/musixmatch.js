@@ -1,6 +1,6 @@
-import fetch from 'node-fetch';
-import { parse } from 'node-html-parser';
-import { searchify } from '../urlify';
+const fetch = require('node-fetch');
+const { parse } = require('node-html-parser');
+const { searchify } = require('../urlify');
 
 const generateSearchUrl = (artistName, songName) => {
   const trackInfo = `${encodeURIComponent(searchify(artistName))} ${encodeURIComponent(searchify(songName))}`;
@@ -63,4 +63,4 @@ const fetchFromMusixmatch = async (artistName, songName, headers) => {
   };
 };
 
-export default fetchFromMusixmatch;
+module.exports = fetchFromMusixmatch;

@@ -51,7 +51,7 @@ The frontend will be available on `http://localhost/` (port 80).
 This method is recommended if you are developing and want auto-reload upon code
 change.
 
-If you are not running NodeJS v12, please install
+If you are not running NodeJS v14, please install
 [nvm](https://github.com/nvm-sh/nvm) and run `nvm use` in the repository.
 
 See the respective README files in `api/` and `front/` for instructions on how

@@ -1,4 +1,4 @@
-import tokenHelper from './tokenHelper';
+import getExpirationTimestamp from './getExpirationTimestamp';
 
 const API_URL = process.env.REACT_APP_API_URL ? process.env.REACT_APP_API_URL.replace(/\/$/, '') : 'http://localhost:3001';
 const headers = {
@@ -49,7 +49,7 @@ const authenticatedRequest = async (route, params = {}) => {
       throw new Error('Unable to refresh OAuth access token.');
     }
     localStorage.setItem('accessToken', authData.access_token);
-    localStorage.setItem('expiresAt', tokenHelper.getExpirationTimestamp(authData.expires_in));
+    localStorage.setItem('expiresAt', getExpirationTimestamp(authData.expires_in));
     accessToken = authData.access_token;
   }
   const body = JSON.stringify({
@@ -67,12 +67,18 @@ const authenticatedRequest = async (route, params = {}) => {
   }).then((r) => r.json());
 };
 
+
+const getAuthorizeUrl = async () => {
+  const res = await request('/getAuthorizeUrl');
+  return res.url;
+};
+const exchangeCode = async (code) => request('/exchangeCode', { code });
+const getPlaybackState = async () => authenticatedRequest('/getPlaybackState');
+const getPlaybackLyrics = async () => authenticatedRequest('/getPlaybackLyrics');
+
 export default {
-  getAuthorizeUrl: async () => {
-    const res = await request('/getAuthorizeUrl');
-    return res.url;
-  },
-  exchangeCode: async (code) => request('/exchangeCode', { code }),
-  getPlaybackState: async () => authenticatedRequest('/getPlaybackState'),
-  getPlaybackLyrics: async () => authenticatedRequest('/getPlaybackLyrics'),
+  getAuthorizeUrl,
+  exchangeCode,
+  getPlaybackState,
+  getPlaybackLyrics,
 };

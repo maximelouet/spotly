@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import api from '../tools/api';
 import formatError from '../tools/formatError';
-import tokenHelper from '../tools/tokenHelper';
+import getExpirationTimestamp from '../tools/getExpirationTimestamp';
 import s from './SpotifyCallback.module.css';
 
 function SpotifyCallback() {
@@ -18,7 +18,7 @@ function SpotifyCallback() {
         }
         localStorage.setItem('accessToken', authData.access_token);
         localStorage.setItem('refreshToken', authData.refresh_token);
-        localStorage.setItem('expiresAt', tokenHelper.getExpirationTimestamp(authData.expires_in));
+        localStorage.setItem('expiresAt', getExpirationTimestamp(authData.expires_in));
         window.location.replace('/');
       } catch (e) {
         setError(e);

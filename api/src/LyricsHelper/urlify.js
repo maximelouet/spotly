@@ -1,5 +1,5 @@
 /* eslint-disable quote-props */
-import slugify from 'slugify';
+const slugify = require('slugify');
 
 const geniusUrlify = (string) => {
   slugify.extend({
@@ -25,7 +25,7 @@ const searchify = (string, separator = ' ') => {
   });
 };
 
-export {
+module.exports = {
   geniusUrlify,
   searchify,
 };

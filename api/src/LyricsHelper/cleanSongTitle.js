@@ -64,5 +64,7 @@ const removeFeat = (songName) => {
   return cleanedUp;
 };
 
-export default cleanSongTitle;
-export { removeFeat };
+module.exports = {
+  cleanSongTitle,
+  removeFeat,
+};

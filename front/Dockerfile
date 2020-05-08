@@ -1,4 +1,4 @@
-FROM node:12-slim as build
+FROM node:14.2-slim as build
 
 ENV NODE_ENV=production
 
@@ -19,7 +19,7 @@ COPY . ./
 RUN npm run build
 
 
-FROM nginx:1.16-alpine
+FROM nginx:1.18-alpine
 
 COPY --from=build /app/build/ /usr/share/nginx/html/
 

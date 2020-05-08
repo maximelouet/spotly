@@ -1,14 +1,14 @@
-import fetch from 'node-fetch';
-import { parse } from 'node-html-parser';
-import { DomHandler } from 'domhandler';
-import { Parser } from 'htmlparser2';
-import * as DomUtils from 'domutils';
-import CSSselect from 'css-select';
-import { XmlEntities as Entities } from 'html-entities';
-import { geniusUrlify } from '../urlify';
-import { removeFeat } from '../cleanSongTitle';
+const fetch = require('node-fetch');
+const { parse } = require('node-html-parser');
+const { DomHandler } = require('domhandler');
+const { Parser } = require('htmlparser2');
+const DomUtils = require('domutils');
+const CSSselect = require('css-select');
+const { XmlEntities } = require('html-entities');
+const { geniusUrlify } = require('../urlify');
+const { removeFeat } = require('../cleanSongTitle');
 
-const entities = new Entities();
+const entities = new XmlEntities();
 
 const generateGeniusUrl = (artistName, songName) => {
   const trackInfo = `${encodeURIComponent(geniusUrlify(artistName))}-${encodeURIComponent(geniusUrlify(songName))}`;
@@ -158,4 +158,4 @@ const fetchFromGenius = async (artistName, songName, headers) => {
   };
 };
 
-export default fetchFromGenius;
+module.exports = fetchFromGenius;

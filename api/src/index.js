@@ -1,9 +1,9 @@
 /* eslint-disable no-unused-vars */
-import Fastify from 'fastify';
-import cors from 'cors';
-import fastifyRateLimit from 'fastify-rate-limit';
-import { exchangeCodeSchema, refreshTokenSchema, loggedInSchema } from './validation';
-import Spotly from './Spotly';
+const Fastify = require('fastify');
+const cors = require('cors');
+const fastifyRateLimit = require('fastify-rate-limit');
+const { exchangeCodeSchema, refreshTokenSchema, loggedInSchema } = require('./validation');
+const Spotly = require('./Spotly');
 
 const fastify = new Fastify({
   logger: true,
@@ -26,7 +26,7 @@ fastify.use(cors({
 fastify.register(fastifyRateLimit, {
   max: 8,
   timeWindow: 3000,
-  keyGenerator: (req) => (req.body && req.body.accessToken)
+  keyGenerator: (req) => (req.body?.accessToken)
       || req.headers['x-real-ip']
       || req.raw.ip
   ,
@@ -57,7 +57,7 @@ fastify.setNotFoundHandler(async (request, reply) => ({
 
 const start = async () => {
   try {
-    await fastify.listen(process.env.PORT ? process.env.PORT : 3001, '0.0.0.0');
+    await fastify.listen(process.env.PORT ?? 3001, '0.0.0.0');
   } catch (err) {
     fastify.log.error(err);
     process.exit(1);

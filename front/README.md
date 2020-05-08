@@ -15,7 +15,7 @@ These examples use `http://localhost:3001` as the API URL.
 
 ### Standard way
 
-- Make sure you're using NodeJS v12, or run `nvm use`
+- Make sure you're using NodeJS v14, or run `nvm use`
 - Run `npm install`
 - Provide the `REACT_APP_API_URL` environment variable to `npm start`, such as:
   `REACT_APP_API_URL=http://localhost:3001 npm start`

@@ -1,6 +1,6 @@
-import { describe, it } from 'mocha';
-import { expect } from 'chai';
-import cleanSongTitle from '../src/LyricsHelper/cleanSongTitle';
+const { describe, it } = require('mocha');
+const { expect } = require('chai');
+const { cleanSongTitle } = require('../src/LyricsHelper/cleanSongTitle');
 
 const songsToClean = [
   {

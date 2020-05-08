@@ -1,4 +1,4 @@
-export default (originalError) => {
+const isConnectionError = (originalError) => {
   const error = (originalError?.message) ? originalError.message : originalError;
   switch (error) {
     case 'NO_INTERNET':
@@ -9,3 +9,5 @@ export default (originalError) => {
       return false;
   }
 };
+
+export default isConnectionError;

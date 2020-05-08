@@ -37,7 +37,7 @@ const loggedInSchema = {
   },
 };
 
-export {
+module.exports = {
   exchangeCodeSchema,
   refreshTokenSchema,
   loggedInSchema,

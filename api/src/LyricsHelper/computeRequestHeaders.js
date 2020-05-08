@@ -1,4 +1,4 @@
-export default (clientHeaders) => {
+const computeRequestHeaders = (clientHeaders) => {
   // site respond differently to mobile user agents so we always choose a desktop one
   const userAgent = (clientHeaders['user-agent'] && !clientHeaders['user-agent'].match(/mobile/gi))
     ? clientHeaders['user-agent']
@@ -11,3 +11,5 @@ export default (clientHeaders) => {
     'cache-control': 'max-age=0',
   };
 };
+
+module.exports = computeRequestHeaders;

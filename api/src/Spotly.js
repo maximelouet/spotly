@@ -1,10 +1,10 @@
-import SpotifyWebApi from 'spotify-web-api-node';
-import LyricsHelper from './LyricsHelper';
+const SpotifyWebApi = require('spotify-web-api-node');
+const LyricsHelper = require('./LyricsHelper');
 
 const scopes = ['user-read-playback-state', 'user-read-currently-playing'];
 
 const serializePlaybackStateFromSpotify = (ps) => {
-  if (!ps.item || !ps.item.artists[0]) {
+  if (!ps.item?.artists[0]) {
     return {
       isPlaying: false,
     };
@@ -88,4 +88,4 @@ class Spotly {
   }
 }
 
-export default Spotly;
+module.exports = Spotly;
