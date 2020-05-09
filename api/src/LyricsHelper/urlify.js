@@ -2,8 +2,10 @@
 const slugify = require('slugify');
 
 const geniusUrlify = (string) => {
+  const separator = '-';
   slugify.extend({
     '&': 'and',
+    '/': separator,
   });
   const asciiOnly = string.replace(/[^\x20-\xFF]/g, '');
   return slugify(asciiOnly, {
@@ -17,6 +19,7 @@ const searchify = (string, separator = ' ') => {
   slugify.extend({
     '&': '&',
     '+': separator,
+    '/': '/',
   });
   return slugify(string, {
     replacement: separator,
