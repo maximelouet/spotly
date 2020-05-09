@@ -18,6 +18,7 @@ const serializePlaybackStateFromSpotify = (ps) => {
       image: ps.item.album.images[ps.item.album.images.length - 1].url,
       progressMs: ps.progress_ms,
       durationMs: ps.item.duration_ms,
+      popularity: ps.item.popularity,
     },
   };
 };

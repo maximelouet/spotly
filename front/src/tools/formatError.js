@@ -1,7 +1,7 @@
 import React from 'react';
 import logout from './logout';
 
-const formatError = (originalError) => {
+const formatError = (originalError, additionalMessage = undefined) => {
   const error = (originalError?.message) ? originalError.message : originalError;
   const accessToken = localStorage.getItem('accessToken');
   const suggestLogout = Boolean(accessToken);
@@ -14,9 +14,16 @@ const formatError = (originalError) => {
       );
     case 'LYRICS_NOT_FOUND':
       return (
-        <p>
-          <span className="light-bold">No lyrics found for this track.</span>
-        </p>
+        <>
+          <p>
+            <span className="light-bold">No lyrics found for this track.</span>
+          </p>
+          { additionalMessage && (
+            <p>
+              <span className="light-italic">{ additionalMessage }</span>
+            </p>
+          ) }
+        </>
       );
     case 'WAITING_FOR_FOCUS':
       return (

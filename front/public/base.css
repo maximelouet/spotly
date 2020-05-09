@@ -88,6 +88,10 @@ main {
     font-weight: 600;
     color: var(--light-bold-color);
 }
+.light-italic {
+    font-style: italic;
+    color: var(--light-bold-color);
+}
 
 
 a.link, button.link {
