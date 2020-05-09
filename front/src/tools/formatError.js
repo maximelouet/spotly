@@ -8,29 +8,21 @@ const formatError = (originalError, additionalMessage = undefined) => {
   switch (error) {
     case 'NOTHING_PLAYING':
       return (
-        <p>
-          <span className="light-bold">No song is currently playing.</span>
-        </p>
+        <p className="light-bold">No song is currently playing.</p>
       );
     case 'LYRICS_NOT_FOUND':
       return (
         <>
-          <p>
-            <span className="light-bold">No lyrics found for this track.</span>
-          </p>
+          <p className="light-bold">No lyrics found for this track.</p>
           { additionalMessage && (
-            <p>
-              <span className="light-italic">{ additionalMessage }</span>
-            </p>
+            <p className="light-italic">{ additionalMessage }</p>
           ) }
         </>
       );
     case 'WAITING_FOR_FOCUS':
       return (
         <>
-          <p>
-            <span className="light-bold">Waiting for focus...</span>
-          </p>
+          <p className="light-bold">Waiting for focus...</p>
           <p>
             <a
               href="/"
@@ -74,15 +66,10 @@ const formatError = (originalError, additionalMessage = undefined) => {
     case 'NetworkError when attempting to fetch resource.':
       return (
         <>
-          <p>
-            <span className="light-bold">Error: unable to reach the server.</span>
-            { error === 'NO_INTERNET' && (
-              <>
-                <br />
-                <span>Your device is offline.</span>
-              </>
-            )}
-          </p>
+          <p className="light-bold">Error: unable to reach the server.</p>
+          { error === 'NO_INTERNET' && (
+            <p className="light-italic">Your device is offline.</p>
+          ) }
           <p>
             <a
               href="/"
