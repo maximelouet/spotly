@@ -7,12 +7,14 @@ const geniusUrlify = (string) => {
     '&': 'and',
     '/': separator,
     'Ø': '',
+    ':': separator,
+    '_': separator,
   });
   const asciiOnly = string.replace(/[^\x20-\xFF]/g, '');
   return slugify(asciiOnly, {
     lower: true,
     strict: true,
-    remove: /[*+~.()'"!:@/?]/g, // Genius strips special characters from its URLs
+    remove: /[*+~.()'"!@?]/g, // Genius strips special characters from its URLs
   });
 };
 
@@ -22,6 +24,8 @@ const searchify = (string, separator = ' ') => {
     '+': separator,
     '/': '/',
     'Ø': 'O',
+    ':': ':',
+    '_': '_',
   });
   return slugify(string, {
     replacement: separator,
