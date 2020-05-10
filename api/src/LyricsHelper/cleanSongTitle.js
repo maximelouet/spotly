@@ -44,6 +44,10 @@ const unsafeSuffixes = [
   / \(Interlude\)$/i,
   / - .*Original Extended.*$/i,
   / \(.*Original Extended.*\)$/i,
+  / - From .*$/i,
+  / \(.*From .*\)$/i,
+  / - Extrait d.*$/i,
+  / \(.*Extrait d.*\)$/i,
 ];
 
 const cleanSongTitle = (songName, aggressive) => {
