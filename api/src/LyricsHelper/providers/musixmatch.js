@@ -3,7 +3,7 @@ const { parse } = require('node-html-parser');
 const { searchify } = require('../urlify');
 
 const generateSearchUrl = (artistName, songName) => {
-  const trackInfo = `${encodeURIComponent(searchify(artistName))} ${encodeURIComponent(searchify(songName))}`;
+  const trackInfo = `${encodeURIComponent(searchify(artistName))}%20${encodeURIComponent(searchify(songName))}`;
   return `https://www.musixmatch.com/search/${trackInfo}`;
 };
 
