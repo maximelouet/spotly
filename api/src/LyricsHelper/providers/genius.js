@@ -22,6 +22,7 @@ const isSkippableLine = (line) => {
     /^\[Music Video]$/i,
     /^\[Paroles de .*]$/i,
     /^\[Songtext zu .*]$/i,
+    /^\[Produced by .*]$/i,
     /^\.$/,
   ];
   // eslint-disable-next-line no-restricted-syntax
