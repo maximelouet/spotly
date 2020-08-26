@@ -1,5 +1,11 @@
 # Changelog
 
+## [v1.2.1](https://github.com/maximelouet/spotly/tree/v1.2.1) (2020-08-26)
+
+Security release, no new features.
+
+Full list of changes: https://github.com/maximelouet/spotly/compare/v1.2.0...v1.2.1
+
 ## [v1.2.0](https://github.com/maximelouet/spotly/tree/v1.2.0) (2020-05-10)
 
 Full list of changes: https://github.com/maximelouet/spotly/compare/v1.1.0...v1.2.0
