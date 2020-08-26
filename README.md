@@ -35,7 +35,7 @@ display.
 
 The `docker-compose.yml` allows you to run the app locally. Prior to starting it
 you must set some environment variables in `api/.env`. See
-[`api/README.md`](https://github.com/maximelouet/spotly/blob/master/api/README.md)
+[`api/README.md`](https://github.com/maximelouet/spotly/blob/main/api/README.md)
 for more informations. Set `FRONT_URL` to `http://localhost`.
 
 Once the environment variables are set, run the project with:
@@ -67,5 +67,5 @@ not already been reported.
 ## License
 
 This project is licensed under the Apache License 2.0. See
-[`LICENSE`](https://github.com/maximelouet/spotly/blob/master/LICENSE) for
+[`LICENSE`](https://github.com/maximelouet/spotly/blob/main/LICENSE) for
 details.
