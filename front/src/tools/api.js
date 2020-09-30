@@ -1,6 +1,6 @@
 import getExpirationTimestamp from './getExpirationTimestamp';
 
-const API_URL = process.env.REACT_APP_API_URL ? process.env.REACT_APP_API_URL.replace(/\/$/, '') : 'http://localhost:3001';
+const API_URL = window._env_.API_URL ? window._env_.API_URL.replace(/\/$/, '') : 'http://localhost:3001';
 const headers = {
   'Content-Type': 'application/json',
 };

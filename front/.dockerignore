@@ -1,4 +1,6 @@
 *
+!/copy-env.sh
+!/.env*
 !/nginx.conf
 !/package*.json
 !/public

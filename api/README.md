@@ -23,6 +23,7 @@ CAPTCHA).
 - Make sure you're using NodeJS v14, or run `nvm use`
 - Run `npm install`
 - Put the required environment variables in `.env`, in the format `NAME=VALUE`
+  An example is available in `.env.dev`.
 - Run `npm start`
 
 The server auto-reloads on code changes.
@@ -30,8 +31,10 @@ The server auto-reloads on code changes.
 ### Docker way
 
 - Run `docker build . -t spotly-api`
-- Put the required environment variables in `.env`, in the format `NAME=VALUE`
-- Run `docker run --env-file=.env -p 3001:3001 spotly-api`. If you changed the `PORT`, change the `-p` parameter accordingly
+- Put the required environment variables in `.env`, in the format `NAME=VALUE`.
+  An example is available in `.env.dev`.
+- Run `docker run --env-file=.env -p 3001:3001 spotly-api`. If you changed the
+  `PORT`, change the `-p` parameter accordingly
 
 Please note that auto-reload is disabled with Docker.
 

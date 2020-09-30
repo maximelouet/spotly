@@ -6,27 +6,33 @@ The frontend uses [React](https://reactjs.org/).
 
 | Environment variable | Description                       | Mandatory |
 |----------------------|-----------------------------------|-----------|
-| REACT_APP_API_URL    | URL of the API                    | YES       |
-| REACT_APP_VERSION    | Spotly version for footer display | no        |
+| API_URL              | URL of the API                    | YES       |
+| VERSION              | Spotly version for footer display | no        |
 
 ## Running locally
 
-These examples use `http://localhost:3001` as the API URL.
+These examples assume that the API is started on port 3001. You can change this
+by setting the `API_URL` environment variable, whose default value is
+`http://localhost:3001`, in the `.env` file.
 
 ### Standard way
 
 - Make sure you're using NodeJS v14, or run `nvm use`
 - Run `npm install`
-- Provide the `REACT_APP_API_URL` environment variable to `npm start`, such as:
-  `REACT_APP_API_URL=http://localhost:3001 npm start`
+- Set values in `.env` or copy the default configuration: `cp .env.dev .env`
+- Run `npm start`
+- The frontend is accessible on port 3000
 
 The frontend auto-reloads on code changes.
 
 ### Docker way
 
-- Run `docker build . --build-arg REACT_APP_API_URL=http://localhost:3001 -t
-  spotly-api`
-- Run `docker run --network host spotly-api`
-- The frontend is accessible from port 80
+- Run `docker build . -t spotly-front`
+- Run `docker run -p 3000:3000 spotly-front`
+- The frontend is accessible on port 3000
+
+You can configure the frontend's environment variables like this:
+
+`docker run -e API_URL=http://localhost:3001 spotly-front`
 
 Please note that auto-reload is disabled with Docker.
