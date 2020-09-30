@@ -5,11 +5,9 @@ version: '3.7'
 services:
 
   front:
-    build:
-      context: ./front
-      args:
-        REACT_APP_API_URL: http://localhost:3001
-    network_mode: host
+    build: ./front
+    ports:
+      - "3000:3000"
 
   api:
     build: ./api

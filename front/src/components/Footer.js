@@ -4,7 +4,7 @@ import logout from '../tools/logout';
 import s from './Footer.module.css';
 
 function Footer({ loggedIn }) {
-  const version = process.env.REACT_APP_VERSION ? `version ${process.env.REACT_APP_VERSION}` : 'development version';
+  const version = window._env_?.VERSION ? `version ${window._env_.VERSION}` : 'development version';
 
   const onToggleTheme = (e) => {
     e.preventDefault();
