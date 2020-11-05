@@ -3,6 +3,7 @@ import getExpirationTimestamp from './getExpirationTimestamp';
 const API_URL = window._env_.API_URL ? window._env_.API_URL.replace(/\/$/, '') : 'http://localhost:3001';
 const headers = {
   'Content-Type': 'application/json',
+  'Spotly-Version': window._env_?.VERSION ? window._env_.VERSION : 'DEV',
 };
 
 const controller = new AbortController();
