@@ -122,6 +122,10 @@ const songsToCleanAggressive = [
     original: 'Trop vite - Version single',
     expected: 'Trop vite',
   },
+  {
+    original: 'Underwater - Unplugged',
+    expected: 'Underwater',
+  },
 ];
 
 const songsToKeep = [
@@ -146,6 +150,7 @@ const songsToKeepAggressive = [
   'Acoustic song',
   'A song with remix in it',
   'Interlude',
+  'Unplugged',
 ];
 
 describe('Clean song name', () => {
