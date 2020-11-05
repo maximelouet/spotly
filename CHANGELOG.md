@@ -1,5 +1,22 @@
 # Changelog
 
+## [v1.2.2](https://github.com/maximelouet/spotly/tree/v1.2.2) (2020-11-05)
+
+Full list of changes: https://github.com/maximelouet/spotly/compare/v1.2.1...v1.2.2
+
+### Changed
+
+- Remove more Spotify song suffixes to find more lyrics
+  ([e64e454](https://github.com/maximelouet/spotly/commit/e64e454828778606df46c94d903bf89dd90b3302))
+- Send `Spotly-Version` to the API for easier deployments
+  ([a6f3161](https://github.com/maximelouet/spotly/commit/a6f31619489cb6dc80e28708e48ffadbe9d445d0))
+- Log more infos in the API, including `Spotly-Version`
+  ([0b68052](https://github.com/maximelouet/spotly/commit/0b68052e5d37a2988d0401f85140333181ab481f))
+- Add ability to trust proxy forward headers in the API for logging purposes
+  ([f398663](https://github.com/maximelouet/spotly/commit/f398663b5ff4a2edba929bcf18c6c7805aa6b93f))
+- Simplify Docker builds and improve their settings consistency
+  ([6a60503](https://github.com/maximelouet/spotly/commit/6a60503b58e5cc86842692646779eb8fb76625b0))
+
 ## [v1.2.1](https://github.com/maximelouet/spotly/tree/v1.2.1) (2020-08-26)
 
 Security release, no new features.
