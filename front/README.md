@@ -28,11 +28,8 @@ The frontend auto-reloads on code changes.
 ### Docker way
 
 - Run `docker build . -t spotly-front`
-- Run `docker run -p 3000:3000 spotly-front`
+- Set values in `.env` or copy the default configuration: `cp .env.dev .env`
+- Run `docker run --env-file=.env -p 3000:3000 spotly-front`.
 - The frontend is accessible on port 3000
 
-You can configure the frontend's environment variables like this:
-
-`docker run -e API_URL=http://localhost:3001 spotly-front`
-
-Please note that auto-reload is disabled with Docker.
+Please note that auto-reload on code change is disabled with Docker.

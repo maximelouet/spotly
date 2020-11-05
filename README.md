@@ -34,9 +34,11 @@ display.
 ### With Docker
 
 The `docker-compose.yml` allows you to run the app locally. Prior to starting it
-you must set some environment variables in `api/.env`. See
+you must set some environment variables in `api/.env` and `front/.env`. See
 [`api/README.md`](https://github.com/maximelouet/spotly/blob/main/api/README.md)
-for more infos.
+and
+[`front/README.md`](https://github.com/maximelouet/spotly/blob/main/front/README.md)
+for detailed instructions.
 
 Once the environment variables are set, run the project with:
 
@@ -44,7 +46,7 @@ Once the environment variables are set, run the project with:
 $ docker-compose up
 ```
 
-With the default configuration (`.env.dev` files), the frontend will be
+With the default configuration (from the `.env.dev` file), the frontend will be
 available on `http://localhost:3000/`.
 
 ### Standard way
