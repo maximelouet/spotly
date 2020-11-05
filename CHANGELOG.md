@@ -1,5 +1,16 @@
 # Changelog
 
+## [v1.2.3](https://github.com/maximelouet/spotly/tree/v1.2.3) (2020-11-05)
+
+Full list of changes: https://github.com/maximelouet/spotly/compare/v1.2.2...v1.2.3
+
+### Changed
+
+- Fix `Spotly-Version` header not being sent on authenticated requests
+  ([595e3ac](https://github.com/maximelouet/spotly/commit/595e3ac979072477735ae933f798a86629bb5540))
+- Fix documentation for running the frontend with Docker
+  ([09e1b0d](https://github.com/maximelouet/spotly/commit/09e1b0d30b616fe5aea4d3eacc06e70ce35931ca))
+
 ## [v1.2.2](https://github.com/maximelouet/spotly/tree/v1.2.2) (2020-11-05)
 
 Full list of changes: https://github.com/maximelouet/spotly/compare/v1.2.1...v1.2.2
