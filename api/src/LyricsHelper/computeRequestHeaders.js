@@ -1,8 +1,8 @@
 const computeRequestHeaders = (clientHeaders) => {
-  // site respond differently to mobile user agents so we always choose a desktop one
+  // sites respond differently to mobile user agents so we always choose a desktop one
   const userAgent = (clientHeaders['user-agent'] && !clientHeaders['user-agent'].match(/mobile/gi))
     ? clientHeaders['user-agent']
-    : 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.121 Safari/537.36';
+    : 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.183 Safari/537.36';
   return {
     'user-agent': userAgent,
     'accept-language': clientHeaders['accept-language'] || 'en,en-US;q=0.9',
