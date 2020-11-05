@@ -5,8 +5,11 @@ const fastifyRateLimit = require('fastify-rate-limit');
 const { exchangeCodeSchema, refreshTokenSchema, loggedInSchema } = require('./validation');
 const Spotly = require('./Spotly');
 
+const trustProxy = process.env.TRUST_PROXY && (process.env.TRUST_PROXY === 'true' || process.env.TRUST_PROXY === '1');
+
 const fastify = new Fastify({
   logger: true,
+  trustProxy,
 });
 
 const requiredEnvironmentVariables = [

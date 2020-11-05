@@ -4,13 +4,14 @@ The API uses [fastify](https://www.fastify.io/) as a Web server framework.
 
 ## Environment variables
 
-| Environment variable  | Description                                                                                                    | Mandatory |
-|-----------------------|----------------------------------------------------------------------------------------------------------------|-----------|
-| FRONT_URL             | URL of the frontend for redirect_uri and [CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS) access | YES       |
-| SPOTIFY_CLIENT_ID     | `client_id` of your [Spotify app](https://developer.spotify.com/dashboard/)                                    | YES       |
-| SPOTIFY_CLIENT_SECRET | `client_secret` of your [Spotify app](https://developer.spotify.com/dashboard/)                                | YES       |
-| PORT                  | Fastify listen port. Defaults to `3001`                                                                        | no        |
-| ENABLE_GOOGLE         | Enable Google lyrics fetching as a fallback. Defaults to `false`                                               | no        |
+| Environment variable  | Description                                                                                                        | Mandatory |
+|-----------------------|--------------------------------------------------------------------------------------------------------------------|-----------|
+| FRONT_URL             | URL of the frontend for redirect_uri and [CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS) access     | YES       |
+| SPOTIFY_CLIENT_ID     | `client_id` of your [Spotify app](https://developer.spotify.com/dashboard/)                                        | YES       |
+| SPOTIFY_CLIENT_SECRET | `client_secret` of your [Spotify app](https://developer.spotify.com/dashboard/)                                    | YES       |
+| PORT                  | Fastify listen port. Defaults to `3001`                                                                            | no        |
+| ENABLE_GOOGLE         | Enable Google lyrics fetching as a fallback. Defaults to `false`                                                   | no        |
+| TRUST_PROXY           | Trust `X-Forwarded-For` headers. Turn it on if you're deploying Spotly behind a reverse proxy. Defaults to `false` | no        |
 
 Note: `ENABLE_GOOGLE` is not recommended on shared instances as Google easily
 detects scraping and blocks the server's IP (or at least asks a human to solve a
