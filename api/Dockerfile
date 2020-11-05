@@ -1,4 +1,4 @@
-FROM node:14.2-slim
+FROM node:14.15-slim
 
 ENV NODE_ENV=production
 
