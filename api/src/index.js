@@ -8,8 +8,18 @@ const Spotly = require('./Spotly');
 const trustProxy = process.env.TRUST_PROXY && (process.env.TRUST_PROXY === 'true' || process.env.TRUST_PROXY === '1');
 
 const fastify = new Fastify({
-  logger: true,
   trustProxy,
+  logger: {
+    level: 'info',
+    serializers: {
+      req: (r) => ({
+        method: r.method,
+        url: r.url,
+        headers: r.headers,
+        remoteAddress: r.ip,
+      }),
+    },
+  },
 });
 
 const requiredEnvironmentVariables = [
