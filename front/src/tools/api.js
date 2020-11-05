@@ -61,9 +61,7 @@ const authenticatedRequest = async (route, params = {}) => {
   return fetch(`${API_URL}${route}`, {
     signal,
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
+    headers,
     body,
   }).then((r) => r.json());
 };
