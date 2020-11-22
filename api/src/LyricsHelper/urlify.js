@@ -9,6 +9,7 @@ const geniusUrlify = (string) => {
     'Ø': '',
     ':': separator,
     '_': separator,
+    '^': separator,
   });
   const asciiOnly = string.replace(/[^\x20-\xFF]/g, '');
   return slugify(asciiOnly, {
@@ -26,6 +27,7 @@ const searchify = (string, separator = ' ') => {
     'Ø': 'O',
     ':': ':',
     '_': '_',
+    '^': '^',
   });
   return slugify(string, {
     replacement: separator,
