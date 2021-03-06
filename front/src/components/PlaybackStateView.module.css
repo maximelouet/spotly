@@ -35,7 +35,7 @@
 .offlineIndicator {
     color: #fff;
     background: #D34F4F;
-    padding: .2em .5em;
+    padding: .2em .5em .325em;
     font-weight: 600;
     align-self: center;
     margin-left: auto;
