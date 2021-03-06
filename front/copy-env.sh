@@ -5,7 +5,7 @@
 set -e
 
 # Recreate config file
-echo > env-config.js
+echo -n > env-config.js
 
 # Add assignment 
 echo "window._env_ = {" >> ./env-config.js
