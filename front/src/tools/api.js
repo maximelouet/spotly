@@ -66,7 +66,6 @@ const authenticatedRequest = async (route, params = {}) => {
   }).then((r) => r.json());
 };
 
-
 const getAuthorizeUrl = async () => {
   const res = await request('/getAuthorizeUrl');
   return res.url;

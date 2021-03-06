@@ -102,7 +102,7 @@ function App() {
 
   useEffect(() => {
     if (accessToken) refresh();
-  }, [accessToken]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [accessToken]); // eslint-disable-line
 
   // workaround to get perfect height on mobile
   useEffect(() => {
