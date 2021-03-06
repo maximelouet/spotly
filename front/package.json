@@ -12,7 +12,7 @@
   },
   "scripts": {
     "start": "./copy-env.sh && mv env-config.js ./public/ && react-scripts start",
-    "build": "react-scripts build",
+    "build": "./copy-env.sh && mv env-config.js ./public/ && react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "eslint ./src"
