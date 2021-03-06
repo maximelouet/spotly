@@ -4,14 +4,15 @@ The API uses [fastify](https://www.fastify.io/) as a Web server framework.
 
 ## Environment variables
 
-| Environment variable  | Description                                                                                                        | Mandatory |
-|-----------------------|--------------------------------------------------------------------------------------------------------------------|-----------|
-| FRONT_URL             | URL of the frontend for redirect_uri and [CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS) access     | YES       |
-| SPOTIFY_CLIENT_ID     | `client_id` of your [Spotify app](https://developer.spotify.com/dashboard/)                                        | YES       |
-| SPOTIFY_CLIENT_SECRET | `client_secret` of your [Spotify app](https://developer.spotify.com/dashboard/)                                    | YES       |
-| PORT                  | Fastify listen port. Defaults to `3001`                                                                            | no        |
-| ENABLE_GOOGLE         | Enable Google lyrics fetching as a fallback. Defaults to `false`                                                   | no        |
-| TRUST_PROXY           | Trust `X-Forwarded-For` headers. Turn it on if you're deploying Spotly behind a reverse proxy. Defaults to `false` | no        |
+| Environment variable  | Description                                                                                                                   | Mandatory |
+|-----------------------|-------------------------------------------------------------------------------------------------------------------------------|-----------|
+| FRONT_URL             | URL of the frontend for redirect_uri and [CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS) access                | YES       |
+| SPOTIFY_CLIENT_ID     | `client_id` of your [Spotify app](https://developer.spotify.com/dashboard/)                                                   | YES       |
+| SPOTIFY_CLIENT_SECRET | `client_secret` of your [Spotify app](https://developer.spotify.com/dashboard/)                                               | YES       |
+| LISTEN_IP             | Network IP to listen to. Set `::1` for all IPv6 (+ all IPv4 if your OS has dual-stack mode). Defaults to `0.0.0.0` (all IPv4) | no        |
+| LISTEN_PORT           | Network port to listen to. Defaults to `3001`                                                                                 | no        |
+| ENABLE_GOOGLE         | Enable Google lyrics fetching as a fallback. Defaults to `false`                                                              | no        |
+| TRUST_PROXY           | Trust `X-Forwarded-For` headers. Turn it on if you're deploying Spotly behind a reverse proxy. Defaults to `false`            | no        |
 
 Note: `ENABLE_GOOGLE` is not recommended on shared instances as Google easily
 detects scraping and blocks the server's IP (or at least asks a human to solve a
@@ -35,7 +36,7 @@ The server auto-reloads on code changes.
 - Put the required environment variables in `.env`, in the format `NAME=VALUE`.
   An example is available in `.env.dev`.
 - Run `docker run --env-file=.env -p 3001:3001 spotly-api`. If you changed the
-  `PORT`, change the `-p` parameter accordingly
+  `LISTEN_PORT`, change the `-p` parameter accordingly
 
 Please note that auto-reload is disabled with Docker.
 

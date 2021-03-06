@@ -70,7 +70,7 @@ fastify.setNotFoundHandler(async (request, reply) => ({
 
 const start = async () => {
   try {
-    await fastify.listen(process.env.PORT ?? 3001, '0.0.0.0');
+    await fastify.listen(process.env.LISTEN_PORT ?? 3001, process.env.LISTEN_IP ?? '0.0.0.0');
   } catch (err) {
     fastify.log.error(err);
     process.exit(1);
