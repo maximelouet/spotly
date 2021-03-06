@@ -4,11 +4,9 @@ const { DomHandler } = require('domhandler');
 const { Parser } = require('htmlparser2');
 const DomUtils = require('domutils');
 const CSSselect = require('css-select');
-const { XmlEntities } = require('html-entities');
+const { decode: decodeHtmlEntities } = require('html-entities');
 const { geniusUrlify } = require('../urlify');
 const { removeFeat } = require('../cleanSongTitle');
-
-const entities = new XmlEntities();
 
 const generateGeniusUrl = (artistName, songName) => {
   const trackInfo = `${encodeURIComponent(geniusUrlify(artistName))}-${encodeURIComponent(geniusUrlify(songName))}`;
@@ -77,9 +75,9 @@ const parseAlternativeLayout = (html, removedFeatAttempt) => new Promise((resolv
     if (error) {
       throw error;
     }
-    const lyricsNode = CSSselect('[class*="Lyrics__Container-"]', dom);
+    const lyricsNode = CSSselect.selectAll('[class*="Lyrics__Container-"]', dom);
     if (!lyricsNode) {
-      const instruNode = CSSselect('[class*="LyricsPlaceholder__Message"]', dom);
+      const instruNode = CSSselect.selectAll('[class*="LyricsPlaceholder__Message"]', dom);
       if (instruNode) {
         if (DomUtils.getText(instruNode) === 'This song is an instrumental') {
           if (removedFeatAttempt) {
@@ -96,7 +94,7 @@ const parseAlternativeLayout = (html, removedFeatAttempt) => new Promise((resolv
     if (!text) {
       throw new Error('LYRICS_NOT_FOUND');
     }
-    const decodedText = entities.decode(text);
+    const decodedText = decodeHtmlEntities(text, { level: 'xml' });
     resolve(textToArray(decodedText, true));
   });
   const parser = new Parser(handler);
