@@ -1,4 +1,4 @@
-FROM node:14.15-slim as build
+FROM node:14.16-slim as build
 
 ENV NODE_ENV=production
 
