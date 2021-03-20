@@ -1,5 +1,20 @@
 # Changelog
 
+## [v1.2.4](https://github.com/maximelouet/spotly/tree/v1.2.4) (2021-03-20)
+
+Full list of changes: https://github.com/maximelouet/spotly/compare/v1.2.3...v1.2.4
+
+### Changed
+
+- Upgrade dependencies
+  ([63222e6](https://github.com/maximelouet/spotly/commit/63222e6c2a3c10c80344b49f58929fc62781c30a),
+  [9621b32](https://github.com/maximelouet/spotly/commit/9621b324cb8229fa16cc4f315ec166a85a4b3448))
+- Rename the API environment variable `PORT` to `LISTEN_PORT` and add a
+  `LISTEN_IP` environment variable. Default values are unchanged.
+  ([f313ea8](https://github.com/maximelouet/spotly/commit/f313ea8ba905a356460cef7b64cbcdd550fb04c5))
+- Fix Genius lyrics fetching for songs containing "^"
+  ([c24ee8a](https://github.com/maximelouet/spotly/commit/c24ee8ada63c239304299d469b8398dde16082b9))
+
 ## [v1.2.3](https://github.com/maximelouet/spotly/tree/v1.2.3) (2020-11-05)
 
 Full list of changes: https://github.com/maximelouet/spotly/compare/v1.2.2...v1.2.3
