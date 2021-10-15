@@ -34,6 +34,7 @@ requiredEnvironmentVariables.forEach((envVar) => {
 
 fastify.use(cors({
   origin: process.env.FRONT_URL,
+  maxAge: 3600,
 }));
 
 fastify.register(fastifyRateLimit, {
