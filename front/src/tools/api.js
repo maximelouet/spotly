@@ -16,8 +16,11 @@ const request = async (route, params) => {
   } else if (signal.aborted) {
     window.location.reload();
   }
+  // Timeout requests after a reasonable time
+  const timeoutMs = route.includes('AuthorizeUrl') ? 3000 : 7000;
+  const timeoutId = setTimeout(() => controller.abort(), timeoutMs);
   if (params) {
-    return fetch(`${API_URL}${route}`, {
+    const result = await fetch(`${API_URL}${route}`, {
       signal,
       method: 'POST',
       headers,
@@ -25,10 +28,15 @@ const request = async (route, params) => {
         ...params,
       }),
     }).then((r) => r.json());
+    clearTimeout(timeoutId);
+    return result;
   }
-  return fetch(`${API_URL}${route}`, {
+  const result = await fetch(`${API_URL}${route}`, {
+    signal,
     headers,
   }).then((r) => r.json());
+  clearTimeout(timeoutId);
+  return result;
 };
 
 const authenticatedRequest = async (route, params = {}) => {
@@ -58,12 +66,17 @@ const authenticatedRequest = async (route, params = {}) => {
     ...params,
   });
 
-  return fetch(`${API_URL}${route}`, {
+  // Timeout requests after a reasonable time
+  const timeoutMs = route.includes('Lyrics') ? 20000 : 12000;
+  const timeoutId = setTimeout(() => controller.abort(), timeoutMs);
+  const result = await fetch(`${API_URL}${route}`, {
     signal,
     method: 'POST',
     headers,
     body,
   }).then((r) => r.json());
+  clearTimeout(timeoutId);
+  return result;
 };
 
 const getAuthorizeUrl = async () => {

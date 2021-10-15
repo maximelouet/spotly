@@ -64,6 +64,10 @@ const formatError = (originalError, additionalMessage = undefined) => {
     case 'NO_INTERNET':
     case 'Failed to fetch':
     case 'NetworkError when attempting to fetch resource.':
+    case 'The operation was aborted. ': // Firefox (yes with a trailing space)
+    case 'The user aborted a request.': // Chromium
+    // FIXME: we should use standard error.name (such as 'AbortError') instead
+    //        of matching browser-specific user-oriented messages
       return (
         <>
           <p className="light-bold">Error: unable to reach the server.</p>
