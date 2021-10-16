@@ -67,6 +67,7 @@ const formatError = (originalError, additionalMessage = undefined) => {
     case 'The operation was aborted. ': // Firefox (yes with a trailing space)
     case 'The user aborted a request.': // Chromium
     case 'JSON.parse: unexpected character at line 1 column 1 of the JSON data': // Firefox
+    case 'JSON.parse: unexpected keyword at line 1 column 1 of the JSON data': // Firefox
     case 'Unexpected token < in JSON at position 0': // Chromium
     // FIXME: we should use standard error.name (such as 'AbortError') instead
     //        of matching browser-specific user-oriented messages
