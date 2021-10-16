@@ -9,6 +9,13 @@
     <meta name="description" content="Display lyrics from your currently playing song on Spotify" />
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/spotly-192x192.png" />
     <script>
+      // Migration to new variable name
+      const oldDarkTheme = localStorage.getItem('dark-theme');
+      if (oldDarkTheme !== null) {
+        localStorage.removeItem('dark-theme');
+        localStorage.setItem('darkTheme', oldDarkTheme);
+      }
+      // end Migration to new variable name
       const darkTheme = localStorage.getItem('darkTheme');
       if (darkTheme && darkTheme === '1'
         || !darkTheme && window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) {
