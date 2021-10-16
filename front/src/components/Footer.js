@@ -13,12 +13,12 @@ function Footer({ loggedIn }) {
       document.documentElement.classList.add('transitioning');
       document.documentElement.classList.remove('dark-theme');
       window.transitionTimeout = setTimeout(() => document.documentElement.classList.remove('transitioning'), 200);
-      localStorage.setItem('dark-theme', '0');
+      localStorage.setItem('darkTheme', '0');
     } else {
       document.documentElement.classList.add('transitioning');
       document.documentElement.classList.add('dark-theme');
       window.transitionTimeout = setTimeout(() => document.documentElement.classList.remove('transitioning'), 200);
-      localStorage.setItem('dark-theme', '1');
+      localStorage.setItem('darkTheme', '1');
     }
   };
 
