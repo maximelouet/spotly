@@ -42,9 +42,11 @@ function App() {
       if (error !== 'LYRICS_NOT_FOUND') {
         setError(response.error);
       }
-      const finishesIn = ps?.song?.durationMs - ps?.song.progressMs;
-      if (finishesIn < 10000 && ps.isPlaying) {
-        setTimeout(refresh, finishesIn + 300);
+      if (ps?.song) {
+        const finishesIn = ps.song.durationMs - ps.song.progressMs;
+        if (finishesIn < 10000 && ps.isPlaying) {
+          setTimeout(refresh, finishesIn + 300);
+        }
       }
       if (ps.song.id !== playbackState?.song?.id || error === 'WAITING_FOR_FOCUS') {
         setPlaybackState(ps);

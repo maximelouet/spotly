@@ -9,8 +9,10 @@ function LyricsView({
   if (lyrics === '' || (!lyrics && error)) {
     return (
       <div className={s.root}>
-        { formatError(error,
-          playbackState?.song?.popularity < 10 && 'Note: this track has a low popularity score.') }
+        { formatError(
+          error,
+          playbackState?.song?.popularity < 10 && 'Note: this track has a low popularity score.',
+        ) }
       </div>
     );
   }

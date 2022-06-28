@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 const Fastify = require('fastify');
 const cors = require('cors');
-const fastifyRateLimit = require('fastify-rate-limit');
+const fastifyRateLimit = require('@fastify/rate-limit');
 const { exchangeCodeSchema, refreshTokenSchema, loggedInSchema } = require('./validation');
 const Spotly = require('./Spotly');
 

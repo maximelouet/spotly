@@ -22,7 +22,7 @@ CAPTCHA).
 
 ### Standard way
 
-- Make sure you're using NodeJS v14, or run `nvm use`
+- Make sure you're using NodeJS v16, or run `nvm use`
 - Run `npm install`
 - Put the required environment variables in `.env`, in the format `NAME=VALUE`
   An example is available in `.env.dev`.

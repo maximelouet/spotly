@@ -17,7 +17,7 @@ by setting the `API_URL` environment variable, whose default value is
 
 ### Standard way
 
-- Make sure you're using NodeJS v14, or run `nvm use`
+- Make sure you're using NodeJS v16, or run `nvm use`
 - Run `npm install`
 - Set values in `.env` or copy the default configuration: `cp .env.dev .env`
 - Run `npm start`

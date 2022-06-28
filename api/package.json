@@ -17,13 +17,13 @@
     "test": "mocha tests"
   },
   "dependencies": {
+    "@fastify/rate-limit": "^7.0.0",
     "cors": "^2.8.5",
-    "css-select": "^3.1.2",
+    "css-select": "^5.1.0",
     "domhandler": "^4.0.0",
     "domutils": "^2.4.4",
     "dotenv": "^8.2.0",
     "fastify": "^2.15.3",
-    "fastify-rate-limit": "^5.4.1",
     "html-entities": "^2.1.0",
     "htmlparser2": "^6.0.0",
     "node-fetch": "^2.6.1",
@@ -36,11 +36,11 @@
     "eslint": "^7.21.0",
     "eslint-config-airbnb-base": "^14.2.0",
     "eslint-plugin-import": "^2.22.1",
-    "mocha": "^8.3.1",
-    "nodemon": "^2.0.7"
+    "mocha": "^10.0.0",
+    "nodemon": "^2.0.18"
   },
   "engines": {
-    "node": ">=14"
+    "node": ">=16"
   },
   "private": true
 }
