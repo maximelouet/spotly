@@ -1,4 +1,4 @@
-FROM node:16.15-slim as build
+FROM node:20.10-slim as build
 
 ENV NODE_ENV=production
 
@@ -13,7 +13,7 @@ COPY . ./
 RUN npm run build
 
 
-FROM nginx:1.22-alpine
+FROM nginx:1.24-alpine
 
 RUN apk add bash
 

@@ -43,7 +43,7 @@
     "eslint-plugin-react": "^7.22.0"
   },
   "engines": {
-    "node": ">=16"
+    "node": ">=20"
   },
   "private": true
 }

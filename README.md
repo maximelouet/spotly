@@ -54,7 +54,7 @@ available on `http://localhost:3000/`.
 This method is recommended if you are developing and want auto-reload upon code
 change.
 
-If you are not running NodeJS v16, please install
+If you are not running NodeJS v20, please install
 [nvm](https://github.com/nvm-sh/nvm) and run `nvm use` in the repository.
 
 See the respective README files in `api/` and `front/` for instructions on how
