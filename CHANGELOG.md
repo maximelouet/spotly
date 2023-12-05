@@ -1,5 +1,19 @@
 # Changelog
 
+## [v1.3.0](https://github.com/maximelouet/spotly/tree/v1.3.0) (2023-12-05)
+
+Full list of changes: https://github.com/maximelouet/spotly/compare/v1.2.4...v1.3.0
+
+### Changed
+
+- Upgrade dependencies
+  ([9f370d3](https://github.com/maximelouet/spotly/commit/9f370d323a627c9ef76d1c10a007c5f863a3f437),
+  [c1d2143](https://github.com/maximelouet/spotly/commit/c1d2143411a3baeabd3b1b5da06da0be8b2699c0),
+  [e3f1414](https://github.com/maximelouet/spotly/commit/e3f14145272d8e1b8bab4827256b411820009e6c))
+- Cache preflight requests for one hour to reduce unnecessary traffic between front and API ([a5bf481](https://github.com/maximelouet/spotly/commit/a5bf481e3dd9cbc96131b7b348eeaa249701f3b7))
+- Add timeout for all front requests ([6ea11d8](https://github.com/maximelouet/spotly/commit/6ea11d862651a428a0356b571aac598f421d4181))
+- Show clearer errors when API is down ([4e42dba](https://github.com/maximelouet/spotly/commit/4e42dbae0725976a64ceb1fbafdb7c7c41421bc6), [264beb1](https://github.com/maximelouet/spotly/commit/264beb127260cda6ba6ed451c08c4e94b1249261))
+
 ## [v1.2.4](https://github.com/maximelouet/spotly/tree/v1.2.4) (2021-03-20)
 
 Full list of changes: https://github.com/maximelouet/spotly/compare/v1.2.3...v1.2.4
